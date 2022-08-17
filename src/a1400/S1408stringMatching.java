@@ -2,7 +2,6 @@ package a1400;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class S1408stringMatching {
