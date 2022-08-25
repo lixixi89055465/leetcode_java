@@ -2,9 +2,9 @@ package a600;
 
 import java.util.List;
 
-class Solution {
+class Solution636 {
     public int[] exclusiveTime(int n, List<String> logs) {
-
+        return null;
     }
 }
 
