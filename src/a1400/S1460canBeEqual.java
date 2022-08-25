@@ -44,16 +44,8 @@ class Solution1460 {
     public boolean canBeEqual(int[] target, int[] arr) {
         Map<Integer, Integer> m = new HashMap<Integer, Integer>();
         for (int i = 0; i < target.length; i++) {
-            if (m.containsKey(target[i])) {
-                m.put(target[i], m.get(target[i]) + 1);
-            } else {
-                m.put(target[i], 1);
-            }
-            if (m.containsKey(arr[i])) {
-                m.put(arr[i], m.get(arr[i]) - 1);
-            } else {
-                m.put(arr[i], -1);
-            }
+            m.put(target[i], m.getOrDefault(target[i], 0) + 1);
+            m.put(arr[i], m.getOrDefault(arr[i], 0) - 1);
         }
         for (Map.Entry<Integer, Integer> entry : m.entrySet()) {
             if (entry.getValue() != 0) {
