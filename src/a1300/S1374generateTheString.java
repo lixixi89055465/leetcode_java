@@ -29,12 +29,12 @@ package a1300;
  * 1 <= n <= 500
  */
 public class S1374generateTheString {
-    public String generateTheString(int n) {
-        return (n&1)>0?"a".repeat(n):"a".repeat(n-1)+"b";
-    }
-    public static void main(String[] args) {
-        S1374generateTheString solution=new S1374generateTheString();
-        String result=solution.generateTheString(4);
-        System.out.println(result);
-    }
+//    public String generateTheString(int n) {
+//        return (n&1)>0?"a".repeat(n):"a".repeat(n-1)+"b";
+//    }
+//    public static void main(String[] args) {
+//        S1374generateTheString solution=new S1374generateTheString();
+//        String result=solution.generateTheString(4);
+//        System.out.println(result);
+//    }
 }
