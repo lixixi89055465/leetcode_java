@@ -1,5 +1,7 @@
 package base.chass01;
 
+import java.util.Arrays;
+
 /**
  * 比较器思想
  */
@@ -49,6 +51,7 @@ public class Code01_SelectionSort {
     }
 
     private static void comparator(int[] arr2) {
+        Arrays.sort(arr2);
     }
 
     private static void printArray(int[] arr1) {
