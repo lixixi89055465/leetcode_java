@@ -24,6 +24,7 @@ public class Test {
                 default:
                     System.out.println("default");
                     System.out.println("default");
+                    System.out.println("default");
 
 
 
