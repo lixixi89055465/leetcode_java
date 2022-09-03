@@ -23,6 +23,7 @@ public class Test {
                 break;
                 default:
                     System.out.println("default");
+                    System.out.println("default");
 
 
 
