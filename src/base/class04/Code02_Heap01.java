@@ -1,6 +1,6 @@
-package base;
+package base.class04;
 
-public class class04_Code02_Heap01 {
+public class Code02_Heap01 {
     public static class MyMaxHeap {
         private int[] heap;
         private final int limit;
