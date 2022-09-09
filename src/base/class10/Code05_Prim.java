@@ -92,4 +92,5 @@ public class Code05_Prim {
         return result;
 
     }
+
 }
