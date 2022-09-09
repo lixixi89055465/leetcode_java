@@ -1,5 +1,7 @@
 package base.class11;
 
+import java.util.Stack;
+
 public class Code01_Hanoi {
 
     public static void hanoi1(int n) {
@@ -66,8 +68,59 @@ public class Code01_Hanoi {
         leftToRight(n - 1);
     }
 
+    public static void hanoi2(int n) {
+        if (n > 0) {
+            func(n, "left", "right", "mid");
+        }
+    }
+
+    private static void func(int n, String from, String to, String other) {
+        if (n == 1) {
+            System.out.println("move\t1\tfrom\t" + from + "\tto\t" + to);
+            return;
+        }
+        func(n - 1, from, other, to);
+        System.out.println("Move\t" + n + "\tfrom\t" + from + "\tto\t" + to);
+        func(n - 1, other, to, from);
+    }
+
+    public static class Record {
+        public boolean finish1;
+        public int base;
+        public String from;
+        public String to;
+        public String other;
+
+        public Record(boolean finish1, int base, String from, String to, String other) {
+            this.finish1 = finish1;
+            this.base = base;
+            this.from = from;
+            this.to = to;
+            this.other = other;
+        }
+    }
+
+    public static void hanoi3(int N) {
+        if (N < 1) {
+            return;
+        }
+        Stack<Record> stack = new Stack<>();
+        stack.add(new Record(false, N, "left", "right", "mid"));
+        while (!stack.isEmpty()) {
+            Record cur = stack.pop();
+            if (!cur.finish1) {
+                stack.push(cur);
+            } else {
+
+            }
+
+        }
+    }
+
+
     public static void main(String[] args) {
-       hanoi1(3);
+//        hanoi1(3);
+        hanoi2(3);
     }
 
 }
