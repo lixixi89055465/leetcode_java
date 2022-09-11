@@ -54,7 +54,6 @@ public class Code09_NQueens {
             res += process2(limit, colLim | mostRightOne,
                     (leftDiaLim | mostRightOne) << 1,
                     (rightDiaLim | mostRightOne) >>> 1);
-
         }
         return res;
     }
