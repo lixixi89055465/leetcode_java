@@ -1,4 +1,4 @@
-package zuo.Advanced2019;
+package zuo.Advanced2019.class02;
 
 public class Code03_MinBoatEvenNumbers {
     public static void main(String[] args) {
