@@ -1,6 +1,5 @@
 package base.class12;
 
-import sun.jvm.hotspot.oops.ReceiverTypeData;
 
 public class Code06_Coffee {
     public static int minTime1(int[] arr, int n, int a, int b) {

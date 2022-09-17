@@ -4,7 +4,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.Security;
 
-import javax.xml.bind.DatatypeConverter;
 
 public class Code01_HashFunction {
 
@@ -21,7 +20,9 @@ public class Code01_HashFunction {
 		}
 
 		public String hashCode(String input) {
-			return DatatypeConverter.printHexBinary(hash.digest(input.getBytes())).toUpperCase();
+			//为了其他代码运行，临时注解
+//			return DatatypeConverter.printHexBinary(hash.digest(input.getBytes())).toUpperCase();
+            return "";
 		}
 	}
 

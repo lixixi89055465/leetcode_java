@@ -5,7 +5,6 @@ import java.security.NoSuchAlgorithmException;
 import java.security.Security;
 
 // 这个类所包含的jar包需要自己找到，然后导入项目
-import javax.xml.bind.DatatypeConverter;
 
 public class Code01_Hash {
 
@@ -22,7 +21,9 @@ public class Code01_Hash {
 		}
 
 		public String hashCode(String input) {
-			return DatatypeConverter.printHexBinary(hash.digest(input.getBytes())).toUpperCase();
+			//为了其他代码运行，临时注解
+//			return DatatypeConverter.printHexBinary(hash.digest(input.getBytes())).toUpperCase();
+            return "";
 		}
 	}
 
