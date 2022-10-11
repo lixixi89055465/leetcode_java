@@ -6,6 +6,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
+/**
+ * 并查集
+ * @param <V>
+ */
 public class Code01_UnionFind<V> {
     public static class Node<V> {
         V value;

@@ -1,5 +1,8 @@
 package zuo.publicclass2020.class069;
 
+/**
+ * 布隆过滤器
+ */
 public class Code02_BitMap {
 
 	// 位图
