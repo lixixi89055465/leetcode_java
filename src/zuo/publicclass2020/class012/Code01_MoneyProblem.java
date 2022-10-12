@@ -16,7 +16,7 @@ public class Code01_MoneyProblem {
 	// 目前，你的能力是hp，你来到了index号怪兽的面前，如果要通过后续所有的怪兽，
 	// 请返回需要花的最少钱数
 	public static long process(int[] d, int[] p, int hp, int index) {
-		if (index == d.length) { // base case
+		if (index == d.length) { // zuo.base case
 			return 0;
 		}
 		// index < d.length 还有怪兽要面对
