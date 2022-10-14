@@ -1,4 +1,4 @@
-package interview_question.class01;
+package zuo.interview_question.class102;
 
 public class Code01_MagicStone01 {
     public static int dpTest1(int[][] arr) {

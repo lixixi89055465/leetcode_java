@@ -1,0 +1,113 @@
+package zuo.interview_question.class102;
+
+
+/**
+ * 给定一个数字 n,代表数组的长度
+ * 给定一个数字 m,代表数组每个位置都可以在 1~m之间选择数字
+ * 所有长度为n 的数组中，最长递增子序列长度为3的数组，叫做达标数组
+ * 返回达标数组的数量
+ * 1 <= n <= 500
+ * 1 <= m <= 10
+ * 500 * 10 * 10 * 10
+ * 结果对998244353取模
+ * 实现的时候没有取模的逻辑，因为非重点
+ */
+public class Code02_NLengthMValueLIS3 {
+    //暴力方法
+    //为了验证
+    public static int number1(int n, int m) {
+        return process1(0, n, m, new int[n]);
+    }
+
+    public static int process1(int i, int n, int m, int[] path) {
+        if (i == n) {
+            return lengthOfLIS(path) == 3 ? 1 : 0;
+        } else {
+            int ans = 0;
+            for (int cur = 1; cur <= m; cur++) {
+                path[i] = cur;
+                ans += process1(i + 1, n, m, path);
+            }
+            return ans;
+        }
+    }
+
+    public static int lengthOfLIS(int[] arr) {
+        if (arr == null || arr.length == 0)
+            return 0;
+        int ends[] = new int[arr.length];
+        ends[0] = arr[0];
+        int l = 0;
+        int r = 0;
+        int right = 0;
+        int max = 1;
+        for (int i = 1; i < arr.length; i++) {
+            l = 0;
+            r = right;
+            while (l <= r) {
+                int m = l + (r - l) / 2;
+                if (arr[i] > ends[m]) {
+                    l = m + 1;
+                } else {
+                    r = m - 1;
+                }
+            }
+            right = Math.max(right, l);
+            ends[l] = arr[i];
+            max = Math.max(max, l + 1);
+        }
+        return max;
+    }
+
+    //i : 当前来到的下标
+    //f、s、t : ends 数组中放置的数字 !
+    // ? ==0 , 没放!
+    // n: 一共的长度 !
+    //m: 每一位，都可以在1~m中随意选择数字
+    // 返回值 ：i...... 有几个合法的数组 !
+    public static int zuo(int i, int f, int s, int t, int n, int m) {
+    }
+
+
+    public static int number2(int n, int m) {
+        int[][][][] dp = new int[n][m + 1][m + 1][m + 1];
+        for (int i = 0; i < n; i++) {
+            for (int f = 0; f <= m; f++) {
+                for (int s = 0; s <= m; s++) {
+                    for (int t = 0; t <= m; t++) {
+                        dp[i][f][s][t] = -1;
+                    }
+                }
+            }
+        }
+        return process2(0, 0, 0, 0, n, m, dp);
+    }
+
+    private static int process2(int i, int f, int s, int t, int n, int m, int[][][][] dp) {
+        if (i == n) {
+            return f != 0 && s != 0 && t != 0 ? 1 : 0;
+        }
+        if (dp[i][f][s][t] != -1) {
+            return dp[i][f][s][t];
+        }
+        int ans = 0;
+        for (int cur = 0; cur <= m; cur++) {
+            if (f == 0 || cur <= f) {
+                ans += process2(i + 1, cur, s, t, n, m, dp);
+            } else if (s == 0 || cur <= s) {
+                ans += process2(i + 1, f, cur, t, n, m, dp);
+            } else if (t == 0 || cur <= t) {
+                ans += process2(i + 1, f, s, cur, n, m, dp);
+            }
+        }
+        dp[i][f][s][t] = ans;
+        return ans;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = new int[]{1, 4, 2, 9, 6, 7, 3, 5};
+        int a = lengthOfLIS(arr);
+        System.out.println(a);
+    }
+
+}

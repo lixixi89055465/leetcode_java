@@ -1,4 +1,4 @@
-package interview_question.class01;
+package zuo.interview_question.class102;
 
 import java.util.ArrayList;
 import java.util.List;
