@@ -15,8 +15,8 @@ public class Code05_MakeNo {
 		// [4个奇数] [3个偶]
 		int halfSize = (size + 1) / 2;
 		int[] base = makeNo(halfSize);
-		// base -> 等长奇数达标来
-		// base -> 等长偶数达标来
+		// zuo.base -> 等长奇数达标来
+		// zuo.base -> 等长偶数达标来
 		int[] ans = new int[size];
 		int index = 0;
 		for(; index < halfSize;index++) {
