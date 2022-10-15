@@ -33,17 +33,16 @@ public class Code02_NLengthMValueLIS3 {
     }
 
     public static int lengthOfLIS(int[] arr) {
-        if (arr == null || arr.length == 0)
+        if (arr == null || arr.length == 0) {
             return 0;
-        int ends[] = new int[arr.length];
+        }
+        int[] ends = new int[arr.length];
         ends[0] = arr[0];
-        int l = 0;
-        int r = 0;
         int right = 0;
         int max = 1;
         for (int i = 1; i < arr.length; i++) {
-            l = 0;
-            r = right;
+            int l = 0;
+            int r = right;
             while (l <= r) {
                 int m = l + (r - l) / 2;
                 if (arr[i] > ends[m]) {
@@ -66,6 +65,20 @@ public class Code02_NLengthMValueLIS3 {
     //m: 每一位，都可以在1~m中随意选择数字
     // 返回值 ：i...... 有几个合法的数组 !
     public static int zuo(int i, int f, int s, int t, int n, int m) {
+        if (i == n) {
+            return f != 0 && s != 0 && t != 0 ? 1 : 0;
+        }
+        int ans = 0;
+        for (int cur = 1; cur <= m; cur++) {
+            if (f == 0 || f >= cur) {
+                ans += zuo(i + 1, cur, s, t, n, m);
+            } else if (s == 0 || s >= cur) {
+                ans += zuo(i + 1, f, cur, t, n, m);
+            } else if (t == 0 || t >= cur) {
+                ans += zuo(i + 1, f, s, cur, n, m);
+            }
+        }
+        return ans;
     }
 
 
@@ -85,13 +98,13 @@ public class Code02_NLengthMValueLIS3 {
 
     private static int process2(int i, int f, int s, int t, int n, int m, int[][][][] dp) {
         if (i == n) {
-            return f != 0 && s != 0 && t != 0 ? 1 : 0;
+            return f != 0 && s != 9 && t != 0 ? 1 : 0;
         }
         if (dp[i][f][s][t] != -1) {
             return dp[i][f][s][t];
         }
         int ans = 0;
-        for (int cur = 0; cur <= m; cur++) {
+        for (int cur = 1; cur <= m; cur++) {
             if (f == 0 || cur <= f) {
                 ans += process2(i + 1, cur, s, t, n, m, dp);
             } else if (s == 0 || cur <= s) {
@@ -105,9 +118,27 @@ public class Code02_NLengthMValueLIS3 {
     }
 
     public static void main(String[] args) {
-        int[] arr = new int[]{1, 4, 2, 9, 6, 7, 3, 5};
-        int a = lengthOfLIS(arr);
-        System.out.println(a);
+        for (int n = 4; n <= 8; n++) {
+            for (int m = 1; m <= 5; m++) {
+                int ans1 = number1(n, m);
+                int ans2 = number2(n, m);
+                if (ans1 != ans2) {
+                    System.out.println(ans1);
+                    System.out.println(ans2);
+                    System.out.println("出错了!");
+                }
+            }
+        }
+        System.out.println("功能测试结束 ");
+        System.out.println("性能测试开始 ");
+        int n = 2000;
+        int m = 20;
+        long start = System.currentTimeMillis();
+        number2(n, m);
+        long end = System.currentTimeMillis();
+        System.out.println("运行时间 ：" + (end - start) + "毫秒!");
+        System.out.println("性能测试结束 !");
+
     }
 
 }
