@@ -40,17 +40,18 @@ import java.util.List;
  * 此问题的总时间限制减少了 50%。
  */
 public class M901StockSpanner {
-    static class Node {
-        public Integer price;
-        public Integer span;
 
-        public Node(Integer price, Integer span) {
-            this.price = price;
-            this.span = span;
-        }
-    }
 
     static class StockSpanner {
+        static class Node {
+            public Integer price;
+            public Integer span;
+
+            public Node(Integer price, Integer span) {
+                this.price = price;
+                this.span = span;
+            }
+        }
         private LinkedList<Node> st;
 
         public StockSpanner() {
@@ -60,15 +61,16 @@ public class M901StockSpanner {
         public int next(int price) {
             if (st.isEmpty()) {
                 st.add(new Node(price, 1));
+                return 1;
             }
             int ans = 1;
             if (st.getLast().price > price) {
-                st.add()
+                st.add(new Node(price, 1));
                 return ans;
             }
             ans += st.pollLast().span;
-            while (!st.isEmpty() && st.pollLast().price < price) {
-                ans += 1;
+            while (!st.isEmpty() && st.getLast().price <= price) {
+                ans += st.pollLast().span;
             }
             st.add(new Node(price, ans));
             return ans;
@@ -76,6 +78,14 @@ public class M901StockSpanner {
     }
 
     public static void main(String[] args) {
+        StockSpanner S = new StockSpanner();
+        System.out.println(S.next(100));
+        System.out.println(S.next(80));
+        System.out.println(S.next(60));
+        System.out.println(S.next(70));
+        System.out.println(S.next(60));
+        System.out.println(S.next(75));
+        System.out.println(S.next(85));
 
     }
 }
