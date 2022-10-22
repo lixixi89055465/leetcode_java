@@ -44,7 +44,9 @@ public class Problem_29_TopKTimes2 {
                 minRootHeap.add(new Node(str, strSizeMap.get(str)));
             } else if (minRootHeap.peek().times < strSizeMap.get(str)) {
                 minRootHeap.poll();
-                minRootHeap.add(new Node(str, strSizeMap.get(str)));
+                minRootHeap.add(new Node(str,
+
+                        strSizeMap.get(str)));
             }
         }
         public void printTopk(){
