@@ -27,3 +27,4 @@ output
 *.iml
 .DS_Store
 out
+*.kotlin_module
