@@ -15,15 +15,28 @@ public class Problem01_GetFolderTree {
     }
 
     public static void print(String[] folderPaths) {
-        if (folderPaths != null || folderPaths.length == 0) {
+        if (folderPaths == null || folderPaths.length == 0) {
             return;
         }
         Node head = generateFolderTree(folderPaths);
         printProcess(head, 0);
     }
 
-    private static void printProcess(Node head, int i) {
+    private static void printProcess(Node node, int level) {
+        if (level != 0) {
+            System.out.println(get2nSpace(level) + node.name);
+        }
+        for (Node next : node.nextMap.values()) {
+            printProcess(next, level + 1);
+        }
+    }
 
+    private static String get2nSpace(int level) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < level; i++) {
+            sb.append(" ");
+        }
+        return sb.toString();
     }
 
     public static Node generateFolderTree(String[] folderPaths) {
@@ -32,10 +45,10 @@ public class Problem01_GetFolderTree {
             Node cur = head;
             String[] paths = folderPaths[i].split("\\\\");
             for (int j = 0; j < paths.length; j++) {
-                if (!cur.nextMap.containsKey(paths[i])) {
-                    cur.nextMap.put(paths[i], new Node(paths[i]));
+                if (!cur.nextMap.containsKey(paths[j])) {
+                    cur.nextMap.put(paths[j], new Node(paths[j]));
                 }
-                cur = cur.nextMap.get(paths[i]);
+                cur = cur.nextMap.get(paths[j]);
             }
         }
         return head;
@@ -45,9 +58,8 @@ public class Problem01_GetFolderTree {
     public static void main(String[] args) {
         String test = "a\\b\\c";
         System.out.println(test);
-        String[] arr = test.split("\\\\");
-        for (String s : arr) {
-            System.out.println(s);
-        }
+        String[] folderPaths = {"a\\b\\c", "a\\d\\e", "b\\csd", "d\\"};
+        print(folderPaths);
+        System.out.println("==================");
     }
 }
