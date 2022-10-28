@@ -5,27 +5,30 @@ public class Problem06_SubArrayMaxSum {
         if(arr==null|| arr.length==0){
             return 0;
         }
-        int max=Integer.MIN_VALUE;
-        int cur=0;
-        for (int i = 0; i !=arr.length; i++) {
-            cur+=arr[i];
-            max=Math.max(cur,max);
-            cur=cur<0?0:cur;
+        int curMax=arr[0]>0?arr[0]:0;
+        int ans=arr[0];
+        for (int i = 1; i < arr.length; i++) {
+            curMax+=arr[i];
+            if(curMax<0){
+                curMax=0;
+            }
+            ans=Math.max(curMax,ans);
         }
-        return max;
+        return ans;
+
     }
     public static int maxSum1(int []arr){
         int[]dp=new int[arr.length];
         dp[0]=arr[0]>0?arr[0]:0;
         int ans=dp[0];
-        for (int i = 1; i < arr.length; i++) {
+        for (int i = 1; i <arr.length ; i++) {
             if(dp[i-1]<0){
                 dp[i]=arr[i];
             }else{
-                dp[i]=dp[i-1]+arr[i];
+                dp[i]=arr[i]+dp[i-1];
             }
             ans=Math.max(dp[i],ans);
-        }
+       }
         return ans;
     }
 
