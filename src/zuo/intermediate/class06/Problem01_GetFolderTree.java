@@ -43,11 +43,6 @@ public class Problem01_GetFolderTree {
 
 
     public static void main(String[] args) {
-        String test = "a\\b\\c";
-        System.out.println(test);
-        String[] arr = test.split("\\\\");
-        for (String s : arr) {
-            System.out.println(s);
-        }
+        System.out.println(Math.round(-1.5));
     }
 }
