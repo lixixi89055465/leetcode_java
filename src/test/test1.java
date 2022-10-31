@@ -1,22 +1,14 @@
 package test;
 
+import java.math.BigDecimal;
+
 public class test1 {
     public static void main(String[] args) {
-        Father a = new Father();
-        Father b = new Child();
-        float[] f[][][] = new float[6][][][];
-        int x = 0, y = 1;
-    }
-}
-
-class Father {
-    public Father() {
-        System.out.println("我是父类");
-    }
-}
-
-class Child extends Father {
-    public Child() {
-        System.out.println("我是子类");
+        BigDecimal a = new BigDecimal("1.0");
+        BigDecimal b = new BigDecimal("0.9");
+        BigDecimal c = new BigDecimal("0.8");
+        BigDecimal x = a.subtract(b);
+        BigDecimal y = b.subtract(c);
+        System.out.println(x.compareTo(y));
     }
 }
