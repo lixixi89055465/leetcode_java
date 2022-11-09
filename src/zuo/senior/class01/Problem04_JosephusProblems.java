@@ -40,6 +40,28 @@ public class Problem04_JosephusProblems {
         }
         System.out.println("->\t"+head.value);
     }
+    public static int getNo(int x,int i,int m){
+        return (x+m-1)%i+1;
+    }
+    //0....n-1个人围成一圈，依次循环取用 arr中的数字 。
+    //杀n-1轮，返回活的人的原始编号
+    public static int live(int n,int []arr){
+        return 0;
+    }
+    public static int no(int i,int []arr,int index){
+        if(i==1){
+            return 1;
+        }
+        // 老=(新 + m -1 ) %i +1
+        return (no(i-1,arr,nextIndex(arr.length,index))
+                        +arr[index]-1)%i+1;
+
+    }
+    //如果数组长度为 size，当前下标为index,返回循环的模型下，下一个index是多少
+    public static int nextIndex(int size,int index){
+        return index==size-1?0:index+1;
+
+    }
 
     public static void main(String[] args) {
 
