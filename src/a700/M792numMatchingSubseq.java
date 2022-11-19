@@ -61,19 +61,23 @@ public class M792numMatchingSubseq {
             for (char aChar : chars) {
                 index = aChar - 'a';
                 List<Integer> list = letterList[index];
+                if (list == null || list.size() == 0) {
+                    return false;
+                }
                 int left = 0, right = list.size() - 1;
                 int mid = 0;
-                while (left <= right) {
-                    mid = left + (right - left) >> 1;
+                while (left < right) {
+                    mid = left + (right - left) / 2;
                     if (list.get(mid) < lastIndex) {
-                        left = mid;
+                        left = mid + 1;
                     } else {
                         right = mid;
                     }
                 }
-                if(list.get(mid)>right){
+                if (list.get(left) < lastIndex) {
                     return false;
                 }
+                lastIndex = list.get(left) + 1;
             }
             return true;
         }
@@ -81,8 +85,14 @@ public class M792numMatchingSubseq {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        String s = "abcde";
-        String[] words = {"a", "bb", "acd", "ace"};
+//        String s = "abcde";
+//        String[] words = {"a", "bb", "acd", "ace"};
+//        String s = "dsahjpjauf";
+//        String[]words ={ "ahjpjau","ja","ahbwzgqnuk","tnmlanowax"};
+        String s = "rwpddkvbnnuglnagtvamxkqtwhqgwbqgfbvgkwyuqkdwhzudsxvjubjgloeofnpjqlkdsqvruvabjrikfwronbrdyyjnakstqjac";
+        String[] words = {"wpddkvbnn", "lnagtva", "kvbnnuglnagtvamxkqtwhqgwbqgfbvgkwyuqkdwhzudsxvju", "rwpddkvbnnugln", "gloeofnpjqlkdsqvruvabjrikfwronbrdyyj",
+                "vbgeinupkvgmgxeaaiuiyojmoqkahwvbpwugdainxciedbdkos", "mspuhbykmmumtveoighlcgpcapzczomshiblnvhjzqjlfkpina", "rgmliajkiknongrofpugfgajedxicdhxinzjakwnifvxwlokip",
+                "fhepktaipapyrbylskxddypwmuuxyoivcewzrdwwlrlhqwzikq", "qatithxifaaiwyszlkgoljzkkweqkjjzvymedvclfxwcezqebx"};
         int result = solution.numMatchingSubseq(s, words);
         System.out.println(result);
     }
