@@ -1,8 +1,6 @@
 package a700;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.PriorityQueue;
+import java.util.*;
 
 /**
  * 792. 匹配子序列的单词数
@@ -34,52 +32,29 @@ import java.util.PriorityQueue;
 public class M792numMatchingSubseq {
     static protected class Solution {
         public int numMatchingSubseq(String s, String[] words) {
-            List[] letterList = new List[26];
-            char[] str = s.toCharArray();
-            int index = 0;
-            for (int i = 0; i < str.length; i++) {
-                index = str[i] - 'a';
-                if (letterList[index] == null) {
-                    letterList[index] = new ArrayList<Integer>();
-                }
-                letterList[index].add(i);
+            Queue<int[]>[] p = new Queue[26];
+            for (int i = 0; i < 26; i++) {
+                p[i] = new ArrayDeque<int[]>();
             }
-            int ans = 0;
-            for (String word : words) {
-                if (isSubWord(word, letterList)) {
-                    ans += 1;
-                }
+            for (int i = 0; i < words.length; i++) {
+                p[words[i].charAt(0) - 'a'].offer(new int[]{i, 0});
             }
-            return ans;
-        }
-
-        private boolean isSubWord(String word, List<Integer>[] letterList) {
-            char[] chars = word.toCharArray();
-
-            int index = -1;
-            int lastIndex = 0;
-            for (char aChar : chars) {
-                index = aChar - 'a';
-                List<Integer> list = letterList[index];
-                if (list == null || list.size() == 0) {
-                    return false;
-                }
-                int left = 0, right = list.size() - 1;
-                int mid = 0;
-                while (left < right) {
-                    mid = left + (right - left) / 2;
-                    if (list.get(mid) < lastIndex) {
-                        left = mid + 1;
+            int res = 0;
+            for (int i = 0; i < s.length(); i++) {
+                char c = s.charAt(i);
+                int len = p[c - 'a'].size();
+                while (len > 0) {
+                    int[] t = p[c - 'a'].poll();
+                    if (t[1] == words[t[0]].length() - 1) {
+                        ++res;
                     } else {
-                        right = mid;
+                        ++t[1];
+                        p[words[t[0]].charAt(t[1]) - 'a'].offer(t);
                     }
+                    --len;
                 }
-                if (list.get(left) < lastIndex) {
-                    return false;
-                }
-                lastIndex = list.get(left) + 1;
             }
-            return true;
+            return res;
         }
     }
 
@@ -87,12 +62,10 @@ public class M792numMatchingSubseq {
         Solution solution = new Solution();
 //        String s = "abcde";
 //        String[] words = {"a", "bb", "acd", "ace"};
-//        String s = "dsahjpjauf";
-//        String[]words ={ "ahjpjau","ja","ahbwzgqnuk","tnmlanowax"};
-        String s = "rwpddkvbnnuglnagtvamxkqtwhqgwbqgfbvgkwyuqkdwhzudsxvjubjgloeofnpjqlkdsqvruvabjrikfwronbrdyyjnakstqjac";
-        String[] words = {"wpddkvbnn", "lnagtva", "kvbnnuglnagtvamxkqtwhqgwbqgfbvgkwyuqkdwhzudsxvju", "rwpddkvbnnugln", "gloeofnpjqlkdsqvruvabjrikfwronbrdyyj",
-                "vbgeinupkvgmgxeaaiuiyojmoqkahwvbpwugdainxciedbdkos", "mspuhbykmmumtveoighlcgpcapzczomshiblnvhjzqjlfkpina", "rgmliajkiknongrofpugfgajedxicdhxinzjakwnifvxwlokip",
-                "fhepktaipapyrbylskxddypwmuuxyoivcewzrdwwlrlhqwzikq", "qatithxifaaiwyszlkgoljzkkweqkjjzvymedvclfxwcezqebx"};
+        String s = "dsahjpjauf";
+        String[]words ={ "ahjpjau","ja","ahbwzgqnuk","tnmlanowax"};
+//        String s = "rwpddkvbnnuglnagtvamxkqtwhqgwbqgfbvgkwyuqkdwhzudsxvjubjgloeofnpjqlkdsqvruvabjrikfwronbrdyyjnakstqjac";
+//        String[] words = {"wpddkvbnn", "lnagtva", "kvbnnuglnagtvamxkqtwhqgwbqgfbvgkwyuqkdwhzudsxvju", "rwpddkvbnnugln", "gloeofnpjqlkdsqvruvabjrikfwronbrdyyj", "vbgeinupkvgmgxeaaiuiyojmoqkahwvbpwugdainxciedbdkos", "mspuhbykmmumtveoighlcgpcapzczomshiblnvhjzqjlfkpina", "rgmliajkiknongrofpugfgajedxicdhxinzjakwnifvxwlokip", "fhepktaipapyrbylskxddypwmuuxyoivcewzrdwwlrlhqwzikq", "qatithxifaaiwyszlkgoljzkkweqkjjzvymedvclfxwcezqebx"};
         int result = solution.numMatchingSubseq(s, words);
         System.out.println(result);
     }
