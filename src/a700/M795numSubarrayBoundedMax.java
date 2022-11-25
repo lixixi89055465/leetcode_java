@@ -5,41 +5,16 @@ import java.util.Stack;
 public class M795numSubarrayBoundedMax {
     protected static class Solution {
         public int numSubarrayBoundedMax(int[] nums, int left, int right) {
-            int ans = 0;
-            Stack<Integer> st = new Stack<Integer>();
-            st.add(-1);
-            int[] lefti = new int[nums.length];
-            int[] righti = new int[nums.length];
-            for (int i = 0; i < nums.length; i++) {
-                lefti[i] = 1;
-                while (st.peek() != -1) {
-                    if (nums[st.peek()] > nums[i]) {
-                        break;
-                    }
-                    st.pop();
-                }
-                lefti[i] = i - st.peek();
-                st.add(i);
+            return count(nums, right) - count(nums, left - 1);
+        }
+
+        private int count(int[] nums, int lower) {
+            int res = 0, cur = 0;
+            for (int num : nums) {
+                cur = num <= lower ? cur + 1 : 0;
+                res += cur;
             }
-            st.clear();
-            st.add(nums.length);
-            for (int i = nums.length - 1; i >= 0; i--) {
-                righti[i] = 1;
-                while (st.peek() != nums.length) {
-                    if (nums[st.peek()] >= nums[i]) {
-                        break;
-                    }
-                    st.pop();
-                }
-                righti[i] = st.peek() - i;
-                st.add(i);
-            }
-            for (int i = 0; i < nums.length; i++) {
-                if (nums[i] >= left && nums[i] <= right) {
-                    ans += lefti[i] * righti[i];
-                }
-            }
-            return ans;
+            return res;
         }
     }
 
