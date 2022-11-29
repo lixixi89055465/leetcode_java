@@ -20,10 +20,10 @@ public class Code_12_SmallSum {
         int p1 = L;
         int p2 = M + 1;
         int[] help = new int[R - L + 1];
-        int ans = 0;
+        int res= 0;
         while (p1 <= M && p2 <= R) {
             if (arr[p1] < arr[p2]) {
-                ans += arr[p1] * (R - p2);
+                res+= arr[p1] * (R - p2+1);
                 help[i++] = arr[p1];
                 p1++;
             } else {
@@ -41,7 +41,7 @@ public class Code_12_SmallSum {
         for (int j = 0; j < help.length; j++) {
             arr[L + j] = help[j];
         }
-        return 0;
+        return res;
     }
 
     public static void main(String[] args) {
