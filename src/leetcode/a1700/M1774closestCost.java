@@ -59,8 +59,19 @@ package leetcode.a1700;
  */
 public class M1774closestCost {
     protected static class Solution {
+        private int ans = Integer.MAX_VALUE;
+
         public int closestCost(int[] base, int[] top, int V) {
-            return 0;
+            for (int i = 0; i < base.length; i++) {
+                ans = Math.min(ans, Math.abs(base[i] - V));
+            }
+            for (int c : base) {
+                dfs(c, 0, 0, top);
+            }
+            return ans;
+        }
+
+        private void dfs(int c, int i, int i1, int[] top) {
         }
     }
 
