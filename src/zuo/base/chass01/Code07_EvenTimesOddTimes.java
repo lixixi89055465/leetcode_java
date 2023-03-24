@@ -13,25 +13,33 @@ public class Code07_EvenTimesOddTimes {
     }
 
     public static void printOddTimeNums2(int[] arr) {
-        int eor = 0;
-        for (int i = 0; i < arr.length; i++) {
-            eor ^= arr[i];
+        int eor=0;
+        for (int i : arr) {
+            eor^=i;
         }
-        int anyOne = eor & (~eor + 1);
-        int onlyOne = 0;
-        for (int i = 0; i < arr.length; i++) {
-            if ((arr[i] & anyOne) != 0) {
-                onlyOne ^= arr[i];
+        int rightOne=eor&(~eor+1);
+        int onlyOne=0;
+        for (int cur : arr) {
+            if((cur&rightOne)==0){
+                onlyOne^=cur;
             }
         }
-        System.out.println(onlyOne + ":" + (eor ^ onlyOne));
+        System.out.println(onlyOne+"\t"+(eor^onlyOne));
+
     }
-    public static int bitCounts(int N){
-        int count=0;
-        while (N!=0){
-            int rightOne=N&(~N+1);
-            N^=rightOne;
-            count+=1;
+
+    public static void main(String[] args) {
+        int[] arr = {1, 2, 3, 1, 2, 3, 7, 9};
+        printOddTimeNums2(arr);
+    }
+
+
+    public static int bitCounts(int N) {
+        int count = 0;
+        while (N != 0) {
+            int rightOne = N & (~N + 1);
+            N ^= rightOne;
+            count += 1;
         }
         return count;
     }
