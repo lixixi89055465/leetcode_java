@@ -11,12 +11,14 @@ public class Code01_SelectionSort {
             return;
         }
         for (int i = 0; i < arr.length - 1; i++) {
-            int minIndex = i;
+            int maxIndex = i;
             for (int j = i + 1; j < arr.length; j++) {
-                minIndex = arr[minIndex] < arr[j] ? minIndex : j;
+                maxIndex = arr[maxIndex] < arr[j] ? maxIndex : j;
             }
-            swap(arr, minIndex, i);
+            swap(arr, i, maxIndex);
         }
+
+
     }
 
     //    private static void swap(int[] arr, int i, int minIndex) {
@@ -31,17 +33,17 @@ public class Code01_SelectionSort {
     }
 
     public static void main(String[] args) {
-        int testTime=500000;
-        int maxSize=100;
-        int maxValue=100;
-        boolean succed=true;
+        int testTime = 500000;
+        int maxSize = 100;
+        int maxValue = 100;
+        boolean succed = true;
         for (int i = 0; i < testTime; i++) {
-            int []arr1=generateRandomArray(maxSize,maxValue);
-            int []arr2=copyArray(arr1);
+            int[] arr1 = generateRandomArray(maxSize, maxValue);
+            int[] arr2 = copyArray(arr1);
             selectionSort(arr1);
             comparator(arr2);
-            if(!isEqual(arr1,arr2)){
-                succed=false;
+            if (!isEqual(arr1, arr2)) {
+                succed = false;
                 printArray(arr1);
                 printArray(arr2);
                 break;
@@ -56,36 +58,37 @@ public class Code01_SelectionSort {
 
     private static void printArray(int[] arr1) {
         for (int i = 0; i < arr1.length; i++) {
-            System.out.println(arr1[i]+",");
+            System.out.println(arr1[i] + ",");
         }
     }
 
     private static int[] copyArray(int[] arr1) {
-        int []arr2=new int[arr1.length];
+        int[] arr2 = new int[arr1.length];
         for (int i = 0; i < arr1.length; i++) {
-            arr2[i]=arr1[i];
+            arr2[i] = arr1[i];
         }
         return arr2;
     }
 
-    public static int[]generateRandomArray(int maxSize,int maxValue){
-        int []arr=new int[(int)((maxSize+1)*Math.random())];
+    public static int[] generateRandomArray(int maxSize, int maxValue) {
+        int[] arr = new int[(int) ((maxSize + 1) * Math.random())];
         for (int i = 0; i < arr.length; i++) {
-            arr[i]=(int)((maxValue+1)*Math.random()-(int)(maxValue*Math.random()));
+            arr[i] = (int) ((maxValue + 1) * Math.random() - (int) (maxValue * Math.random()));
         }
         return arr;
 
     }
-    public static boolean isEqual(int []arr1,int []arr2){
-        if(arr1==null && arr2!=null||
-        arr1!=null && arr2==null){
+
+    public static boolean isEqual(int[] arr1, int[] arr2) {
+        if (arr1 == null && arr2 != null ||
+                arr1 != null && arr2 == null) {
             return false;
         }
-        if(arr1==null&&arr2==null ){
+        if (arr1 == null && arr2 == null) {
             return true;
         }
         for (int i = 0; i < arr1.length; i++) {
-            if(arr1[i]!=arr2[i]){
+            if (arr1[i] != arr2[i]) {
                 return false;
             }
         }
