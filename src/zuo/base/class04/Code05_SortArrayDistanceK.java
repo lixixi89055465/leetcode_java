@@ -4,18 +4,18 @@ import java.util.PriorityQueue;
 
 public class Code05_SortArrayDistanceK {
     public void sortedArrDistanceLessK(int[] arr, int k) {
-        PriorityQueue<Integer> heap = new PriorityQueue<>();
+        PriorityQueue<Integer> q = new PriorityQueue<>(k);
         int index = 0;
-        for (; index < Math.min(arr.length, k); index++) {
-            heap.add(arr[index]);
+        for (index = 0; index < Math.min(k, arr.length); index++) {
+            q.add(arr[index]);
         }
-        int i=0;
-        for(;index<arr.length;i++,index++){
-            heap.add(arr[index]);
-            arr[i]=heap.poll();
+        int i = 0;
+        for (; index < arr.length; index++, i++) {
+            arr[i] = q.poll();
+            q.add(arr[index]);
         }
-        while (!heap.isEmpty()){
-            arr[i++]=heap.poll();
+        while (!q.isEmpty()) {
+            arr[i++] = q.poll();
         }
     }
 
