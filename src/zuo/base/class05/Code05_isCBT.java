@@ -3,6 +3,7 @@ package zuo.base.class05;
 import java.util.LinkedList;
 import java.util.Queue;
 
+//二叉树是否是完全二叉树
 public class Code05_isCBT {
     public static class Node {
         public int value;
