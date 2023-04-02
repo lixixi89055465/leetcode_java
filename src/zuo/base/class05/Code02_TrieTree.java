@@ -1,7 +1,7 @@
 package zuo.base.class05;
 
 public class Code02_TrieTree {
-    public static class Node1 {
+    private static class Node1 {
         public int pass;
         public int end;
         public Node1[] nexts;
