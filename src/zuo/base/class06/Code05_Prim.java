@@ -42,7 +42,6 @@ public class Code05_Prim {
     }
 
     private static class EdgeComparator implements Comparator<Edge> {
-
         @Override
         public int compare(Edge o1, Edge o2) {
             return o1.weight - o2.weight;
@@ -50,16 +49,26 @@ public class Code05_Prim {
     }
 
     public static Set<Edge> primMST(Graph graph) {
-        PriorityQueue<Edge> priorityQueue = new PriorityQueue<>(new EdgeComparator());
+        HashSet<Edge> result = new HashSet<>();
         HashSet<Node> set = new HashSet<>();
+        PriorityQueue<Edge> priorityQueue = new PriorityQueue<>(new EdgeComparator());
         for (Node node : graph.nodes) {
             if (!set.contains(node)) {
                 set.add(node);
                 for (Edge edge : node.edges) {
                     priorityQueue.add(edge);
                 }
-                node
+                while (!priorityQueue.isEmpty()) {
+                    Edge edge = priorityQueue.poll();
+                    if (!set.contains(edge.to)) {
+                        set.add(edge.to);
+                        for (Edge nextEdge : edge.to.edges) {
+                            priorityQueue.add(nextEdge);
+                        }
+                    }
+                }
             }
         }
+        return result;
     }
 }
