@@ -49,9 +49,9 @@ public class Code05_Prim {
     }
 
     public static Set<Edge> primMST(Graph graph) {
-        HashSet<Edge> result = new HashSet<>();
+        PriorityQueue<Edge> priorityQueue = new PriorityQueue<>();
         HashSet<Node> set = new HashSet<>();
-        PriorityQueue<Edge> priorityQueue = new PriorityQueue<>(new EdgeComparator());
+        HashSet<Edge> result = new HashSet<>();
         for (Node node : graph.nodes) {
             if (!set.contains(node)) {
                 set.add(node);
@@ -59,16 +59,17 @@ public class Code05_Prim {
                     priorityQueue.add(edge);
                 }
                 while (!priorityQueue.isEmpty()) {
-                    Edge edge = priorityQueue.poll();
-                    if (!set.contains(edge.to)) {
-                        set.add(edge.to);
-                        for (Edge nextEdge : edge.to.edges) {
-                            priorityQueue.add(nextEdge);
+                    Edge nextEdges = priorityQueue.poll();
+                    if (!set.contains(nextEdges.to)) {
+                        result.add(nextEdges);
+                        set.add(nextEdges.to);
+                        for (Edge edge : nextEdges.to.edges) {
+                            priorityQueue.add(edge);
                         }
                     }
                 }
             }
         }
-        return result;
     }
+
 }
