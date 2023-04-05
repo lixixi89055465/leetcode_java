@@ -25,7 +25,7 @@ public class Code09_NQueues {
 
     private static boolean isValid(int[] record, int i, int j) {
         for (int k = 0; k < i; k++) {
-            if (record[k] == j || Math.abs(j - record[k]) == Math.abs(i - k))){
+            if (record[k] == j || Math.abs(j - record[k]) == Math.abs(i - k)) {
                 return false;
             }
         }
