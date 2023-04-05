@@ -14,15 +14,34 @@ public class Code01_PrintAllProcesss {
         return res;
     }
 
-    public static void process(char[] chs, int i, ArrayList<String> res) {
+    public static ArrayList<String> process(char[] chs, int i, ArrayList<String> res) {
         if (i == chs.length) {
             res.add(String.valueOf(chs));
         }
         for (int j = i; j < chs.length; j++) {
             swap(chs, i, j);
             process(chs, i + 1, res);
-            swap(chs, j, i);
+            swap(chs, i, j);
         }
+        return res;
+    }
+
+    public static ArrayList<String> process01(char[] chs, int i, ArrayList<String> res) {
+        if (i == chs.length) {
+            res.add(String.valueOf(chs));
+        }
+        boolean[] visit = new boolean[26];
+        for (int j = i; j < chs.length; j++) {
+            if (visit[chs[j] - 'a'] == false) {
+                visit[chs[j] - 'a'] = true;
+                swap(chs, i, j);
+                process01(chs, i + 1, res);
+                swap(chs, i, j);
+            }
+        }
+        return res;
+
+
     }
 
     private static void swap(char[] chs, int i, int j) {
