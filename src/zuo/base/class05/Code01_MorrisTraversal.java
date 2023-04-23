@@ -8,30 +8,26 @@ class Node {
 
 public class Code01_MorrisTraversal {
     public static void morrisPos(Node head) {
-        if (head == null) {
-            return;
-        }
         Node cur = head;
         Node mostRight = null;
         while (cur != null) {
-            mostRight = cur.left;
-            if (mostRight != null) {
+            if (cur.left == null) {
+                cur = cur.right;
+            } else {
+                mostRight = cur.left;
                 while (mostRight.right != null && mostRight.right != cur) {
                     mostRight = mostRight.right;
                 }
                 if (mostRight.right == null) {
-                    mostRight.right = cur;
+                    mostRight = cur;
                     cur = cur.left;
-                    continue;
                 } else {
                     mostRight.right = null;
-                    printEdge(cur.left);
+                    cur = cur.right;
                 }
             }
-            cur = cur.right;
         }
-        printEdge(head);
-        System.out.println();
+
     }
 
     public static void printEdge(Node X) {
