@@ -1,4 +1,4 @@
-package base.class07;
+package zuo.base.class07;
 
 public class Code03_CardsInLine {
     public static int win1(int[] arr) {
