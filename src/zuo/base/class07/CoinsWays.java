@@ -1,12 +1,15 @@
 package zuo.base.class07;
 
 public class CoinsWays {
+    //arr里都是正数，没有重复值，每个值代表一种货币，每一种都可以用无限次
+    //最终要找零钱数是aim,
+    //找零方法数返回
     public static int way1(int[] arr, int aim) {
         return process(arr, 0, aim);
     }
 
     private static int process(int[] arr, int index, int rest) {
-        if (index == arr.length) {
+        if (index == 0) {
             return rest == 0 ? 1 : 0;
         }
         int ways = 0;
@@ -22,7 +25,7 @@ public class CoinsWays {
         }
         int N = arr.length;
         int[][] dp = new int[N + 1][aim + 1];
-        dp[N][0] = 1;
+        dp[N][0]=0;
         for (int index = N - 1; index >= 0; index--) {
             for (int rest = 0; rest <= aim; rest++) {
                 int ways = 0;
@@ -35,47 +38,15 @@ public class CoinsWays {
         return dp[0][aim];
     }
 
-    public static int way3(int[] arr, int aim) {
-        if (arr == null || arr.length == 0) {
-            return 0;
+    private static int process2(int[] arr, int index, int rest, int[][] dp) {
+        if (dp[index][rest] != -1) {
+            return dp[index][rest];
         }
-        int N = arr.length;
-        int[][] dp = new int[N + 1][aim + 1];
-        dp[N][0] = 1;
-        for (int index = N - 1; index >= 0; index--) {
-            for (int rest = 0; rest <= aim; rest++) {
-                dp[index][rest] = dp[index + 1][rest];
-                if (rest - arr[index] >= 0) {
-                    dp[index][rest] += dp[index][rest - arr[index]];
-                }
-            }
+        int ways = 0;
+        for (int i = 0; i * arr[index] <= rest; i++) {
+            ways += process2(arr, index + 1, rest - arr[index] * i, dp);
         }
-        return dp[0][aim];
-    }
-
-    public static int[] generateRandomArray(int len, int max) {
-        int[] arr = new int[(int) (Math.random() * len) + 1];
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] = (int) (Math.random() * max) + 1;
-        }
-        return arr;
-    }
-
-    public static void main(String[] args) {
-        int len = 10;
-        int max = 10;
-        int testTime = 10000;
-        for (int i = 0; i < testTime; i++) {
-            int[] arr = generateRandomArray(len, max);
-            int aim = (int) (Math.random() * 3 * max) + max;
-            if (way1(arr, aim) != way2(arr, aim)
-                    || way2(arr, aim) != way3(arr, aim)) {
-                System.out.println("oooops!");
-                break;
-            }
-
-        }
-
-
+        dp[index][rest] = ways;
+        return ways;
     }
 }
