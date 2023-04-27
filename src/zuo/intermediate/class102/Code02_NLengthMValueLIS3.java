@@ -1,4 +1,4 @@
-package zuo.interview_question.class102;
+package zuo.intermediate.class102;
 
 
 /**
