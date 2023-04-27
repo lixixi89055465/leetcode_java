@@ -21,34 +21,36 @@ public class Code01_RobotWalk {
         return f(N, E, rest - 1, cur - 1) + f(N, E, rest - 1, cur + 1);
     }
 
-
-    public static int walkWays2(int N, int E, int S, int K) {
-        int[][] dp = new int[K + 1][N + 1];
+    public static int walkWay2(int N, int E, int S, int K) {
+        int[][] dp = new int[S + 1][K + 1];
         for (int i = 0; i <= K; i++) {
             for (int j = 0; j <= N; j++) {
                 dp[i][j] = -1;
             }
         }
-        return f2(N, E, K, S, dp);
+
+        return f2(dp, N, E, S, K);
     }
 
-    private static int f2(int N, int E, int rest, int cur, int[][] dp) {
-        if (dp[rest][cur] != -1) {
-            return dp[rest][cur];
+    private static int f2(int[][] dp, int N, int E, int S, int K) {
+        if (dp[S][K] != -1) {
+            return dp[S][K];
         }
-        if (rest == 0) {
-            dp[rest][cur] = cur == E ? 1 : 0;
-            return dp[rest][cur];
+        if (S == 0) {
+            if (K == E) {
+                dp[K][S] = 0;
+                return 1;
+            } else {
+                return 0;
+            }
         }
-        if (cur == 1) {
-            dp[rest][cur] = f(N, E, rest - 1, 2);
-            return dp[rest][cur];
+        if (K == 1) {
+            dp[S][K] = 1 + f2(dp, N, E, S - 1, 2);
         }
-        if (cur == N) {
-            dp[rest][cur] = f(N, E, rest - 1, N - 1);
-            return dp[rest][cur];
+        if (K == N) {
+            dp[S][K] = 1 + f2(dp, N, E, S - 1, N - 1);
         }
-        dp[rest][cur] = f(N, E, rest - 1, cur - 1) + f(N, E, rest - 1, cur + 1);
-        return dp[rest][cur];
+        dp[S][K] = 1 + Math.min(f2(dp, N, E, S - 1, K - 1), f2(dp, N, E, S - 1, K + 1));
+        return dp[S][K];
     }
 }
