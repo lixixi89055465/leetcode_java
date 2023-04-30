@@ -2,18 +2,18 @@ package zuo.intermediate.class02;
 
 public class Problem04_parenthesesDeep {
     public static int maxLength(String s) {
-        if (s == null || s.equals("")) {
+        if (s == null || s.length() == 0) {
             return 0;
         }
-        char[] str = s.toCharArray();
-        int[] dp = new int[str.length];
+        char[] strs = s.toCharArray();
         int pre = 0;
         int res = 0;
-        for (int i = 0; i < str.length; i++) {
-            if (str[i] == ')') {
+        int[] dp = new int[s.length()];
+        for (int i = 0; i < strs.length; i++) {
+            if (strs[i] == ')') {
                 pre = i - dp[i - 1] - 1;
-                if (pre >= 0 && str[pre] == '(') {
-                    dp[i] = dp[i - 1] + 2 + (pre > 0 ? dp[pre - 1] : 0);
+                if (pre >= 0 && strs[pre] == '(') {
+                    dp[i] = strs[pre] == strs[i] ? (dp[i - 1] + 2 + (pre > 0 ? dp[pre - 1] : 0)) : 0;
                 }
             }
             res = Math.max(res, dp[i]);
@@ -22,7 +22,7 @@ public class Problem04_parenthesesDeep {
     }
 
     public static void main(String[] args) {
-        String test="((()))";
-        System.out.println(maxLength(test));
+
     }
 }
+
