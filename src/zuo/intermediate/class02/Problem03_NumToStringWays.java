@@ -31,19 +31,16 @@ public class Problem03_NumToStringWays {
         char[] str = String.valueOf(num).toCharArray();
         int N = str.length;
         int[] dp = new int[N + 1];
+        dp[N] = 1;
         dp[N - 1] = str[N - 1] == '0' ? 0 : 1;
-        for (int i = N - 2; i >= 0; i++) {
+        for (int i = N; i >= 0; i--) {
             if (str[i] == '0') {
                 dp[i] = 0;
             } else {
-                dp[i] = dp[i + 1]
-                        + (((str[i] - '0') * 10 + (str[i + 1] - '0') < 27 ? dp[i + 2] : 0));
+                dp[i] = dp[i + 1] +
+                        (((str[i] - '0') * 10 + str[i + 1] - '0') < 27 ? dp[i + 2] : 0);
             }
         }
         return dp[0];
-    }
-
-    public static void main(String[] args) {
-
     }
 }
