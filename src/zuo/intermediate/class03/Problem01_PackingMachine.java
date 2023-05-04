@@ -7,28 +7,27 @@ public class Problem01_PackingMachine {
         }
         int size = arr.length;
         int sum = 0;
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < arr.length; i++) {
             sum += arr[i];
         }
         if (sum % size != 0) {
             return -1;
         }
-        int avg = sum / size;
         int leftSum = 0;
-        int ans = 0;
+        int avg = sum / arr.length;
+        int result = 0;
         for (int i = 0; i < arr.length; i++) {
-            int leftRest = leftSum - i * avg;
-            int rightRest = (sum - leftRest - arr[i]) - (size - i - 1) * avg;
-            if (leftRest < 0 && rightRest < 0) {
-                ans = Math.max(ans, Math.abs(leftRest) + Math.abs(rightRest));
+            int left = leftSum - avg * i;
+            int right = sum - left - (arr.length - i) * avg;
+            if (left < 0 && right < 0) {
+                result = Math.max(result, Math.abs(left) + Math.abs(right));
             } else {
-                ans = Math.max(ans, Math.max(Math.abs(leftRest), Math.abs(rightRest)));
+                result = Math.max(result, Math.max(Math.abs(left), Math.abs(right)));
             }
             leftSum += arr[i];
         }
-        return ans;
+        return result;
     }
-
 
     public static void main(String[] args) {
 

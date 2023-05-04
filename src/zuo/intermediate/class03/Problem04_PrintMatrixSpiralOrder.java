@@ -27,16 +27,18 @@ public class Problem04_PrintMatrixSpiralOrder {
                 System.out.println(matrix[a][curC] + " ");
                 curC++;
             }
-            while (curR != c) {
-                System.out.println(matrix[curR][d] + " ");
+            while (curR != b) {
+                System.out.println(matrix[b][curR] + " ");
                 curR++;
             }
+            curC = d;
+            curR = c;
             while (curC != b) {
-                System.out.println(matrix[c][curC] + " ");
+                System.out.println(matrix[c][curC]);
                 curC--;
             }
-            while (curR != a) {
-                System.out.println(matrix[curR][b] + " ");
+            while (curR != c) {
+                System.out.println(matrix[d][curR]);
                 curR--;
             }
         }
