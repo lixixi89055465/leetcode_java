@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.PriorityQueue;
 
 public class Problem_29_TopKTimes2 {
-    public static class Node {
+    private static class Node {
         public String str;
         public int times;
 
@@ -16,70 +16,87 @@ public class Problem_29_TopKTimes2 {
         }
     }
 
-    public static class TopKRecod {
-        Integer size;
-        PriorityQueue<Node> minRootHeap = new PriorityQueue<>(new Comparator<Node>() {
-            @Override
-            public int compare(Node o1, Node o2) {
-                return o1.times - o2.times;
-            }
-        });
-        Map<String, Integer> strSizeMap = new HashMap<String, Integer>();
+    private static class TopRecord {
+        private HashMap<String, Node> strNodeMap = new HashMap<>();
+        private HashMap<Node, Integer> nodeIndexMap = new HashMap<>();
+        private Node[] heap;
+        private int index;
 
-
-        public TopKRecod(int size) {
-            this.size = size;
+        public TopRecord(int K) {
+            heap = new Node[K];
+            index = 0;
+            strNodeMap = new HashMap<>();
+            nodeIndexMap = new HashMap<>();
         }
+
 
         public void add(String str) {
-            if (!strSizeMap.containsKey(str)) {
-                strSizeMap.put(str, 1);
-                if (minRootHeap.size() < size) {
-                    minRootHeap.add(new Node(str, 1));
+            Node curNode = null;
+            int preIndex = -1;
+            if (!strNodeMap.containsKey(str)) {
+                curNode = new Node(str, 1);
+                strNodeMap.put(str, curNode);
+                nodeIndexMap.put(curNode, -1);
+            } else {
+                curNode = strNodeMap.get(curNode);
+                curNode.times++;
+                preIndex = nodeIndexMap.get(curNode);
+            }
+            if (preIndex == -1) {
+                if (index == heap.length) {
+                    if (heap[0].times < curNode.times) {
+                        nodeIndexMap.put(heap[0], -1);
+                        nodeIndexMap.put(curNode, 0);
+                        heap[0] = curNode;
+                        modify(0, index);
+                    }
+                } else {
+                    nodeIndexMap.put(curNode, index);
+                    heap[index] = curNode;
+                    heapInsert(index++);
                 }
-                return;
+            } else {
+                modify(preIndex, index);
             }
-            strSizeMap.put(str, strSizeMap.get(str) + 1);
-            if (minRootHeap.size() < this.size) {
-                minRootHeap.add(new Node(str, strSizeMap.get(str)));
-            } else if (minRootHeap.peek().times < strSizeMap.get(str)) {
-                minRootHeap.poll();
-                minRootHeap.add(new Node(str,
 
-                        strSizeMap.get(str)));
-            }
         }
-        public void printTopk(){
-            System.out.println("Top: ");
-            while (!minRootHeap.isEmpty()){
-                Node poll = minRootHeap.poll();
-                System.out.println(poll.str + " : " + poll.times);
+
+        private void heapInsert(int index) {
+            while (index != 0) {
+                int parent = (index - 1) / 2;
+                if (heap[parent].times > heap[index].times) {
+                    swap(parent, index);
+                    index = parent;
+                } else {
+                    break;
+                }
             }
         }
 
+        private void swap(int parent, int index) {
+            Node tmp = heap[parent];
+            heap[parent] = heap[index];
+            heap[index] = tmp;
+            nodeIndexMap.put(heap[parent], parent);
+            nodeIndexMap.put(heap[index], index);
+        }
+
+        private void modify(int preIndex, int heapSize) {
+            int l = index * 2 + 1;
+            int r = index * 2 + 2;
+            int smallest = index;
+            while (l < heapSize) {
+                if (heap[l].times < heap[index].times) {
+                    smallest = l;
+                }
+                if (r < heapSize && heap[r].times < heap[smallest].times) {
+                    smallest = r;
+                }
+                index = smallest;
+                l = index * 2 + 1;
+                r = index * 2 + 1;
+            }
+
+        }
     }
-
-    public static void main(String[] args) {
-        TopKRecod topKRecod = new TopKRecod(3);
-        topKRecod.add("ddd");
-        topKRecod.add("ddd");
-        topKRecod.add("ddd");
-        topKRecod.add("ddd");
-        topKRecod.add("ddd");
-        topKRecod.add("ddd");
-        topKRecod.add("aaa");
-        topKRecod.add("bbb");
-        topKRecod.add("bbb");
-        topKRecod.add("ccc");
-        topKRecod.add("ccc");
-        topKRecod.add("ccc");
-        topKRecod.add("ccc");
-        topKRecod.add("ccc");
-        topKRecod.add("aaa");
-        topKRecod.add("aaa");
-
-        topKRecod.printTopk();
-
-    }
-
 }
