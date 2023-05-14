@@ -39,8 +39,23 @@ public class Coffee01 {
             heap.add(cur);
         }
         return process(drinks, a, b, 0, 0);
-
     }
+
+    public static int process(int[] drinks, int a, int b, int index, int washLine) {
+        if (index == drinks.length - 1) {
+            return Math.min(Math.max(washLine, drinks[index] + a),
+                    drinks[index] + b);
+        }
+        //wash 是我当前的咖啡杯，洗完的时间
+        int wash = Math.max(washLine, drinks[index] + a);
+        int next1 = process(drinks, a, b, index + 1, wash);
+        int p1 = Math.max(wash, next1);
+        int dry = drinks[index] + b;
+        int next2 = process(drinks, a, b, index + 1, dry);
+        int p2 = Math.max(dry, next2);
+        return Math.min(p1, p2);
+    }
+
 
     public static void main(String[] args) {
 
