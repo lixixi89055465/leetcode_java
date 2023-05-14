@@ -33,7 +33,7 @@ public class Coffee {
         return 0;
     }
 
-    static class Machine {
+    private static class Machine {
         public int timePoint;
         public int workTime;
 
