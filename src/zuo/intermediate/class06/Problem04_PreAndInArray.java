@@ -31,4 +31,8 @@ public class Problem04_PreAndInArray {
         );
 
     }
+
+    public static void main(String[] args) {
+        System.out.println("aaaaaaaaaa");
+    }
 }
