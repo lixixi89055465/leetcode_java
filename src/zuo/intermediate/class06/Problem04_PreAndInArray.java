@@ -1,6 +1,22 @@
 package zuo.intermediate.class06;
 
+import java.util.HashMap;
+
 public class Problem04_PreAndInArray {
+    public static int[] getPostArray(int[] pre, int[] in) {
+        if (pre == null) {
+            return null;
+        }
+        int N = pre.length;
+        int[] pos = new int[N];
+        HashMap<Integer, Integer> inMap = new HashMap<>();
+        for (int i = 0; i < in.length; i++) {
+            inMap.put(in[i], i);
+        }
+        set(pre, in, pos, 0, N - 1, 0, N - 1, 0, N - 1);
+        return pos;
+    }
+
     public static void set(int[] pre, int[] in, int[] pos,
                            int prei, int prej,
                            int ini, int inj,
