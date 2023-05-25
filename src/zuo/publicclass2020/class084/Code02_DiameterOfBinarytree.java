@@ -46,11 +46,11 @@ public class Code02_DiameterOfBinarytree {
 //
 //	public static class Info {
 //		public int maxDistance;
-//		public int height;
+//		public int h;
 //
 //		public Info(int m, int h) {
 //			maxDistance = m;
-//			height = h;
+//			h = h;
 //		}
 //	}
 //
@@ -62,9 +62,9 @@ public class Code02_DiameterOfBinarytree {
 //		Info rightInfo = process(x.right);
 //		int maxDistance = Math.max(
 //				Math.max(leftInfo.maxDistance, rightInfo.maxDistance),
-//				leftInfo.height + rightInfo.height);
-//		int height = Math.max(leftInfo.height, rightInfo.height) + 1;
-//		return new Info(maxDistance, height);
+//				leftInfo.h + rightInfo.h);
+//		int h = Math.max(leftInfo.h, rightInfo.h) + 1;
+//		return new Info(maxDistance, h);
 //	}
 
 }
