@@ -1,5 +1,7 @@
 package zuo.senior.class01;
 
+import java.awt.*;
+
 public class Problem04 {
     protected static class Node {
         public Node next;
@@ -7,16 +9,17 @@ public class Problem04 {
     }
 
     public static Node josephusKill2(Node head, int m) {
-        if (head == null || head.next == head || m < 1) {
+        if (head == null || head.next == null || m < 1) {
             return head;
         }
-        int tmp = 0;
         Node cur = head.next;
+        int tmp = 0;
         while (cur != null) {
             tmp++;
             cur = cur.next;
         }
-        while (--tmp > 0) {
+        int index = getLive(tmp, m);
+        while (--index > 0) {
             head = head.next;
         }
         head.next = head;
