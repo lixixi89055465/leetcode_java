@@ -40,7 +40,7 @@ public class Code04_ExpressionCompute {
 		return new int[] { getNum(que), i };
 	}
 
-	public static void addNum(LinkedList<String> que, int num) {
+	private static void addNum(LinkedList<String> que, int num) {
 		if (!que.isEmpty()) {
 			int cur = 0;
 			String top = que.pollLast();
