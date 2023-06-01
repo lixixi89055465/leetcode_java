@@ -54,7 +54,7 @@ public class Code04_ExpressionCompute {
 		que.addLast(String.valueOf(num));
 	}
 
-	public static int getNum(LinkedList<String> que) {
+	private static int getNum(LinkedList<String> que) {
 		int res = 0;
 		boolean add = true;
 		String cur = null;
