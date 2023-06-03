@@ -111,7 +111,7 @@ public class Code02_KthMinPair {
 		}
 	}
 
-	public static int medianOfMedians(int[] arr, int begin, int end) {
+	private static int medianOfMedians(int[] arr, int begin, int end) {
 		int num = end - begin + 1;
 		int offset = num % 5 == 0 ? 0 : 1;
 		int[] mArr = new int[num / 5 + offset];
@@ -123,7 +123,7 @@ public class Code02_KthMinPair {
 		return select(mArr, 0, mArr.length - 1, mArr.length / 2);
 	}
 
-	public static int[] partition(int[] arr, int begin, int end, int pivotValue) {
+	private static int[] partition(int[] arr, int begin, int end, int pivotValue) {
 		int small = begin - 1;
 		int cur = begin;
 		int big = end + 1;
@@ -142,7 +142,7 @@ public class Code02_KthMinPair {
 		return range;
 	}
 
-	public static int getMedian(int[] arr, int begin, int end) {
+	private static int getMedian(int[] arr, int begin, int end) {
 		insertionSort(arr, begin, end);
 		int sum = end + begin;
 		int mid = (sum / 2) + (sum % 2);
