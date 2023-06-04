@@ -1,4 +1,4 @@
-package zuo.senior;
+package zuo.senior.class05;
 
 public class Problem02_SplitNumer {
     private static int process(int pre, int rest) {
