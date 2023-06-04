@@ -8,38 +8,38 @@ public class Problem06_BFPRT {
         }
         int pivot = medianOfMedians(arr, begin, end);
         int[] pivotRange = partition(arr, begin, end, pivot);
-        if (pivotRange[0] <= i && pivotRange[1] >= i) {
-            return arr[i];
-        } else if (pivotRange[0] > i) {
+        if (pivotRange[0] > i) {
             return select(arr, begin, pivotRange[0] - 1, i);
-        } else {
+        } else if (pivotRange[1] < i) {
             return select(arr, pivotRange[1] + 1, end, i);
+        } else {
+            return arr[i];
         }
-
     }
 
     private static int[] partition(int[] arr, int begin, int end, int pivotValue) {
         int small = begin - 1;
-        int cur = begin;
         int big = end;
+        int cur = begin;
         while (cur != big) {
             if (arr[cur] < pivotValue) {
-                swap(arr, ++small, cur++);
+                swap(arr, cur++, ++small);
             } else if (arr[cur] > pivotValue) {
-                swap(arr, big--, cur);
+                swap(arr, cur, big--);
             } else {
                 cur++;
             }
         }
         int[] range = new int[2];
-        range[0] = small + 1;
-        range[0] = end - 1;
+        range[0] = small;
+        range[1] = big;
         return range;
     }
 
     private static int medianOfMedians(int[] arr, int begin, int end) {
         int num = end - begin + 1;
-        int[] mArr = new int[num];
+        int offset = num % 5 == 0 ? 0 : 1;
+        int[] mArr = new int[num / 5 + offset];
         for (int i = 0; i < mArr.length; i++) {
             int beginI = begin + i * 5;
             int endI = beginI + 4;
@@ -50,9 +50,9 @@ public class Problem06_BFPRT {
 
     private static int getMedian(int[] arr, int begin, int end) {
         insertionSort(arr, begin, end);
-        int sum = end + begin;
-        int mid = sum / 2 + (sum % 2);
-        return arr[mid];
+        int sum = begin + end;
+        int index = sum / 2 + (sum % 2);
+        return arr[index];
     }
 
     private static void insertionSort(int[] arr, int begin, int end) {
