@@ -6,18 +6,24 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class Test1 {
-
-    public static void main(String args[]) throws InterruptedException {
-        List<Integer>arr=new ArrayList<>(7);
-        arr.addAll(Arrays.asList(1, 2, 6, 6, 8, 10, 1 ));
-        for (int i = arr.size()-1 ; i >=0; i--) {
-            if(arr.get(i)==1){
-                arr.remove(i);
-            }
+    public static String alternativeMerge2(String str1, String str2) {
+        // write code here
+        if (str1 == null || str1.length() == 0 || str2 == null || str2.length() == 0) {
+            return "";
         }
-        for (Integer integer : arr) {
-            System.out.println(integer);
+        int j = 0;
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < str1.length(); i++) {
+            sb.append(str1.charAt(i));
+            sb.append(str2.charAt(j));
+            j = (j + 1) % str2.length();
         }
+        return sb.toString();
     }
 
+    public static void main(String args[]) throws InterruptedException {
+        String str1 = "abcyokagames", str2 = "12345";
+        System.out.println(alternativeMerge2(str1, str2));
+    }
 }
+
