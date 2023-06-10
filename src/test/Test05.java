@@ -28,7 +28,7 @@ public class Test05 {
 
     }
 
-    public static int process(int[] nArr, int N, int K) {
+    private static int process(int[] nArr, int N, int K) {
         HashMap<Integer, Integer> count = new HashMap<>();
         int left = 0, right = 0;
         int res = 0;
