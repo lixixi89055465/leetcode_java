@@ -10,7 +10,7 @@ public class Code02_CoinsMin {
         return process(arr, 0, aim);
     }
 
-    public static int process(int[] arr, int index, int rest) {
+    private static int process(int[] arr, int index, int rest) {
         if (rest < 0) {
             return -1;
         }
