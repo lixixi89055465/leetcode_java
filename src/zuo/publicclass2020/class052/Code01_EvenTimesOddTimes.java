@@ -15,7 +15,7 @@ public class Code01_EvenTimesOddTimes {
 		for (int num : arr) {
 			eor ^= num;
 		}
-		// a和b，出现了奇数次 eor -> a ^ b
+		// a和b，出现了奇数次 eor -> HJ93 ^ b
 		// eor : 0..000101011000
 		// 最右的1: 0..000000001000
 		// ~num + 1 -> -num
@@ -37,7 +37,7 @@ public class Code01_EvenTimesOddTimes {
 		for (int i = 0; i < arr.length; i++) {
 			eor ^= arr[i];
 		}
-		// eor = a ^ b
+		// eor = HJ93 ^ b
 		// eor != 0
 		// eor : 001100100
 		// rightOne : 000000100
@@ -48,7 +48,7 @@ public class Code01_EvenTimesOddTimes {
 				onlyOne ^= arr[i];
 			}
 		}
-		// eor' = a or b
+		// eor' = HJ93 or b
 		System.out.println(onlyOne + " " + (eor ^ onlyOne));
 	}
 

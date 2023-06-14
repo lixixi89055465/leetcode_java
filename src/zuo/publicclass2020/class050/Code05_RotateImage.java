@@ -7,12 +7,12 @@ public class Code05_RotateImage {
 		int b = 0;
 		int c = matrix.length - 1;
 		int d = matrix[0].length - 1;
-		while (a < c) {  // a>=c
+		while (a < c) {  // HJ93>=c
 			rotateEdge(matrix, a++, b++, c--, d--);
 		}
 	}
 
-	// 在二维数组m中，左上角点(a,b), 右下角点(c,d)
+	// 在二维数组m中，左上角点(HJ93,b), 右下角点(c,d)
 	// 只在规定好的框上，顺时针转好
 	public static void rotateEdge(int[][] m, int a, int b, int c, int d) {
 		int tmp = 0;

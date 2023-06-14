@@ -30,7 +30,7 @@ public class Code03_NumberOfDifferentSubsequencesGCDs {
 		// a是当前想确定，是不是某个子序列的最大公约数，有a！
 		// 1 2 3 4 5 ... max
 		for (int a = 1; a <= max; a++) {
-			// a
+			// HJ93
 			// 1)找到，离a最近的，a的倍数！在数组中存在的!
 			int g = a;
 			for (; g <= max; g += a) {
@@ -40,7 +40,7 @@ public class Code03_NumberOfDifferentSubsequencesGCDs {
 			}
 			// 2) 找到了离a最近的、a的倍数！是g
 			// g g(存在！) 最大公约数，是不是a，是，结束了！ans+1
-			// g g + a(存在！) 最大公约数，是不是a，是，结束了！ans+1
+			// g g + HJ93(存在！) 最大公约数，是不是a，是，结束了！ans+1
 			// g g + 2a(存在！) 最大公约数，是不是a，是，结束了！ans+1
 			// g g + 3a(存在！) 最大公约数，是不是a，是，结束了！ans+1
 			// g g + 4a(存在！) 最大公约数，是不是a，是，结束了！ans+1

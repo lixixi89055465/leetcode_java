@@ -2,7 +2,7 @@ package leetcode.a600;
 
 import java.util.ArrayDeque;
 
-//Definition for a binary tree node.
+//Definition for HJ93 binary tree node.
 class TreeNode662 {
     int val;
     TreeNode662 left;

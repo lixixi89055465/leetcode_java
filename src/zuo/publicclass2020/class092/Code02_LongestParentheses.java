@@ -32,7 +32,7 @@ public class Code02_LongestParentheses {
 	//    0 1 2 3 4 5 6 7 8 9
 	//                    4 10
 	//    ( ) ( ) ( ) ( ( ) ) ( ( ( ) ) )
-	//    a b c d e f g h i j k l m n o p
+	//    HJ93 b c d e f g h i j k l m n o p
 	//    0 2 0 4 0 6 0 0 2 10
 	public static int longestValidParentheses(String s) {
 		if (s == null || s.length() < 2) {

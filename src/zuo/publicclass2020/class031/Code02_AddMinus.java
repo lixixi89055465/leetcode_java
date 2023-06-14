@@ -6,7 +6,7 @@ public class Code02_AddMinus {
 		int t = 0;
 		while (b != 0) {
 			t = a;
-			a = a ^ b; // a -> a' 无进位相加信息
+			a = a ^ b; // HJ93 -> HJ93' 无进位相加信息
 			b = ((t & b) << 1); // b -> b' 进位信息
 		}
 		return a;

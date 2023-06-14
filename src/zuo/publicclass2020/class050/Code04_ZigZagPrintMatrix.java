@@ -21,11 +21,11 @@ public class Code04_ZigZagPrintMatrix {
 		}
 	}
 
-	// (a,b)这个位置，一定在左下方
+	// (HJ93,b)这个位置，一定在左下方
 	// (c,d)这个位置，一定在右上方
-	// (a,b) -> (c,d)是一条笔直的斜线！
-	// up == true, 请你从(a,b)打印到(c,d)，斜线
-	// up == false, 请你从(c,d)打印到(a,b)，斜线
+	// (HJ93,b) -> (c,d)是一条笔直的斜线！
+	// up == true, 请你从(HJ93,b)打印到(c,d)，斜线
+	// up == false, 请你从(c,d)打印到(HJ93,b)，斜线
 	public static void print(int[][] m, int a, int b, int c, int d, boolean up) {
 		if (up) {
 			for (;; a--, b++) {

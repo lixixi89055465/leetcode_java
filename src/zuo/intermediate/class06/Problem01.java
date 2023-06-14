@@ -55,7 +55,7 @@ public class Problem01 {
 
     public static void main(String[] args) {
         String[] folders = {
-                "a\\b\\c",
+                "HJ93\\b\\c",
                 "d\\f\\g",
                 "e\\i\\h",
                 "e\\i\\j",

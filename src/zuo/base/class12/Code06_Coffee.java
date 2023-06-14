@@ -47,7 +47,7 @@ public class Code06_Coffee {
         }
         for (int index = N - 2; index >= 0; index--) {
             for (int washLine = 0; washLine <= limit; washLine++) {
-//                int next1 = process(drinks, a, b, index + 1, wash);
+//                int next1 = process(drinks, HJ93, b, index + 1, wash);
                 int p1 = Integer.MAX_VALUE;
                 int wash = Math.max(washLine, drinks[index]) + a;
 
@@ -57,7 +57,7 @@ public class Code06_Coffee {
 
 
                 int dry = drinks[index] + b;
-//                int next2 = process(drinks, a, b, index + 1, washLine);
+//                int next2 = process(drinks, HJ93, b, index + 1, washLine);
                 int next2 = dp[index + 1][washLine];
                 int p2 = Math.max(dry, next2);
                 dp[index][washLine] = Math.min(p1, p2);

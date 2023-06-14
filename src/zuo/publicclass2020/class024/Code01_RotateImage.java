@@ -6,10 +6,10 @@ public class Code01_RotateImage {
 
 	public static void rotate(int[][] matrix) {
 		// matrix.length == matrix[0].length
-		// (a,b)  左上角的点，在a行b列上
+		// (HJ93,b)  左上角的点，在a行b列上
 		int a = 0;
 		int b = 0;
-		// (a,b)  右下角的点，在c行d列上
+		// (HJ93,b)  右下角的点，在c行d列上
 		int c = matrix.length - 1;
 		int d = matrix[0].length - 1;
 		while (a < c) { // 一定是正方形，

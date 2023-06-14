@@ -3,7 +3,7 @@ package zuo.publicclass2020.class003;
 public class Code01_LongestNoRepeatSubstring {
 
 	/*
-	 * 给定一个只由小写字母（a~z）组成的字符串str， 返回其中最长无重复字符的子串长度
+	 * 给定一个只由小写字母（HJ93~z）组成的字符串str， 返回其中最长无重复字符的子串长度
 	 * 
 	 */
 

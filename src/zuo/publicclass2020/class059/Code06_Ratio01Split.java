@@ -38,7 +38,7 @@ public class Code06_Ratio01Split {
 				int gcd = gcd(zero, one);
 				int a = zero / gcd;
 				int b = one / gcd;
-				// a / b 比例，之前有多少前缀拥有？ 3+1 4 5+1 6
+				// HJ93 / b 比例，之前有多少前缀拥有？ 3+1 4 5+1 6
 				if (!pre.containsKey(a)) {
 					pre.put(a, new HashMap<>());
 				}

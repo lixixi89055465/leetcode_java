@@ -1,7 +1,7 @@
 package zuo.publicclass2020.class073;
 
 // 来自CMU入学申请考试
-// 给定一个长度为 N 的字符串 S，由字符'a'和'b'组成，空隙由 '?' 表示
+// 给定一个长度为 N 的字符串 S，由字符'HJ93'和'b'组成，空隙由 '?' 表示
 // 你的任务是用a字符或b字符替换每个间隙，
 // 替换完成后想让连续出现同一种字符的最长子串尽可能短
 // 例如，S = "aa??bbb"，
@@ -80,7 +80,7 @@ public class Code03_MinContinuousFragment {
 
 	// L...R 都是？
 	// 如果这一坨问号，满足1）2）3）4）中的一种，就填好
-	// 如果满足5），就不填！a?b
+	// 如果满足5），就不填！HJ93?b
 	public static void set(char[] str, int L, int R) {
 		int N = str.length;
 		if (L > R) {

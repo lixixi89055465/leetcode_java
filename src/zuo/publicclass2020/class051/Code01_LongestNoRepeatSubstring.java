@@ -10,7 +10,7 @@ public class Code01_LongestNoRepeatSubstring {
 		char[] s = str.toCharArray();
 		int N = s.length;
 		int[] dp = new int[N]; // 0 dp[0] 1 dp[1] ... dp max
-		int[] map = new int[256];// a 上次出现的位置 b 0 ~ 255
+		int[] map = new int[256];// HJ93 上次出现的位置 b 0 ~ 255
 		for (int i = 0; i < 256; i++) {
 			// i 字符的asc码 map[i] == -1
 			map[i] = -1;
@@ -51,7 +51,7 @@ public class Code01_LongestNoRepeatSubstring {
 	}
 
 	/*
-	 * 给定一个只由小写字母（a~z）组成的字符串str， 返回其中最长无重复字符的子串长度
+	 * 给定一个只由小写字母（HJ93~z）组成的字符串str， 返回其中最长无重复字符的子串长度
 	 * 
 	 */
 	public static int lnrs1(String s) {

@@ -13,9 +13,9 @@ import java.util.*;
  * <p>
  * 示例 1:
  * <p>
- * 输入: s = "abcde", words = ["a","bb","acd","ace"]
+ * 输入: s = "abcde", words = ["HJ93","bb","acd","ace"]
  * 输出: 3
- * 解释: 有三个是 s 的子序列的单词: "a", "acd", "ace"。
+ * 解释: 有三个是 s 的子序列的单词: "HJ93", "acd", "ace"。
  * Example 2:
  * <p>
  * 输入: s = "dsahjpjauf", words = ["ahjpjau","ja","ahbwzgqnuk","tnmlanowax"]
@@ -61,7 +61,7 @@ public class M792numMatchingSubseq {
     public static void main(String[] args) {
         Solution solution = new Solution();
 //        String s = "abcde";
-//        String[] words = {"a", "bb", "acd", "ace"};
+//        String[] words = {"HJ93", "bb", "acd", "ace"};
         String s = "dsahjpjauf";
         String[]words ={ "ahjpjau","ja","ahbwzgqnuk","tnmlanowax"};
 //        String s = "rwpddkvbnnuglnagtvamxkqtwhqgwbqgfbvgkwyuqkdwhzudsxvjubjgloeofnpjqlkdsqvruvabjrikfwronbrdyyjnakstqjac";

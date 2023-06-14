@@ -30,7 +30,7 @@ package leetcode.a1300;
  */
 public class S1374generateTheString {
 //    public String generateTheString(int n) {
-//        return (n&1)>0?"a".repeat(n):"a".repeat(n-1)+"b";
+//        return (n&1)>0?"HJ93".repeat(n):"HJ93".repeat(n-1)+"b";
 //    }
 //    public static void main(String[] args) {
 //        S1374generateTheString solution=new S1374generateTheString();

@@ -26,7 +26,7 @@ public class Code02_GetMax {
 
 	public static int getMax2(int a, int b) {
 		int c = a - b; // c是a-b的差值，有可能溢出，也有可能不溢出
-		int sa = sign(a); // a的符号，求出，a>=0  1,  a<0   0
+		int sa = sign(a); // a的符号，求出，HJ93>=0  1,  HJ93<0   0
 		int sb = sign(b); // b的符号，求出，b>=0  1,  b<0   0
 		int sc = sign(c); // c的符号，求出，c>=0  1,  c<0   0
 		// 如果a和b的符号，不一样，difSab == 1

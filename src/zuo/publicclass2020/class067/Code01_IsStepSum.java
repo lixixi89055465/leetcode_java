@@ -16,7 +16,7 @@ public class Code01_IsStepSum {
 			// 求中点
             // M  = (L + R) / 2;
 			// M = L + (R - L) / 2
-			// a / 2 ->  a >> 1
+			// HJ93 / 2 ->  HJ93 >> 1
 			M = L + ((R - L) >> 1);
 			cur = stepSum(M);
 			if (cur == x) {
