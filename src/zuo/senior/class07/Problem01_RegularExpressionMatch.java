@@ -35,7 +35,7 @@ public class Problem01_RegularExpressionMatch {
             return si != s.length && (e[ei] == s[si] || e[ei] == '.')
                     && process(s, e, si + 1, ei + 1);
         }
-        //可能性二，ei+1位置不是*
+        //可能性二，ei+1位置是*
         while (si != s.length && (e[ei] == s[si] || e[ei] == '.')) {
             if (process(s, e, si, ei + 2)) {
                 return true;
