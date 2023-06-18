@@ -49,12 +49,11 @@ public class HJ39 {
         int flag = 1;
         for (int i = 0; i < 4; i++) {
             int tmp = Integer.parseInt(split[i]);
-            int rightOne = tmp & (~tmp + 1);
             if (tmp == 255 && flag == 1) {
                 continue;
             } else if (flag == 1) {
                 flag = 0;
-            } else if (rightOne != 0) {
+            } else if (tmp != 0) {
                 return false;
             }
         }
