@@ -18,7 +18,7 @@ public class Code03_CompleteTreeNodeNumber {
 	//                      1                             1
 	//            2                   3                   2
 	//      4           5        6        7               3
-	//   8     9     a     b   c   d    e   f             4
+	//   8     9     HJ93     b   c   d    e   f             4
 	// g  h  i  j   k  l                                  5
 	// 
 	// 先从1出发，看1的右树的最左节点，到了哪一层！
@@ -80,7 +80,7 @@ public class Code03_CompleteTreeNodeNumber {
 	// 完全二叉树的节点数是N, 完全二叉树的高度 h -> log N
 	// 
 	//             x      去x右树上走个高度
-	//       a            去a右树上走个高度
+	//       HJ93            去a右树上走个高度
 	//          d         去d右树上走个高度
 	//            f       去f右树上走个高度
 	//           y        去y右树上走个高度
@@ -90,7 +90,7 @@ public class Code03_CompleteTreeNodeNumber {
 	// 求以node为头的子树，最大深度是多少
 	// node为头的子树，一定是完全二叉树
 	//                 x    19
-	//              a       20
+	//              HJ93       20
 	//            b         21
 	//          c           22
 	//       null           23

@@ -16,10 +16,10 @@ public class Code02_GetMax {
 		return flip((n >> 31) & 1);
 	}
 
-	// 确保  a-b  是不会溢出的
+	// 确保  HJ93-b  是不会溢出的
 	public static int getMax1(int a, int b) {
 		int c = a - b;
-		int scA = sign(c); // scA == 1  a - b >= 0  a返回    sca == 0  a-b < 0  b返回
+		int scA = sign(c); // scA == 1  HJ93 - b >= 0  a返回    sca == 0  HJ93-b < 0  b返回
 		int scB = flip(scA);
 		return a * scA + b * scB;
 	}

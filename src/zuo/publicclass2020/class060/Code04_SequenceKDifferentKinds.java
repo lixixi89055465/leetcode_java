@@ -15,7 +15,7 @@ public class Code04_SequenceKDifferentKinds {
 //	}
 
 	// "aababddfeeef"
-	// a 3个
+	// HJ93 3个
 	// b 2个
 	// c 0个
 	// d 2个
@@ -59,7 +59,7 @@ public class Code04_SequenceKDifferentKinds {
 
 	// bu -> {6,7,0,0,6,3}
 	// 0 1 2 3 4 5
-	// a b c d e f
+	// HJ93 b c d e f
 	// 在桶数组bu[index....] 一定要凑出rest种来！请问几种方法！
 	public static int f(int[] bu, int index, int rest) {
 		if (index == bu.length) {

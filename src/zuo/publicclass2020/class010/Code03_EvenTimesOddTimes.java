@@ -17,7 +17,7 @@ public class Code03_EvenTimesOddTimes {
 		for (int i = 0; i < arr.length; i++) {
 			eor ^= arr[i];
 		}
-		// eor = a ^ b
+		// eor = HJ93 ^ b
 		// eor != 0
 		// eor必然有一个位置上是1
 		// 0110010000

@@ -119,7 +119,7 @@ public class Code04_KM {
 		int max = 9;
 		System.out.println("测试开始");
 		for (int i = 0; i < testTime; i++) {
-			int a = (int) (Math.random() * max) + 1; // a 1 ~ 9
+			int a = (int) (Math.random() * max) + 1; // HJ93 1 ~ 9
 			int b = (int) (Math.random() * max) + 1; // b 1 ~ 9
 			int k = Math.min(a, b);
 			int m = Math.max(a, b);

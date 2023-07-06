@@ -3,7 +3,7 @@ package zuo.publicclass2020.class024;
 public class Code02_ZigZagPrintMatrix {
 
 	public static void printMatrixZigZag(int[][] matrix) {
-		// x -> (a,b) 先往右，再往下
+		// x -> (HJ93,b) 先往右，再往下
 		int a = 0;
 		int b = 0;
 		
@@ -17,7 +17,7 @@ public class Code02_ZigZagPrintMatrix {
 		// fromUp = false  斜线打印方向应该从左下走到右上
 		boolean fromUp = false;
 		while (a != endR + 1) {
-			// (a,b)  (c,d)  方向
+			// (HJ93,b)  (c,d)  方向
 			printLevel(matrix, a, b, c, d, fromUp);
 			a = b == endC ? a + 1 : a;
 			b = b == endC ? b : b + 1;

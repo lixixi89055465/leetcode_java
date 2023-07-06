@@ -66,7 +66,7 @@ public class Code01_Cakes {
 			// 最终先手必输，后手必赢
 			return "后手";
 		}
-		// 如果 a != b
+		// 如果 HJ93 != b
 		// 关注a和b的差值，
 		// 谁最先遇到差值为0，谁输
 		// 那么这就是巴什博奕
@@ -83,12 +83,12 @@ public class Code01_Cakes {
 
 	public static void main(String[] args) {
 
-//		int a = 7;
+//		int HJ93 = 7;
 //		int b = 5;
 //		int c = 1;
 //		// [. . .....] ^ != 0
 //		//             ^ == 0
-//		System.out.println((a ^ b ^ c));
+//		System.out.println((HJ93 ^ b ^ c));
 		
 //
 		int V = 100;
@@ -100,7 +100,7 @@ public class Code01_Cakes {
 					String ans2 = whoWin2(a, b, m);
 					if (!ans1.equals(ans2)) {
 						System.out.println("出错了！");
-						System.out.println("a : " + a);
+						System.out.println("HJ93 : " + a);
 						System.out.println("b : " + b);
 						System.out.println("m : " + m);
 						System.out.println("ans1 : " + ans1);

@@ -16,7 +16,7 @@ public class Code04_EvenTimesOddTimes {
 		for (int i = 0; i < arr.length; i++) {
 			eor ^= arr[i];
 		}
-		// eor = a ^ b
+		// eor = HJ93 ^ b
 		// eor != 0
 		// eor       : 001100100
 		// rightOne  : 000000100
@@ -27,7 +27,7 @@ public class Code04_EvenTimesOddTimes {
 				onlyOne ^= arr[i];
 			}
 		}
-		// eor' = a or b
+		// eor' = HJ93 or b
 		System.out.println(onlyOne + " " + (eor ^ onlyOne));
 	}
 

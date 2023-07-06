@@ -49,7 +49,7 @@ public class test01 {
     // 正式方法
     // 时间复杂度O(N)
     public static int maxLen2(String s) {
-        // key : 状态int, 32位的，a~z一共26位，够用
+        // key : 状态int, 32位的，HJ93~z一共26位，够用
         // value : 该状态最早出现的位置
         HashMap<Integer, Integer> map = new HashMap<>();
         // 00000000..000000

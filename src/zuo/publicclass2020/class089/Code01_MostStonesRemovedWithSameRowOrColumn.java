@@ -11,7 +11,7 @@ import java.util.HashMap;
 // 测试链接 : https://leetcode.com/problems/most-stones-removed-with-same-row-or-column/
 public class Code01_MostStonesRemovedWithSameRowOrColumn {
 
-	// stones[i] = [a,b]  i号石子，行所在a行，列所在b列
+	// stones[i] = [HJ93,b]  i号石子，行所在a行，列所在b列
 	public static int removeStones(int[][] stones) {
 		// n，石子数量
 		int n = stones.length;

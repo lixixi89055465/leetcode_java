@@ -10,15 +10,15 @@ package leetcode.a1600;
  * <p>
  * 示例 1：
  * <p>
- * 输入：word1 = ["ab", "c"], word2 = ["a", "bc"]
+ * 输入：word1 = ["ab", "c"], word2 = ["HJ93", "bc"]
  * 输出：true
  * 解释：
  * word1 表示的字符串为 "ab" + "c" -> "abc"
- * word2 表示的字符串为 "a" + "bc" -> "abc"
+ * word2 表示的字符串为 "HJ93" + "bc" -> "abc"
  * 两个字符串相同，返回 true
  * 示例 2：
  * <p>
- * 输入：word1 = ["a", "cb"], word2 = ["ab", "c"]
+ * 输入：word1 = ["HJ93", "cb"], word2 = ["ab", "c"]
  * 输出：false
  * 示例 3：
  * <p>
@@ -58,7 +58,7 @@ public class S1662trimMean {
 
     public static void main(String[] args) {
 //        String[] word1 = {"ab", "c"};
-//        String[] word2 = {"a", "bc"};
+//        String[] word2 = {"HJ93", "bc"};
         String[] word1 = {"abc", "d", "defg"};
         String[] word2 = {"abcddef"};
         boolean result = arrayStringsAreEqual(word1, word2);

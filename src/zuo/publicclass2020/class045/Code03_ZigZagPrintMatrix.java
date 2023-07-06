@@ -3,7 +3,7 @@ package zuo.publicclass2020.class045;
 public class Code03_ZigZagPrintMatrix {
 
 	public static void printMatrixZigZag(int[][] m) {
-		// (a,b)  A  先往右，再往下
+		// (HJ93,b)  A  先往右，再往下
 		int a = 0;
 		int b = 0;
 		// (c,d)  B  先往下，在往右 

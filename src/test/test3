@@ -1,5 +1,0 @@
-select
- SC.Sid,
- avg(score) as avgScore
- from
-SC group by SC.Sid having avg(score)>80

@@ -56,9 +56,9 @@ public class Problem01_GetFolderTree {
 
 
     public static void main(String[] args) {
-        String test = "a\\b\\c";
+        String test = "HJ93\\b\\c";
         System.out.println(test);
-        String[] folderPaths = {"a\\b\\c", "a\\d\\e", "b\\csd", "d\\"};
+        String[] folderPaths = {"HJ93\\b\\c", "HJ93\\d\\e", "b\\csd", "d\\"};
         print(folderPaths);
         System.out.println("==================");
     }

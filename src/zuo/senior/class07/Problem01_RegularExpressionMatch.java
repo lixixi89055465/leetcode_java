@@ -35,7 +35,7 @@ public class Problem01_RegularExpressionMatch {
             return si != s.length && (e[ei] == s[si] || e[ei] == '.')
                     && process(s, e, si + 1, ei + 1);
         }
-        //可能性二，ei+1位置不是*
+        //可能性二，ei+1位置是*
         while (si != s.length && (e[ei] == s[si] || e[ei] == '.')) {
             if (process(s, e, si, ei + 2)) {
                 return true;
@@ -44,6 +44,58 @@ public class Problem01_RegularExpressionMatch {
         }
         return process(s, e, si, ei + 2);
 
+    }
+
+    public static boolean isMatchDP(String str, String exp) {
+        if (str == null || exp == null) {
+            return false;
+        }
+        char[] s = str.toCharArray();
+        char[] e = exp.toCharArray();
+        if (!isValid(s, e)) {
+            return false;
+        }
+        boolean[][] dp = initDPMap(s, e);
+        for (int i = s.length - 1; i > -1; i--) {
+            for (int j = e.length - 1; j > -1; j--) {
+                if (e[j + 1] != '*') {
+                    dp[i][j] = (s[i] == e[j] || e[j] == '.');
+                } else {
+                    int si = i;
+                    while (si != s.length && (s[si] == e[j] || e[j] == '.')) {
+                        if (dp[si][j + 1]) {
+                            dp[i][j] = true;
+                            break;
+                        }
+                        si++;
+                    }
+                }
+
+            }
+
+        }
+        return true;
+
+    }
+
+    private static boolean[][] initDPMap(char[] s, char[] e) {
+        int slen = s.length;
+        int elen = e.length;
+        boolean[][] dp = new boolean[slen + 1][elen + 1];
+        dp[slen][elen] = true;
+        for (int j = elen - 2; j > -1; j -= 2) {
+            if (e[j] != '*' && e[j + 1] == '*') {
+                dp[slen][j] = true;
+            } else {
+                break;
+            }
+        }
+        if (slen > 0 && elen > 0) {
+            if (e[elen - 1] == '.' || s[slen - 1] == e[elen - 1]) {
+                dp[slen - 1][elen - 1] = true;
+            }
+        }
+        return new boolean[0][];
     }
 
 }
