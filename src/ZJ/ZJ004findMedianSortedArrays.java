@@ -3,7 +3,7 @@ package ZJ;
 public class ZJ004findMedianSortedArrays {
     private static class Solution {
         public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-            int allLen=nums1.length+nums2.length;
+            int allLen = nums1.length + nums2.length;
             int end1 = nums1.length - 1;
             int end2 = nums2.length - 1;
             int start1 = 0;
