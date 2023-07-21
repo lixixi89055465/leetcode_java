@@ -1,4 +1,4 @@
-package test;
+package ZJ;
 
 /**
  * @author lixiang
@@ -45,44 +45,32 @@ public class Test04 {
 
         String res = "";
         int resLen = Integer.MAX_VALUE;
-        while (left <= right && right < sChs.length) {
+        while (left < right && right < sChs.length) {
             while (!isValid(curmap, map) && right < sChs.length) {
                 curmap[sChs[right]] += 1;
                 right += 1;
             }
-
-            if (isValid(curmap,map) &&resLen > right - left) {
-                resLen = right - left;
-                res = s.substring(left, right);
-            }
+            resLen = Math.min(resLen, right - left);
+            res = s.substring(left + 1, right + 1);
             while (map[sChs[left]] == 0 || curmap[sChs[left]] > map[sChs[left]]) {
-                curmap[sChs[left]] -= 1;
                 left += 1;
+                curmap[sChs[left]] -= 1;
                 continue;
             }
-            if (isValid(curmap,map) && resLen > right - left) {
-                resLen = right - left;
-                res = s.substring(left, right);
-            }
-            curmap[sChs[left]] -= 1;
+            resLen = Math.min(resLen, right - left);
             left += 1;
+            res = s.substring(left, right);
         }
         return res;
     }
 
     private boolean isValid(int[] curMap, int[] map) {
-        for (int i = 0; i < map.length; i++) {
-            if (curMap[i] < map[i]) {
-                return false;
-            }
-        }
-        return true;
+
+        return false;
     }
 
     public static void main(String[] args) {
         String s = "ADOBECODEBANC", t = "ABC";
-//        String s = "a", t = "a";
-//        String s = "an", t = "aa";
         Test04 test04 = new Test04();
         System.out.println(test04.test01(s, t));
     }
