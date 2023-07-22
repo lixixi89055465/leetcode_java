@@ -32,9 +32,9 @@ package ZJ;
  * 因此没有符合条件的子字符串，返回空字符串。
  */
 public class Test04 {
-    public String test01(String s, String t) {
+    public String minWindow(String s, String t) {
         int[] map = new int[128];
-        int[] curmap = new int[128];
+        int[] curMap = new int[128];
         char[] tChs = t.toCharArray();
         for (char c : tChs) {
             map[c] += 1;
@@ -45,33 +45,40 @@ public class Test04 {
 
         String res = "";
         int resLen = Integer.MAX_VALUE;
-        while (left < right && right < sChs.length) {
-            while (!isValid(curmap, map) && right < sChs.length) {
-                curmap[sChs[right]] += 1;
+        while (left <= right) {
+            while (!isValid(curMap, map) && right < sChs.length) {
+                curMap[sChs[right]] += 1;
                 right += 1;
             }
-            resLen = Math.min(resLen, right - left);
-            res = s.substring(left + 1, right + 1);
-            while (map[sChs[left]] == 0 || curmap[sChs[left]] > map[sChs[left]]) {
-                left += 1;
-                curmap[sChs[left]] -= 1;
-                continue;
+            while (left < right && (map[sChs[left]] == 0 || curMap[sChs[left]] >= map[sChs[left]]) && isValid(curMap, map)) {
+                if (resLen > right - left) {
+                    resLen = Math.min(resLen, right - left);
+                    res = s.substring(left, right);
+                }
+                curMap[sChs[left]] -= 1;
+                left++;
             }
-            resLen = Math.min(resLen, right - left);
-            left += 1;
-            res = s.substring(left, right);
+            if (right == sChs.length) {
+                break;
+            }
         }
         return res;
     }
 
     private boolean isValid(int[] curMap, int[] map) {
-
-        return false;
+        for (int i = 0; i < curMap.length; i++) {
+            if (map[i] > curMap[i]) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public static void main(String[] args) {
-        String s = "ADOBECODEBANC", t = "ABC";
+//        String s = "ADOBECODEBANC", t = "ABC";
+//        String s = "a", t = "a";
+        String s = "a", t = "aa";
         Test04 test04 = new Test04();
-        System.out.println(test04.test01(s, t));
+        System.out.println(test04.minWindow(s, t));
     }
 }

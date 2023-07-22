@@ -1,6 +1,25 @@
 package ZJ;
 
-public class Test02 {
+/**
+ * 4. 寻找两个正序数组的中位数
+ * 给定两个大小分别为 m 和 n 的正序（从小到大）数组 nums1 和 nums2。请你找出并返回这两个正序数组的 中位数 。
+ *
+ * 算法的时间复杂度应该为 O(log (m+n)) 。
+ *
+ *
+ *
+ * 示例 1：
+ *
+ * 输入：nums1 = [1,3], nums2 = [2]
+ * 输出：2.00000
+ * 解释：合并数组 = [1,2,3] ，中位数 2
+ * 示例 2：
+ *
+ * 输入：nums1 = [1,2], nums2 = [3,4]
+ * 输出：2.50000
+ * 解释：合并数组 = [1,2,3,4] ，中位数 (2 + 3) / 2 = 2.5
+ */
+public class ZJ04findMedianSortedArrays {
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
         int length1 = nums1.length, length2 = nums2.length;
         int totalLength = length1 + length2;
@@ -98,7 +117,7 @@ public class Test02 {
     public static void main(String[] args) {
         int[] nums1 = new int[]{1, 2, 4};
         int[] nums2 = new int[]{3, 4 };
-        Test02 solve = new Test02();
+        ZJ04findMedianSortedArrays solve = new ZJ04findMedianSortedArrays();
         System.out.println(solve.test01(nums1, nums2));
 
     }
