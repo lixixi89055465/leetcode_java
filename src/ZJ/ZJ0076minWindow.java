@@ -31,7 +31,7 @@ package ZJ;
  * 解释: t 中两个字符 'a' 均应包含在 s 的子串中，
  * 因此没有符合条件的子字符串，返回空字符串。
  */
-public class Test04 {
+public class ZJ0076minWindow {
     public String minWindow(String s, String t) {
         int[] map = new int[128];
         int[] curMap = new int[128];
@@ -78,7 +78,7 @@ public class Test04 {
 //        String s = "ADOBECODEBANC", t = "ABC";
 //        String s = "a", t = "a";
         String s = "a", t = "aa";
-        Test04 test04 = new Test04();
+        ZJ0076minWindow test04 = new ZJ0076minWindow();
         System.out.println(test04.minWindow(s, t));
     }
 }

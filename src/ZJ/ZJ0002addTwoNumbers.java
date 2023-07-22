@@ -4,7 +4,7 @@ package ZJ;
  * @author lixiang
  * data 2023/7/19
  */
-public class Test05 {
+public class ZJ0002addTwoNumbers {
     private static class ListNode {
         int val;
         ListNode next;
@@ -12,7 +12,7 @@ public class Test05 {
         ListNode() {
         }
 
-        ListNode(int val) {
+        public ListNode(int val) {
             this.val = val;
         }
 
@@ -30,7 +30,7 @@ public class Test05 {
             int pre = 0;
             while (head1 != null || head2 != null) {
                 int s = (head1 != null ? head1.val : 0) + (head2 != null ? head2.val : 0) + pre;
-                if (s > 10) {
+                if (s >= 10) {
                     pre = 1;
                 } else {
                     pre = 0;
@@ -44,12 +44,19 @@ public class Test05 {
                 cur.next = new ListNode(s % 10);
                 cur = cur.next;
             }
+            if (pre == 1) {
+                cur.next = new ListNode(1, null);
+            }
             return head.next;
         }
     }
 
     public static void main(String[] args) {
-//        l1 = [2,4,3], l2 = [5,6,4]
-//[7,0,8]
+        ListNode h2 = new ListNode(2, new ListNode(4, new ListNode(3, null)));
+        ListNode h5 = new ListNode(5, new ListNode(6, new ListNode(4, null)));
+        Solution solve = new Solution();
+        ListNode res = solve.addTwoNumbers(h2, h5);
+        System.out.println(res);
+
     }
 }
