@@ -19,7 +19,7 @@ public class Code04_LongestOneLetterManyNumberString {
 		return ans;
 	}
 
-	public static boolean check(char[] str, int l, int r) {
+	private static boolean check(char[] str, int l, int r) {
 		int letterNumber = 0;
 		for (int i = l; i <= r; i++) {
 			if (str[i] >= 'a' && str[i] <= 'z') {
