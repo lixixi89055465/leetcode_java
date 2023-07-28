@@ -6,7 +6,7 @@ import java.util.Queue;
 import java.util.Stack;
 
 public class Code02_DFS {
-    public static void dfs(Node node) {
+    private static void dfs(Node node) {
         if (node == null) {
             return;
         }
