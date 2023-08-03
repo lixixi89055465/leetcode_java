@@ -74,7 +74,7 @@ public class ZJ240searchMatrix {
                     }
                     int tmpleft = findColHighMid(matrix, bottom, left, right, target);
                     if (tmpleft!= left) {
-                        left=tmpright;
+                        left=tmpleft;
                         flag=true;
                     }
                 }
@@ -167,13 +167,13 @@ public class ZJ240searchMatrix {
             return top-1;
         }
 
-        private int findColLowMid(int[][] matrix, int x, int left, int right, int target) {
+        private int findColLowMid(int[][] matrix, int top, int left, int right, int target) {
             right+=1;
             while (left < right) {
                 int mid = left + (right - left) / 2;
-                if (matrix[x][mid] < target) {
+                if (matrix[top][mid] < target) {
                     left = mid + 1;
-                } else if (matrix[x][mid] > target) {
+                } else if (matrix[top][mid] > target) {
                     right = mid;
                 } else {
                     return mid;
@@ -204,16 +204,12 @@ public class ZJ240searchMatrix {
 //        int target = 0;
 //        int [][]matrix={{1,1}};
 //        int target=1;
-//        for (int i = 0; i < 19; i++) {
-//            int [][]matrix={{5,6,9},{9,10,11},{11,14,18}};
-//            int target=i;
-//            System.out.print(i+":");
-//            boolean res = solve.searchMatrix02(matrix, target);
-//            System.out.println(res);
-//        }
+        for (int i = 0; i < 19; i++) {
             int [][]matrix={{5,6,9},{9,10,11},{11,14,18}};
-            int target=14;
+            int target=i;
+            System.out.print(i+":");
             boolean res = solve.searchMatrix02(matrix, target);
             System.out.println(res);
+        }
     }
 }
