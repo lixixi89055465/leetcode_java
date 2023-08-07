@@ -45,8 +45,7 @@ public class ZJ695maxAreaOfIsland {
                 for (int j = 0; j < m; j++) {
                     if (grid[i][j] == 1) {
                         if (valid[i][j] == 0 && grid[i][j] == 1) {
-                            res += 1;
-                            dfs(grid, valid, i, j, n, m);
+                            res = Math.max(res, dfs(grid, valid, i, j, n, m));
                         }
                     }
                 }
@@ -54,41 +53,43 @@ public class ZJ695maxAreaOfIsland {
             return res;
         }
 
-        private void dfs(int[][] grid, int[][] valid, int i, int j, int n, int m) {
+        private int dfs(int[][] grid, int[][] valid, int i, int j, int n, int m) {
             if (valid[i][j] != 0 || grid[i][j] == 0) {
-                return;
+                return 0;
             }
             valid[i][j] = 1;
+            int sum = 1;
             if (i != 0) {
-                dfs(grid, valid, i - 1, j, n, m);
+                sum += dfs(grid, valid, i - 1, j, n, m);
             }
             if (i != n - 1) {
-                dfs(grid, valid, i + 1, j, n, m);
+                sum += dfs(grid, valid, i + 1, j, n, m);
             }
             if (j != 0) {
-                dfs(grid, valid, i, j - 1, n, m);
+                sum += dfs(grid, valid, i, j - 1, n, m);
             }
             if (j != m - 1) {
-                dfs(grid, valid, i, j + 1, n, m);
+                sum += dfs(grid, valid, i, j + 1, n, m);
             }
+            return sum;
         }
     }
 
     public static void main(String[] args) {
         Solution solve = new Solution();
-//        int[][] grid = {{0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
-//                {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
-//                {0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-//                {0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0},
-//                {0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0},
-//                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
-//                {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
-//                {0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0}};
-        int[][] grid =
-                {{1, 1, 0, 0, 0},
-                {1, 1, 0, 0, 0},
-                {0, 0, 0, 1, 1},
-                {0, 0, 0, 1, 1}};
+        int[][] grid = {{0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
+                {0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0},
+                {0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0}};
+//        int[][] grid =
+//                {{1, 1, 0, 0, 0},
+//                        {1, 1, 0, 0, 0},
+//                        {0, 0, 0, 1, 1},
+//                        {0, 0, 0, 1, 1}};
         System.out.println(solve.maxAreaOfIsland(grid));
     }
 }
