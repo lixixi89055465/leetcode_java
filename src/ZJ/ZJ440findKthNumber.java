@@ -25,12 +25,12 @@ public class ZJ440findKthNumber {
             int curr = 1;
             k--;
             while (k > 0) {
-                int steps = getSteps(curr, n);
+                long steps = getSteps(curr, n);
                 if (steps <= k) {
                     k -= steps;
-                    curr++;
+                    curr += 1;
                 } else {
-                    curr = curr * 10;
+                    curr *= 10;
                     k--;
                 }
             }
@@ -38,21 +38,23 @@ public class ZJ440findKthNumber {
         }
 
         public int getSteps(int curr, long n) {
-            int steps = 0;
+            int step = 0;
             long first = curr;
             long last = curr;
             while (first <= n) {
-                steps += Math.min(last, n) - first + 1;
-                first = first * 10;
+                step += Math.min(last, n) - first + 1;
+                first *= 10;
                 last = last * 10 + 9;
             }
-            return steps;
+            return step;
         }
     }
 
     public static void main(String[] args) {
         Solution solve = new Solution();
-        int n = 13, k = 2;
+//        int n = 13, k = 3;
+//        int n = 10, k = 3;
+        int n = 100, k = 90;
         int res = solve.findKthNumber(n, k);
         System.out.println(res);
     }
