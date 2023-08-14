@@ -68,6 +68,7 @@ public class H1289minFallingPathSum {
             int firstRes = grid[n - 1][prefirstSmall], secondRes = grid[n - 1][presecondSmall];
             for (int i = grid.length - 2; i >= 0; i--) {
                 int secondSmall = -1, firstSmall = -1;
+                int thirdSmall=0;
                 firstSmall = grid[i][0] >= grid[i][1] ? 1 : 0;
                 secondSmall = grid[i][0] >= grid[i][1] ? 0 : 1;
                 for (int j = 2; j < grid.length; j++) {
@@ -75,6 +76,7 @@ public class H1289minFallingPathSum {
                         secondSmall = firstSmall;
                         firstSmall = j;
                     } else if (grid[i][j] < grid[i][secondSmall]) {
+                        thirdSmall=secondSmall;
                         secondSmall = j;
                     }
                 }
@@ -82,7 +84,7 @@ public class H1289minFallingPathSum {
                     if (secondSmall != prefirstSmall) {
                         secondRes = firstRes + grid[i][secondSmall];
                     } else {
-                        secondRes = secondRes + grid[i][secondSmall];
+                        secondRes = firstRes + grid[i][thirdSmall];
                     }
                     firstRes += grid[i][firstSmall];
                     prefirstSmall = firstSmall;
@@ -108,20 +110,20 @@ public class H1289minFallingPathSum {
     }
 
     public static void main(String[] args) {
-//        int[][] grid = {
-//                {1, 2, 3},
-//                {4, 5, 6},
-//                {7, 8, 9}};
+        int[][] grid = {
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9}};
 //        int[][] grid = {
 //                {-73, 61, 43, -48, -36},//-192
 //                {3, 30, 27, 57, 10},//-126,-119
 //                {96, -76, 84, 59, -15},//-129,-110
 //                {5, -49, 76, 31, -7},//-95,-53
 //                {97, 91, 61, -46, 67}};//-46,-46
-        int[][] grid = {
-                {1, 99, 99},
-                {0, 2, 1},
-                {99, 99, 4}};
+//        int[][] grid = {
+//                {1, 99, 99},
+//                {0, 2, 1},
+//                {99, 99, 4}};
         Solution solve = new Solution();
         System.out.println(solve.minFallingPathSum(grid));
 
