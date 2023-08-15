@@ -58,7 +58,7 @@ package leetcode.a1700;
  * 1 <= target <= 104
  */
 public class M1774closestCost {
-    protected static class Solution {
+    private static class Solution {
         private int ans = Integer.MAX_VALUE;
 
         public int closestCost(int[] base, int[] top, int V) {
