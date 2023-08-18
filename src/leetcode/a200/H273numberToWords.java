@@ -1,5 +1,8 @@
 package leetcode.a200;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 273. 整数转换英文表示
  * 提示
@@ -31,6 +34,7 @@ package leetcode.a200;
 public class H273numberToWords {
     private static class Solution {
         public String numberToWords(int num) {
+
             return "";
         }
     }
