@@ -3,7 +3,7 @@ package zuo.base.class10;
 import java.util.*;
 
 public class Code02_DFS {
-    public static void dfs(Node graph) {
+    private static void dfs(Node graph) {
         if (graph == null) {
             return;
         }
