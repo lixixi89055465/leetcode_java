@@ -1,5 +1,8 @@
 package leetcode.mst;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @PackageName:leetcode.mst
  * @Date 2023/8/24 14:52
@@ -32,17 +35,42 @@ public class H1719missingTwo {
             int n1 = 0, n2 = 0;
             int[] lasts = new int[2];
             int n = nums.length;
-            for (int i = 0; i < nums.length; i++) {
-                int index1 = nums[i];
+            for (int i = 0; i < nums.length + 2; i++) {
+                int index1 = getNums(i, nums, lasts);
                 int pre = -1;
+                if (index1 <= 0) {
+                    continue;
+                }
                 while (getNums(index1 - 1, nums, lasts) != index1) {
                     pre = index1;
-                    index1 = nums[index1 - 1];
-                    nums[pre - 1] = pre;
+                    index1 = getNums(index1 - 1, nums, lasts);
+                    setNums(pre - 1, nums, lasts, pre);
+                    if (index1 <= 0) {
+                        break;
+                    }
                 }
             }
-            System.out.println(nums);
-            return null;
+            int[] res = new int[2];
+            int start = 0;
+            for (int i = 0; i < nums.length; i++) {
+                if (nums[i] != i + 1) {
+                    res[start++] = i + 1;
+                }
+            }
+            for (int i = 0; i < 2; i++) {
+                if (lasts[i] != nums.length + i + 1) {
+                    res[start++] = nums.length + i + 1;
+                }
+            }
+            return res;
+        }
+
+        private void setNums(int i, int[] nums, int[] lasts, int pre) {
+            if (i < nums.length) {
+                nums[i] = pre;
+            } else {
+                lasts[i - nums.length] = pre;
+            }
         }
 
         private int getNums(int i, int[] nums, int[] lasts) {
@@ -54,7 +82,8 @@ public class H1719missingTwo {
     }
 
     public static void main(String[] args) {
-        int[] nums = {2, 3};
+//        int[] nums = {2, 3};
+        int[] nums = {1};
         Solution solve = new Solution();
         int[] res = solve.missingTwo(nums);
         System.out.println(res);
