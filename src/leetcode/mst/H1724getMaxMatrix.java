@@ -1,5 +1,7 @@
 package leetcode.mst;
 
+import org.omg.CORBA.INTERNAL;
+
 /**
  * @PackageName:leetcode.mst
  * @Date 2023/8/24 19:37
@@ -33,7 +35,72 @@ package leetcode.mst;
 public class H1724getMaxMatrix {
     private static class Solution {
         public int[] getMaxMatrix(int[][] matrix) {
-            return null;
+            int n = matrix.length;
+            int m = matrix[0].length;
+            if (n == 0 || m == 0) {
+                return new int[]{};
+            }
+            int res = Integer.MIN_VALUE;
+            int[] dp = new int[m];
+            int[] first = new int[m];
+
+            int[] res01 = new int[4];
+            for (int len = 1; len < n; len++) {
+                for (int i = 0; i < m; i++) {
+                    first[i] += matrix[len][i];
+                }
+                for (int i = 0; i < m; i++) {
+                    dp[i] = first[i];
+                }
+                System.out.println("33333333333");
+                res = getRes(matrix, n, m, res, dp, res01, len);
+            }
+            return res01;
         }
+
+        private int getRes(int[][] matrix, int n, int m, int res, int[] dp, int[] res01, int len) {
+            for (int i = 0; i + len < n; i++) {
+                int pre = Integer.MIN_VALUE;
+                int start = 0;
+                for (int j = 0; j < m; j++) {
+                    dp[j] -= matrix[i][j];
+                    dp[j] += matrix[i + len][j];
+                }
+                res = getRes(n, res, dp, res01, len, i, pre, start);
+
+            }
+            return res;
+        }
+
+        private int getRes(int n, int res, int[] dp, int[] res01, int len, int i, int pre, int start) {
+            for (int j = 0; j < n; j++) {
+                if (pre < 0) {
+                    start = j;
+                    pre = dp[j];
+                }
+
+                if (pre > res) {
+                    res = pre;
+                    res01[0] = i;
+                    res01[1] = start;
+                    res01[2] = i + len - 1;
+                    res01[3] = j;
+                }
+            }
+            return res;
+        }
+    }
+
+    public static void main(String[] args) {
+        Solution solve = new Solution();
+//        int[][] matrix = {{-1, 0}, {0, -1}};
+        int[][] matrix = {
+                {9, -8, 1, 3, -2},
+                {-3, 7, 6, -2, 4},
+                {6, -4, -4, 8, -7}}; //[0,0,2,3]
+
+        int[] res = solve.getMaxMatrix(matrix);
+        System.out.println(res);
+
     }
 }
