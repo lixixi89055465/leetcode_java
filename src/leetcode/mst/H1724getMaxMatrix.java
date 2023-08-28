@@ -43,51 +43,46 @@ public class H1724getMaxMatrix {
             int res = Integer.MIN_VALUE;
             int[] dp = new int[m];
             int[] first = new int[m];
-
+//            for (int i = 0; i < m; i++) {
+//                first[i] = matrix[0][i];
+//            }
             int[] res01 = new int[4];
-            for (int len = 1; len < n; len++) {
-                for (int i = 0; i < m; i++) {
-                    first[i] += matrix[len][i];
-                }
-                for (int i = 0; i < m; i++) {
-                    dp[i] = first[i];
+            for (int len = 0; len < n; len++) {
+                System.out.println("333333333333");
+                for (int j = 0; j < m; j++) {
+                    first[j] += matrix[len][j];
+                    dp[j] = first[j];
                 }
                 System.out.println("33333333333");
-                res = getRes(matrix, n, m, res, dp, res01, len);
+                for (int i = 0; i + len < n; i++) {
+                    int start = 0;
+                    int pre = Integer.MIN_VALUE;
+                    for (int j = 0; j < m; j++) {
+//                        pre = pre < 0 ? dp[j] : dp[j] + pre;
+                        if (pre < 0) {
+                            start = j;
+                            pre = dp[j];
+                        }else{
+                            pre+=dp[j];
+                        }
+
+                        if (pre > res) {
+                            res = pre;
+                            res01[0] = i;
+                            res01[1] = start;
+                            res01[2] = i + len;
+                            res01[3] = j;
+                        }
+                    }
+                    if(i+len+1<n) {
+                        for (int j = 0; j < m; j++) {
+                            dp[j] -= matrix[i][j];
+                            dp[j] += matrix[i + len + 1][j];
+                        }
+                    }
+                }
             }
             return res01;
-        }
-
-        private int getRes(int[][] matrix, int n, int m, int res, int[] dp, int[] res01, int len) {
-            for (int i = 0; i + len < n; i++) {
-                int pre = Integer.MIN_VALUE;
-                int start = 0;
-                for (int j = 0; j < m; j++) {
-                    dp[j] -= matrix[i][j];
-                    dp[j] += matrix[i + len][j];
-                }
-                res = getRes(n, res, dp, res01, len, i, pre, start);
-
-            }
-            return res;
-        }
-
-        private int getRes(int n, int res, int[] dp, int[] res01, int len, int i, int pre, int start) {
-            for (int j = 0; j < n; j++) {
-                if (pre < 0) {
-                    start = j;
-                    pre = dp[j];
-                }
-
-                if (pre > res) {
-                    res = pre;
-                    res01[0] = i;
-                    res01[1] = start;
-                    res01[2] = i + len - 1;
-                    res01[3] = j;
-                }
-            }
-            return res;
         }
     }
 
