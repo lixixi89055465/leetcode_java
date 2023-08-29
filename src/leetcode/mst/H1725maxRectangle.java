@@ -1,8 +1,7 @@
 package leetcode.mst;
 
 
-import java.util.LinkedList;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * @PackageName:leetcode.mst
@@ -37,105 +36,128 @@ import java.util.Stack;
  * 数据保证单词足够随机
  */
 public class H1725maxRectangle {
-    private static class DTNode {
-        public DTNode[] nexts = null;
-        public int count = 0;
-
-        public DTNode() {
-            this.nexts = new DTNode[26];
-        }
-    }
-
-    private static class DictTree {
-        private DTNode root;
-
-        public DictTree() {
-            this.root = new DTNode();
-        }
-
-        public void add(String str) {
-            char[] chs = str.toCharArray();
-            if (chs == null || chs.length == 0) {
-                return;
-            }
-            DTNode curNode = this.root;
-            for (int i = 0; i < chs.length; i++) {
-                int curIndex = chs[i] - 'a';
-                if (curNode.nexts[curIndex] == null) {
-                    curNode.nexts[curIndex] = new DTNode();
-                }
-                curNode = curNode.nexts[curIndex];
-            }
-            curNode.count++;
-        }
-
-        public int getCount(String str) {
-            char[] chs = str.toCharArray();
-            DTNode curNode = this.root;
-            for (int i = 0; i < chs.length; i++) {
-                int curIndex = chs[i] - 'a';
-                if (curNode.nexts[curIndex] == null) {
-                    return 0;
-                }
-                curNode = curNode.nexts[curIndex];
-            }
-            return curNode.count;
-        }
-    }
 
     private static class Solution {
-        public String[] maxRectangle(String[] words) {
-            DictTree tree = new DictTree();
-            int maxLen = 0;
-            for (int i = 0; i < words.length; i++) {
-                maxLen = Math.max(maxLen, words[i].length());
-                tree.add(words[i]);
-            }
-            String[] res = new String[0];
-            int area = 0;
-            LinkedList<String> pre = new LinkedList<>();
-            for (int i = 0; i < words.length; i++) {
-                int col = words[i].length();
-                pre.addLast(words[i]);
-                dfs(pre, tree, col, words);
-                pre.pollLast();
+        private class DTNode {
+            public DTNode[] nexts = null;
+            public boolean isEnd = false;
 
+            public DTNode() {
+                this.nexts = new DTNode[26];
             }
-            return res;
-
         }
 
-        private void dfs(LinkedList<String> pre, DictTree tree, int col, String[] words) {
-            if (pre.size() > col) {
+        private class DictTree {
+            private DTNode root;
+            private int maxArea = 0;
+
+            public DictTree() {
+                this.root = new DTNode();
+            }
+
+            public void add(String str) {
+                char[] chs = str.toCharArray();
+                if (chs == null || chs.length == 0) {
+                    return;
+                }
+                DTNode curNode = this.root;
+                for (int i = 0; i < chs.length; i++) {
+                    int curIndex = chs[i] - 'a';
+                    if (curNode.nexts[curIndex] == null) {
+                        curNode.nexts[curIndex] = new DTNode();
+                    }
+                    curNode = curNode.nexts[curIndex];
+                }
+                curNode.isEnd = true;
+            }
+
+            public boolean isContain(String str) {
+                char[] chs = str.toCharArray();
+                DTNode curNode = this.root;
+                for (int i = 0; i < chs.length; i++) {
+                    int curIndex = chs[i] - 'a';
+                    if (curNode.nexts[curIndex] == null) {
+                        return false;
+                    }
+                    curNode = curNode.nexts[curIndex];
+                }
+                return curNode.isEnd;
+            }
+        }
+
+        public String[] maxRectangle(String[] words) {
+            DictTree tree = new DictTree();
+            Map<Integer, List<Integer>> wordCount = new HashMap<>();
+            int maxCol = 0;
+            Arrays.sort(words, (o1, o2) -> o2.length() - o1.length());
+            for (int i = 0; i < words.length; i++) {
+                List<Integer> curList = wordCount.getOrDefault(words[i].length(), new ArrayList());
+                curList.add(i);
+                wordCount.put(words[i].length(), curList);
+                tree.add(words[i]);
+                maxCol = Math.max(maxCol, words[i].length());
+            }
+            Stack<String> stack = new Stack<>();
+            List<String> res = new ArrayList<>();
+            for (int i = 0; i < words.length; i++) {
+                int col = words[i].length();
+                if (col * col <= tree.maxArea) {
+                    break;
+                }
+                DTNode[] curNodes = new DTNode[col];
+                for (int j = 0; j < col; j++) {
+                    curNodes[j] = tree.root;
+                }
+                dfs(tree, words, curNodes, wordCount, col, stack, res, words[i], 1);
+            }
+            String[] endRes = new String[res.size()];
+            res.toArray(endRes);
+            return endRes;
+        }
+
+        private void dfs(DictTree tree, String[] words, DTNode[] curNodes, Map<Integer, List<Integer>> wordCount, int col, Stack<String> stack, List<String> res, String word, int index) {
+            if (index > col) {
                 return;
             }
+            boolean flag = true;
+            for (int j = 0; j < col; j++) {
+                if (curNodes[j].nexts[word.charAt(j) - 'a'] == null) {
+                    return;
+                }
+                if (!curNodes[j].nexts[word.charAt(j) - 'a'].isEnd) {
+                    flag = false;
+                }
+            }
+            stack.add(word);
+            DTNode[] nextNodes = new DTNode[col];
             for (int i = 0; i < col; i++) {
-                for (int j = 0; j < words.length; j++) {
-                    if (words[j].length() == col && isValid(pre, null, tree, words[j])) {
-                        dfs(pre, tree, col, words);
+                nextNodes[i] = curNodes[i].nexts[word.charAt(i) - 'a'];
+            }
+            if (flag) {
+                int curArea = index * col;
+                if (curArea > tree.maxArea) {
+                    tree.maxArea = curArea;
+                    res.clear();
+                    for (int i = 0; i < stack.size(); i++) {
+                        res.add(stack.get(i));
                     }
                 }
             }
-        }
-
-        private boolean isValid(LinkedList<String> stack, Stack<Character>[] pres, DictTree tree, String word) {
-            int n = word.length();
-
-            for (int i = 0; i < n; i++) {
-
+            List<Integer> curWord = wordCount.get(col);
+            for (Integer curIndex : curWord) {
+                dfs(tree, words, nextNodes, wordCount, col, stack, res, words[curIndex], index + 1);
             }
-            return false;
+            stack.pop();
         }
-
-        private int getArea(String[] res01) {
-            return res01.length * res01[0].length();
-        }
-
 
     }
 
     public static void main(String[] args) {
-        String[] words = {"this", "real", "hard", "trh", "hea", "iar", "sld"};
+//        String[] words = {"this", "real", "hard", "trh", "hea", "iar", "sld"};
+//        String[] words = {"aa"};
+//        String[] words = {"qn", "zh", "bu", "im", "pc", "iz", "mh", "v", "c", "sn"};//["im","zh"]
+//        String[] words = {};
+        String[] words = {"lcauj", "mdlby", "myulp", "yvkqn", "usajk", "rpj", "bojvf", "ukmkb", "afqbhs", "j", "ebe", "yacov", "wsaep", "zdk", "wziqrdd", "pcjfn", "nlrehaq", "dasrc", "lruvq", "dvca"};
         Solution solve = new Solution();
         String[] res = solve.maxRectangle(words);
         System.out.println(res);
