@@ -1,8 +1,5 @@
 package leetcode.top100;
 
-import sun.util.locale.provider.FallbackLocaleProviderAdapter;
-
-import javax.swing.table.DefaultTableCellRenderer;
 import java.util.*;
 
 /**
