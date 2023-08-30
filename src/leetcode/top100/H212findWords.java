@@ -3,7 +3,7 @@ package leetcode.top100;
 import sun.util.locale.provider.FallbackLocaleProviderAdapter;
 
 import javax.swing.table.DefaultTableCellRenderer;
-import java.util.List;
+import java.util.*;
 
 /**
  * @PackageName:leetcode.top100
@@ -73,12 +73,58 @@ public class H212findWords {
             }
 
             public boolean isContain(String word) {
-                return false;
+                char[] chs = word.toCharArray();
+                DictNode cur = root;
+                for (int i = 0; i < chs.length; i++) {
+                    int curIndex = chs[i] - 'a';
+                    if (cur.nexts[curIndex] == null) {
+                        return false;
+                    }
+                    cur = cur.nexts[curIndex];
+                }
+                return cur.isEnd;
             }
         }
 
         public List<String> findWords(char[][] board, String[] words) {
-            return null;
+            if (board == null || board.length == 0) {
+                return new ArrayList<>();
+            }
+            DTree tree = new DTree();
+            int n = board.length;
+            int m = board[0].length;
+            for (int i = 0; i < words.length; i++) {
+                tree.add(words[i]);
+            }
+            boolean[][] valid = new boolean[n][m];
+            Set<String> res = new HashSet<>();
+            StringBuilder stack = new StringBuilder();
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < m; j++) {
+                    dfs(words, board, i, j, n, m, tree, valid, stack, res, tree.root);
+                }
+            }
+            return new ArrayList<>(res);
+        }
+
+        private void dfs(String[] words, char[][] board, int row, int col, int n, int m, DTree tree, boolean[][] valid, StringBuilder stack, Set<String> res, DictNode preNode) {
+            if (preNode == null) {
+                return;
+            }
+            if (preNode.isEnd) {
+                res.add(stack.toString());
+            }
+            if (row < 0 || row >= n || col < 0 || col >= m || valid[row][col]) {
+                return;
+            }
+            valid[row][col] = true;
+            stack.append(board[row][col]);
+            dfs(words, board, row - 1, col, n, m, tree, valid, stack, res, preNode.nexts[board[row][col] - 'a']);
+            dfs(words, board, row + 1, col, n, m, tree, valid, stack, res, preNode.nexts[board[row][col] - 'a']);
+            dfs(words, board, row, col - 1, n, m, tree, valid, stack, res, preNode.nexts[board[row][col] - 'a']);
+            dfs(words, board, row, col + 1, n, m, tree, valid, stack, res, preNode.nexts[board[row][col] - 'a']);
+            stack.deleteCharAt(stack.length() - 1);
+            valid[row][col] = false;
         }
     }
 
@@ -94,12 +140,16 @@ public class H212findWords {
          *  * words = ["oath","pea","eat","rain"]
          *  * 输出：["eat","oath"]
          */
-        char[][] board = {
-                {'o', 'a', 'a', 'n'},
-                {'e', 't', 'a', 'e'},
-                {'i', 'h', 'k', 'r'},
-                {'i', 'f', 'l', 'v'}};
-        String[] words = {"oath", "pea", "eat", "rain"};
-        solve.findWords(board, words);
+//        char[][] board = {
+//                {'o', 'a', 'a', 'n'},
+//                {'e', 't', 'a', 'e'},
+//                {'i', 'h', 'k', 'r'},
+//                {'i', 'f', 'l', 'v'}};
+//        String[] words = {"oath", "pea", "eat", "rain"};
+        char[][] board = {{'a'}};
+        String[] words = {"a"};
+        List<String> res = solve.findWords(board, words);
+        System.out.println(res);
+
     }
 }
