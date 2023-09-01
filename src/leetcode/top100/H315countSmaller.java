@@ -39,50 +39,61 @@ import java.util.*;
 public class H315countSmaller {
 
     private static class Solution {
-        private class BinaryTree {
-            private int[] tree;
-            private int maxLen;
-
-            public BinaryTree(int maxLen) {
-                this.maxLen = maxLen;
-                this.tree = new int[this.maxLen];
+        public List<Integer> countSmaller(int[] nums) {
+            int n = nums.length;
+            Integer[] res = new Integer[n];
+            Integer[] index = new Integer[n];
+            for (int i = 0; i < res.length; i++) {
+                res[i] = 0;
             }
-
-            private void update(int i, int x) {
-                if (i > maxLen) {
-                    return;
-                }
-                for (int pos = i; pos <= this.maxLen; pos += lowBit(pos)) {
-                    tree[pos - 1] += x;
-                }
-            }
-
-            public int query(int end) {
-                if (end > this.maxLen || end <= 0) {
-                    return 0;
-                }
-                int ans = 0;
-                for (int pos = end; pos > 0; pos -= lowBit(pos)) {
-                    ans += tree[pos - 1];
-                }
-                return ans;
-            }
-            private int lowBit(int pos) {
-                return pos & (-pos);
-            }
+            merge(nums, 0, n, res, index);
+            return Arrays.asList(res);
         }
 
-
-        public List<Integer> countSmaller(int[] nums) {
-            int maxLen = 209;
-            BinaryTree btree = new BinaryTree(maxLen);
-            Integer[] res = new Integer[nums.length];
-            for (int i = nums.length - 1; i >= 0; i--) {
-                nums[i] += 104;
-                res[i] = btree.query(nums[i]-1);
-                btree.update(nums[i], 1);
+        private void merge(int[] nums, int start, int end, Integer[] res, Integer[] index) {
+            if (start + 1 == end) {
+                return;
             }
-            return Arrays.asList(res);
+            int half = (start + end) / 2;
+            merge(nums, start, half, res, res);
+            merge(nums, half, end, res, res);
+//            Arrays.sort(nums, start, half);
+//            Arrays.sort(nums, half, end);
+            int start0 = start, start1 = half;
+            while (start0 < half && start1 < end) {
+                if (nums[start0] <= nums[start1]) {
+                    res[start0] += start1 - half;
+                    start0 += 1;
+                } else if (nums[start0] > nums[start1]) {
+                    start1 += 1;
+                }
+            }
+            for (; start0 < half; start0++) {
+                res[start0] += start1 - half;
+            }
+            int[] tmpRes = new int[end - start];
+            int[] tmpIndex = new int[end - start];
+            int p = start, p0 = start0, p1 = half;
+            while (p0 < half && p1 < end) {
+                if (res[p0] <= res[p1]) {
+                    tmpRes[p] = res[p0];
+                    tmpIndex[p]=index[p0];
+                    p0++;
+                } else {
+                    tmpRes[p] = res[p1];
+                    tmpIndex[p]=index[p1];
+                    p1++;
+                }
+                p++;
+            }
+            for (; p0 <half; p0++) {
+                tmpRes[p]=res[p0];
+                tmpIndex[p]=index[p0];
+                p++;
+            }
+            for (int i = start; i < end; i++) {
+                index[start]=tmpIndex[i-start];
+            }
         }
     }
 
@@ -90,7 +101,8 @@ public class H315countSmaller {
         Solution solve = new Solution();
 //        int[] nums = {5, 2, 6, 1};
 //        int []nums = {-1};
-        int[] nums = {-1, -1};
+//        int[] nums = {-1, -1};
+        int[] nums = {26, 78, 27, 100, 33, 67, 90, 23, 66, 5, 38, 7, 35, 23, 52, 22, 83, 51, 98, 69, 81, 32, 78, 28, 94, 13, 2, 97, 3, 76, 99, 51, 9, 21, 84, 66, 65, 36, 100, 41};
         System.out.println(solve.countSmaller(nums));
 
     }
