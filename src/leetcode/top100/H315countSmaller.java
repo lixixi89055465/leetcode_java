@@ -45,6 +45,7 @@ public class H315countSmaller {
             Integer[] index = new Integer[n];
             for (int i = 0; i < res.length; i++) {
                 res[i] = 0;
+                index[i] = i;
             }
             merge(nums, 0, n, res, index);
             return Arrays.asList(res);
@@ -55,44 +56,51 @@ public class H315countSmaller {
                 return;
             }
             int half = (start + end) / 2;
-            merge(nums, start, half, res, res);
-            merge(nums, half, end, res, res);
+            merge(nums, start, half, res, index);
+            merge(nums, half, end, res, index);
 //            Arrays.sort(nums, start, half);
 //            Arrays.sort(nums, half, end);
             int start0 = start, start1 = half;
             while (start0 < half && start1 < end) {
                 if (nums[start0] <= nums[start1]) {
-                    res[start0] += start1 - half;
+                    res[index[start0]] += start1 - half;
                     start0 += 1;
-                } else if (nums[start0] > nums[start1]) {
+                } else {
                     start1 += 1;
                 }
             }
             for (; start0 < half; start0++) {
-                res[start0] += start1 - half;
+                res[index[start0]] += start1 - half;
             }
             int[] tmpRes = new int[end - start];
             int[] tmpIndex = new int[end - start];
-            int p = start, p0 = start0, p1 = half;
+            int p = start, p0 = start, p1 = half;
             while (p0 < half && p1 < end) {
-                if (res[p0] <= res[p1]) {
-                    tmpRes[p] = res[p0];
-                    tmpIndex[p]=index[p0];
+                if (nums[p0] <= nums[p1]) {
+                    tmpRes[p - start] = nums[p0];
+                    tmpIndex[p - start] = index[p0];
                     p0++;
                 } else {
-                    tmpRes[p] = res[p1];
-                    tmpIndex[p]=index[p1];
+                    tmpRes[p - start] = nums[p1];
+                    tmpIndex[p - start] = index[p1];
                     p1++;
                 }
                 p++;
             }
-            for (; p0 <half; p0++) {
-                tmpRes[p]=res[p0];
-                tmpIndex[p]=index[p0];
+            for (; p0 < half; p0++) {
+                tmpRes[p - start] = nums[p0];
+                tmpIndex[p - start] = index[p0];
                 p++;
             }
+            for (; p1 < end; p1++) {
+                tmpRes[p - start] = nums[p1];
+                tmpIndex[p - start] = index[p1];
+                p++;
+            }
+//            System.out.println();
             for (int i = start; i < end; i++) {
-                index[start]=tmpIndex[i-start];
+                index[i] = tmpIndex[i - start];
+                nums[i] = tmpRes[i - start];
             }
         }
     }
@@ -102,7 +110,8 @@ public class H315countSmaller {
 //        int[] nums = {5, 2, 6, 1};
 //        int []nums = {-1};
 //        int[] nums = {-1, -1};
-        int[] nums = {26, 78, 27, 100, 33, 67, 90, 23, 66, 5, 38, 7, 35, 23, 52, 22, 83, 51, 98, 69, 81, 32, 78, 28, 94, 13, 2, 97, 3, 76, 99, 51, 9, 21, 84, 66, 65, 36, 100, 41};
+//        int[] nums = {26, 78, 27, 100, 33, 67, 90, 23, 66, 5, 38, 7, 35, 23, 52, 22, 83, 51, 98, 69, 81, 32, 78, 28, 94, 13, 2, 97, 3, 76, 99, 51, 9, 21, 84, 66, 65, 36, 100, 41};
+        int[] nums = {1, 0, 2};
         System.out.println(solve.countSmaller(nums));
 
     }
