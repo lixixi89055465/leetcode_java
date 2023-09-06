@@ -6,7 +6,7 @@ package zuo.publicclass2020.class080;
 // 请问从0到x位置，至少跳几次可以到达
 // 字节考的问题其实就是这个问题
 // 找到了测试链接 : https://www.luogu.com.cn/problem/CF11B
-// 提交以下所有代码，把主类名改成"Main"，可以直接通过
+// 提交以下所有代码，把主类名改成"P1129"，可以直接通过
 import java.util.Scanner;
 
 public class Code04_JumpToTargets {

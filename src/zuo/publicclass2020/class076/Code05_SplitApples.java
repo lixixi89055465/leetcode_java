@@ -6,7 +6,7 @@ package zuo.publicclass2020.class076;
 //那么1、3、1和1、1、3和3、1、1的放置方法，也认为是一种方法
 //如上的设定下，返回有多少种放置方法
 //测试链接 : https://www.nowcoder.com/practice/bfd8234bb5e84be0b493656e390bdebf
-//提交以下的code，提交时请把类名改成"Main"
+//提交以下的code，提交时请把类名改成"P1129"
 import java.util.Arrays;
 import java.util.Scanner;
 

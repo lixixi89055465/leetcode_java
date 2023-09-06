@@ -8,6 +8,6 @@ package luogu.P15;
  */
 public class P1551 {
     public static void main(String[] args) {
-
+        System.out.println("test");
     }
 }

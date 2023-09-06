@@ -7,7 +7,7 @@ package zuo.publicclass2020.class091;
 // 1、2和2、1的放置认为是一种方法
 // 返回有多少种放置苹果的方法
 // 测试链接 : https://www.nowcoder.com/practice/bfd8234bb5e84be0b493656e390bdebf
-// 提交以下的code，提交时请把类名改成"Main"
+// 提交以下的code，提交时请把类名改成"P1129"
 import java.util.Arrays;
 import java.util.Scanner;
 

@@ -9,7 +9,7 @@ package zuo.publicclass2020.class080;
 // 那在心理上就不会觉得吃亏。
 // 现在你希望在心理上不觉得吃亏的前提下，获得尽可能多的快乐值。
 // 测试链接 : https://leetcode-cn.com/problems/tJau2o/
-// 提交以下的code，将主类名字改成"Main"
+// 提交以下的code，将主类名字改成"P1129"
 // 可以直接通过
 import java.util.Scanner;
 

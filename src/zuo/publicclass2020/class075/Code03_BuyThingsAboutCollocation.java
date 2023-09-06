@@ -12,7 +12,7 @@ package zuo.publicclass2020.class075;
 // 主商品和附属商品的层级最多有2层
 // 给定二维数组things、钱数money，返回整体花费不超过money的情况下，最大的收益总和
 // 测试链接 : https://www.nowcoder.com/practice/f9c6f980eeec43ef85be20755ddbeaf4
-// 请把如下的代码的主类名改为"Main", 可以直接通过
+// 请把如下的代码的主类名改为"P1129", 可以直接通过
 import java.util.ArrayList;
 import java.util.Scanner;
 

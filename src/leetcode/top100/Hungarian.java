@@ -7,23 +7,24 @@ package leetcode.top100;
  */
 public class Hungarian {
     public int process(boolean[][] concats, int M, int N) {
-        int cnt = 0;
         boolean[] visit = new boolean[N];
-        int[] P = new int[N];
+        int[] p = new int[N];
+        int ans=0;
         for (int i = 0; i < M; i++) {
-            if (match(i, N, concats, visit, P)) {
-                cnt++;
+            if(match(i,N,concats,visit,p)){
+                ans++;
             }
         }
-        return cnt;
+        return ans;
+
     }
 
-    private boolean match(int i, int N, boolean[][] map, boolean[] visit, int[] P) {
-        for (int j = 0; j < i; j++) {
-            if (!visit[j] && map[i][j]) {
-                visit[j] = true;
-                if (P[j] == 0 || match(P[j], N, map, visit, P)) {
-                    P[j] = i;
+    private boolean match(int i, int N, boolean[][] map, boolean[] visit, int[] p) {
+        for (int j = 0; j < N; j++) {
+            if(!visit[j]&&map[i][j]) {
+                visit[j]=true;
+                if (p[j]==0 || match(p[j], N, map, visit, p)) {
+                    p[j]=i;
                     return true;
                 }
             }
