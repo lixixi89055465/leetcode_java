@@ -1,5 +1,7 @@
 package luogu.P20;
 
+import java.util.Scanner;
+
 /**
  * @PackageName:luogu.P20
  * @Date 2023/9/12 14:54
@@ -21,7 +23,38 @@ package luogu.P20;
 public class P2880 {
 
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String[] split = sc.nextLine().trim().split(",");
+        int N=Integer.parseInt(split[0]);
+        int Q=Integer.parseInt(split[0]);
+        int []arr=new int[N];
+        for (int i = 0; i < N; i++) {
+            arr[i]=sc.nextInt();
+        }
+        int[][]quick=process(N,arr);
+        int []QArr=new int[Q];
+        for (int i = 0; i < Q; i++) {
+            String[] split1 = sc.nextLine().trim().split(",");
+            int start=Integer.parseInt(split1[0]);
+            int end=Integer.parseInt(split1[1]);
+            int k=0;
+            while (((k+1)<<1)<=end-start+1){
+               k+=1;
+            }
+            System.out.println(Math.max(quick[start][k],quick[end-(1<<k)][k]));
+        }
+    }
 
-
+    private static int[][] process(int n, int[] arr) {
+        int[][]f=new int[n][22];
+        for (int i = 0; i < n; i++) {
+            f[i][0]=arr[i];
+        }
+        for (int i = 1; i < 22; i++) {
+            for (int j = 1; j < n; j++) {
+                f[j][i]=Math.max(f[j][i-1],f[j+(1<<(i -1))][i-1]);
+            }
+        }
+        return f;
     }
 }
