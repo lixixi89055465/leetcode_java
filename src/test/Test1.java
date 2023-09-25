@@ -1,29 +1,39 @@
 package test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
+import java.util.Scanner;
 
 public class Test1 {
-    public static String alternativeMerge2(String str1, String str2) {
-        // write code here
-        if (str1 == null || str1.length() == 0 || str2 == null || str2.length() == 0) {
-            return "";
+    private static class Tree{
+        public  int[]tree;
+        public Tree(int n) {
+            tree=new int[n];
         }
-        int j = 0;
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < str1.length(); i++) {
-            sb.append(str1.charAt(i));
-            sb.append(str2.charAt(j));
-            j = (j + 1) % str2.length();
+        public   void update(int i, int x){
+            int maxLen=this.tree.length;
+            for(;i<=maxLen;i+=lowBit(i)){
+                tree[i]+=x;
+            }
         }
-        return sb.toString();
+        public  int query(int n){
+            int ans=0;
+            for (int i = n; i > 0; i-=lowBit(i)) {
+                ans+=tree[i];
+            }
+            return ans;
+        }
+        private   int lowBit(int i) {
+            return i&-i;
+        }
     }
 
-    public static void main(String args[]) throws InterruptedException {
-        String str1 = "abcyokagames", str2 = "12345";
-        System.out.println(alternativeMerge2(str1, str2));
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n=sc.nextInt();
+        int []ans=new int[n];
+        Tree tree = new Tree(n);
+        for (int i = 0; i < n; i++) {
+            int curV = sc.nextInt();
+
+        }
     }
 }
-
