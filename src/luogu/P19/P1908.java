@@ -14,41 +14,43 @@ import java.util.TreeMap;
  * 给定序列中逆序对的数目。
  */
 public class P1908 {
-    private static class BinaryTree {
+    private static class TreeArr {
         public int[] tree;
-        public int maxLen = 0;
+        public int n = 0;
 
-        public BinaryTree(int maxLen) {
-            this.maxLen = maxLen;
-            this.tree = new int[maxLen];
+        public TreeArr(int n) {
+            this.tree = new int[n];
+            this.n = n;
         }
 
         public void update(int i, int x) {
-            for (int j = i; j <= this.maxLen; j += lowBit(j)) {
-                this.tree[j - 1] += x;
+            for (int j = i; j < n; j += lowBit(j)) {
+                this.tree[j] += x;
             }
         }
 
-        private int lowBit(int i) {
-            return i & (-i);
-        }
-
-        public int query(int end) {
+        public int query(int index) {
             int ans = 0;
-            for (int j = end; j > 0; j -= lowBit(j)) {
-                ans += this.tree[j - 1];
+            for (int i = index; i > 0; i -= lowBit(i)) {
+                ans += this.tree[i];
             }
             return ans;
+        }
+
+        private int lowBit(int j) {
+            return j & -j;
         }
     }
 
     public static int process(int[] nums) {
-        BinaryTree binaryTree = new BinaryTree(nums.length);
+        TreeArr treeArr = new TreeArr(nums.length);
+        int n = nums.length;
         int ans = 0;
         for (int i = 0; i < nums.length; i++) {
-            ans += binaryTree.query(nums[i]);
-            binaryTree.update(nums[i], 1);
+            ans += treeArr.query(nums[i]);
+            treeArr.update(nums[i], 1);
         }
+        ans = n * (n - 1) / 2 - ans;
         return ans;
     }
 
