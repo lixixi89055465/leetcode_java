@@ -64,4 +64,8 @@ public class RandomUtils {
 		arr[j]=arr[i]^arr[j];
 		arr[i]=arr[i]^arr[j];
 	}
+
+	public static void sort(int[] arr) {
+		Arrays.sort(arr);
+	}
 }
