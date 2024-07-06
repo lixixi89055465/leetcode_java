@@ -1,42 +1,29 @@
 package zuo.base.chass01;
 
+import utils.RandomUtils;
+
+import java.util.Random;
+
 public class Code02_BubbleSort {
-    public static void selectionSort(int[] arr) {
+    public static void bubbleSort(int[] arr) {
         if (arr == null || arr.length < 2) {
             return;
         }
-        for (int i = 0; i < arr.length; i++) {
-            for (int j = arr.length - 1; j > i; j++) {
-                if (arr[i] > arr[j]) {
-                    swap(arr, j - 1, j);
-                }
+        for (int i = arr.length-1; i>0; i--) {
+            for (int j = 0; j < i; j++) {
+                RandomUtils.swapBit(arr,i,j);
             }
         }
-
     }
 
-    //    private static void swap(int[] arr, int i, int minIndex) {
-//        int tmp = arr[i];
-//        arr[i] = arr[minIndex];
-//        arr[minIndex] = tmp;
-//    }
-    private static void swapBit(int[] arr, int i, int j) {
-        arr[i] = arr[i] ^ arr[j];
-        arr[j] = arr[i] ^ arr[j];
-        arr[i] = arr[i] ^ arr[j];
-    }
 
-    private static void swap(int[] arr, int i, int j) {
-        arr[i] = arr[i] ^ arr[j];
-        arr[j] = arr[i] ^ arr[j];
-        arr[i] = arr[i] ^ arr[j];
-    }
 
     public static void main(String[] args) {
-        int[] arr = new int[]{3, 4, 343, 5, 46, 547, 5, 64, 54, 99};
-        Code02_BubbleSort.selectionSort(arr);
-        for (int i = 0; i < arr.length; i++) {
-            System.out.printf(arr[i] + ",");
-        }
+        int[] arr = RandomUtils.generateRandomArray(100,100);
+        RandomUtils.printArray(arr);
+        int[] copyArr= RandomUtils.copyArray(arr);
+        boolean equal = RandomUtils.isEqual(arr, copyArr);
+        System.out.println(equal);
     }
+
 }
