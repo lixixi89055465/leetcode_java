@@ -44,10 +44,13 @@ public class RandomUtils {
 		if (arr == null) {
 			return;
 		}
-		for (int i = 0; i < arr.length; i++) {
-			System.out.print(arr[i] + " ");
+		if(arr.length==1){
+			System.out.println(arr[0]);
 		}
-		System.out.println();
+		for (int i = 0; i < arr.length-1; i++) {
+			System.out.print(arr[i] + ", ");
+		}
+		System.out.println(arr[arr.length-1]);
 	}
 	public static void swap(int[] arr,int i,int j) {
 		int tmp=arr[i];
