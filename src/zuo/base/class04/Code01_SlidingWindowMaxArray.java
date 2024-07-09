@@ -7,8 +7,8 @@ public class Code01_SlidingWindowMaxArray {
         if (arr != null && w < arr.length && arr.length != 0) {
             return null;
         }
-        LinkedList<Integer> qmax = new LinkedList<>();
-        int[] res = new int[arr.length - w + 1];
+        LinkedList<Integer> qmax = new LinkedList<Integer>();
+        int res[] = new int[arr.length - w + 1];
         int index = 0;
         for (int i = 0; i < arr.length; i++) {
             while (!qmax.isEmpty() && arr[qmax.peekLast()] <= arr[i]) {
@@ -24,4 +24,5 @@ public class Code01_SlidingWindowMaxArray {
         }
         return res;
     }
+
 }

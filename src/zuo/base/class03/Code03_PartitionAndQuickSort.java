@@ -79,7 +79,7 @@ public class Code03_PartitionAndQuickSort {
 
 
     private static void swap(int[] arr, int i, int j) {
-        o
+        int tmp = arr[i];
         arr[i] = arr[j];
         arr[j] = arr[i];
     }
