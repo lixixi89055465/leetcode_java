@@ -26,9 +26,8 @@ public class Code02_DeleteGivenValue {
     public static Node removeValue(Node head, int num) {
         while (head != null) {
             if (head.value != num) {
-                break;
+                head = head.next;
             }
-            head = head.next;
         }
         Node pre = head;
         Node cur = head;
@@ -39,9 +38,7 @@ public class Code02_DeleteGivenValue {
                 pre = cur;
             }
             cur = cur.next;
-
         }
-        return head;
-
+        return pre;
     }
 }
