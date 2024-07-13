@@ -1,5 +1,12 @@
 package zuo.base.class03;
 
+import utils.RandomUtils;
+
+import java.util.Random;
+
+/**
+ * 基数排序
+ */
 public class Code02_RadixSort {
     public static void radixSort(int[] arr) {
         if (arr == null || arr.length < 2) {
@@ -8,40 +15,60 @@ public class Code02_RadixSort {
         radixSort(arr, 0, arr.length - 1, maxbits(arr));
     }
 
-    private static void radixSort(int[] arr, int L, int R, int digit) {
-        final int radix = 10;
-        int[] bucket = new int[R - L + 1];
-        for (int d = 1; d <= digit; d++) {
-            int[] count = new int[digit];
-            for (int i = L; i <= R; i++) {
-                int j = getDigit(arr[i], d);
-                count[j]++;
+    private static void radixSort(int[] arr, int start, int end, int digit) {
+        int radix = 10;
+        int bulk[] = new int[end - start + 1];
+        for (int d = 1; d <=radix; d++) {
+            int count[] = new int[radix];
+            for (int j = start; j <= end; j++) {
+                int digit1 = getDigit(arr[j], d);
+                count[digit1]++;
             }
-            for (int i = 1; i < radix; i++) {
-                count[i] += count[i - 1];
+            for (int j = 1; j < radix; j++) {
+                count[j] += count[j - 1];
             }
-            for (int i = R; i >= L; i--) {
-                int j = getDigit(arr[i], d);
-                bucket[count[j]--] = arr[i];
-                count[j]--;
+            for (int j = end; j >= start; j--) {
+                int digit1 = getDigit(arr[j], d);
+                bulk[count[digit1] - 1] = arr[j];
+                count[digit1]--;
             }
-            for (int i = L, j = 0; i <= R; i++, j++) {
-                arr[i] = bucket[j];
+            for (int i = 0; i < end - start + 1; i++) {
+                arr[start + i] = bulk[i];
             }
         }
     }
 
-    private static int getDigit(int i, int d) {
+    private static int getDigit(int value, int d) {
         d--;
         while (d > 0) {
-            i /= 10;
+            value /= 10;
             d--;
         }
-        return i % 10;
+        return value % 10;
     }
 
     private static int maxbits(int[] arr) {
-        return 0;
+        int maxValue = arr[0];
+        for (int i = 1; i < arr.length; i++) {
+            maxValue = Math.max(maxValue, arr[i]);
+        }
+        int d = 0;
+        while (maxValue > 0) {
+            maxValue /= 10;
+            d++;
+        }
+        return d;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = RandomUtils.generateRandomArray(100, 100);
+        int[] copyArr = RandomUtils.copyArray(arr);
+        radixSort(arr);
+        RandomUtils.sort(copyArr);
+        RandomUtils.printArray(arr);
+        RandomUtils.printArray(copyArr);
+        boolean equal = RandomUtils.isEqual(arr, copyArr);
+        System.out.println(equal);
     }
 }
 

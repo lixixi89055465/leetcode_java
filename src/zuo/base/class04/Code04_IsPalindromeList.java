@@ -2,6 +2,9 @@ package zuo.base.class04;
 
 import java.util.Stack;
 
+/**
+ * 是否是回文链表
+ */
 public class Code04_IsPalindromeList {
     private static class Node {
         public int value;

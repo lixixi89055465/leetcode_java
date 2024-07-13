@@ -46,5 +46,6 @@ public class Code_12_SmallSum {
     public static void main(String[] args) {
         int[] arr = RandomUtils.generateRandomArray(100, 100);
         int[] copyArr = RandomUtils.copyArray(arr);
+
     }
 }
