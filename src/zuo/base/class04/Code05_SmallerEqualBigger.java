@@ -1,5 +1,10 @@
 package zuo.base.class04;
 
+/**
+ * 将单项链表按某值划分成左边小，中间相等，右边大的形式 .
+ * <p>
+ * 给定一个单链表的头节点head,节点的值类型是整形，再给定一个整数pivot.
+ */
 public class Code05_SmallerEqualBigger {
     private static class Node {
         public int value;
@@ -27,7 +32,6 @@ public class Code05_SmallerEqualBigger {
                     sT.next = cur;
                     sT = cur;
                 }
-
             } else if (cur.value == pivot) {
                 if (mH == null) {
                     mH = cur;
