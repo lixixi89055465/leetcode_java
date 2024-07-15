@@ -7,7 +7,7 @@ public class Code03_DoubleEndsQueueToStackAndQueue {
 
     public static class Node<T> {
         public T value;
-        public Node last;
+        public Node pre;
         public Node next;
 
         public Node(T data) {
@@ -20,26 +20,25 @@ public class Code03_DoubleEndsQueueToStackAndQueue {
         public Node<T> tail;
 
         public void addFromHead(T value) {
-            Node<T> cur = new Node<T>(value);
+            Node<T> cur = new Node<>(value);
             if (head == null) {
                 head = cur;
                 tail = cur;
             } else {
                 cur.next = head;
-                head.last = cur;
+                head.pre = cur;
                 head = cur;
             }
-
         }
 
         public void addFromBottom(T value) {
-            Node<T> cur = new Node<T>(value);
+            Node<T> cur = new Node<>(value);
             if (tail == null) {
                 head = cur;
                 tail = cur;
             } else {
-                cur.last = tail;
                 tail.next = cur;
+                cur.pre = tail;
                 tail = cur;
             }
         }
@@ -50,11 +49,9 @@ public class Code03_DoubleEndsQueueToStackAndQueue {
 
         public Node<T> popFromBottom() {
             Node<T> cur = null;
-            Node<T> pre = tail.last;
-            pre.next = null;
-            tail.next = null;
-            tail.last = null;
-            tail = pre;
+            Node<T> pre=tail.pre;
+            pre.next=null;
+            tail.pre=null;
             return tail;
         }
     }
