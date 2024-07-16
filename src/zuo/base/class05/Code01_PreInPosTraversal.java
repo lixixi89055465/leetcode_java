@@ -2,14 +2,51 @@ package zuo.base.class05;
 
 import java.util.Stack;
 
+/**
+ * 用递归和非递归两种方式实现二叉树的先序、中序、后序遍历
+ * 如何直观的打印一颗二叉树
+ * 如何完成二叉树的宽度优先遍历(常见题目：求一棵二叉树的宽度)
+ */
 public class Code01_PreInPosTraversal {
-    private static class Node {
+
+    public static class Node {
         public int value;
         public Node left;
         public Node right;
+
+        public Node(int data) {
+            this.value = data;
+        }
     }
 
-    public static void inOrderUnRecur(Node head) {
+    public static void preOrderRecur(Node head) {
+        if (head == null) {
+            return;
+        }
+        System.out.print(head.value + " ");
+        preOrderRecur(head.left);
+        preOrderRecur(head.right);
+    }
+
+    public static void inOrderRecur(Node head) {
+        if (head == null) {
+            return;
+        }
+        inOrderRecur(head.left);
+        System.out.print(head.value + " ");
+        inOrderRecur(head.right);
+    }
+
+    public static void posOrderRecur(Node head) {
+        if (head == null) {
+            return;
+        }
+        posOrderRecur(head.left);
+        posOrderRecur(head.right);
+        System.out.print(head.value + " ");
+    }
+
+    public static void preOrderUnRecur(Node head) {
         if (head != null) {
             Stack<Node> stack = new Stack<>();
             stack.add(head);
@@ -17,58 +54,108 @@ public class Code01_PreInPosTraversal {
                 while (stack.peek().left != null) {
                     stack.add(stack.peek().left);
                 }
-                Node cur = stack.pop();
-                System.out.println(cur.value);
-                if (cur.right != null) {
-                    stack.add(cur.right);
+                Node pop = stack.pop();
+                System.out.println(pop.value);
+                if (pop.right != null) {
+                    stack.add(pop.right);
                 }
             }
-
         }
     }
 
-    public static void preOrderUnRecur(Node head) {
+    public static void inOrderUnRecur(Node head) {
         if (head != null) {
-            Stack<Node> s1 = new Stack<>();
-            Stack<Node> s2 = new Stack<>();
-            s1.add(head);
-            while (!s1.isEmpty()) {
-                Node cur = s1.pop();
-                s2.add(cur);
-                System.out.println(cur.value);
-                if (cur.right != null) {
-                    s1.add(cur.right);
+            Stack<Node> stack = new Stack<>();
+            stack.add(head);
+            while (!stack.isEmpty()) {
+                Node pop = stack.pop();
+                System.out.println(pop.value);
+                if (pop.left != null) {
+                    stack.add(pop.left);
                 }
-                if (cur.left != null) {
-                    s1.add(cur.left);
+                if (pop.right != null) {
+                    stack.add(pop.right);
+                }
+            }
+        }
+    }
+
+    public static void posOrderUnRecur1(Node head) {
+        System.out.print("pos-order: ");
+        if (head != null) {
+            Stack<Node> s1 = new Stack<Node>();
+            Stack<Node> s2 = new Stack<Node>();
+            s1.push(head);
+            while (!s1.isEmpty()) {
+                head = s1.pop();
+                s2.push(head);
+                if (head.left != null) {
+                    s1.push(head.left);
+                }
+                if (head.right != null) {
+                    s1.push(head.right);
                 }
             }
             while (!s2.isEmpty()) {
-                System.out.println(s2.pop().value);
+                System.out.print(s2.pop().value + " ");
             }
         }
-
+        System.out.println();
     }
 
-    public static void postOrderUnRecur(Node head) {
-        if (head != null) {
-            Stack<Node> stacks = new Stack<>();
-            stacks.add(head);
-            while (!stacks.isEmpty()) {
-                Node cur = stacks.pop();
-                if (cur.left != null) {
-                    stacks.add(cur.left);
+    public static void posOrderUnRecur2(Node h) {
+        System.out.print("pos-order: ");
+        if (h != null) {
+            Stack<Node> stack = new Stack<Node>();
+            stack.push(h);
+            Node c = null;
+            while (!stack.isEmpty()) {
+                c = stack.peek();
+                if (c.left != null && h != c.left && h != c.right) {
+                    stack.push(c.left);
+                } else if (c.right != null && h != c.right) {
+                    stack.push(c.right);
+                } else {
+                    System.out.print(stack.pop().value + " ");
+                    h = c;
                 }
-                if (cur.right != null) {
-                    stacks.add(cur.right);
-                }
-
             }
-
         }
+        System.out.println();
     }
 
     public static void main(String[] args) {
+        Node head = new Node(5);
+        head.left = new Node(3);
+        head.right = new Node(8);
+        head.left.left = new Node(2);
+        head.left.right = new Node(4);
+        head.left.left.left = new Node(1);
+        head.right.left = new Node(7);
+        head.right.left.left = new Node(6);
+        head.right.right = new Node(10);
+        head.right.right.left = new Node(9);
+        head.right.right.right = new Node(11);
+
+        // recursive
+        System.out.println("==============recursive==============");
+        System.out.print("pre-order: ");
+        preOrderRecur(head);
+        System.out.println();
+        System.out.print("in-order: ");
+        inOrderRecur(head);
+        System.out.println();
+        System.out.print("pos-order: ");
+        posOrderRecur(head);
+        System.out.println();
+
+        // unrecursive
+        System.out.println("============unrecursive=============");
+        preOrderUnRecur(head);
+        inOrderUnRecur(head);
+        posOrderUnRecur1(head);
+        posOrderUnRecur2(head);
 
     }
+
 }

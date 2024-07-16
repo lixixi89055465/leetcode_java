@@ -1,12 +1,13 @@
 package zuo.base.class05;
 
-class Node {
-    public Node left;
-    public Node right;
-    int v;
-}
 
 public class Code01_MorrisTraversal {
+    class Node {
+        public Node left;
+        public Node right;
+        int v;
+    }
+
     public static void morrisPos(Node head) {
         Node cur = head;
         Node mostRight = null;

@@ -24,14 +24,13 @@ public class Code07_FindFirstIntersectNode {
         }
         Node n1 = head.next, n2 = head.next.next;
         while (n1 != n2) {
-            if (n2.next == null || n2.next.next == null) {
+            if (n2.next == null || n2.next.next == null)
                 return null;
-            }
-            n2 = n2.next.next;
             n1 = n1.next;
+            n2 = n2.next.next;
         }
         n2 = head;
-        while (n1 != n2) {
+        while (n2 != n1) {
             n1 = n1.next;
             n2 = n2.next;
         }
@@ -40,30 +39,34 @@ public class Code07_FindFirstIntersectNode {
 
     public static Node noLoop(Node head1, Node head2) {
         if (head1 == head2) {
-            return null;
+            return head1;
         }
-        Node cur1 = head1, cur2 = head2;
-        int n = 0;
-        while (cur1.next != null) {
-            cur1 = cur1.next;
-            n++;
+        Node n1 = head1, n2 = head2;
+        int size1 = 0, size2 = 0;
+        while (n1 != null) {
+            n1 = n1.next;
+            size1++;
         }
-        while (cur2.next != null) {
-            cur2 = cur2.next;
-            n--;
+        while (n2 != null) {
+            n2 = n2.next;
+            size2++;
         }
-        cur1 = n > 0 ? head1 : head2;
-        cur2 = cur1 == head1 ? head2 : head1;
-        while (n > 0) {
-            n--;
-            cur1 = cur1.next;
+        Node low = null, high = null;
+        if (size1 < size2) {
+            low = head1;
+            high = head2;
+        } else {
+            low = head2;
+            high = head1;
         }
-        while (cur1 != cur2) {
-            cur1 = cur1.next;
-            cur2 = cur2.next;
+        int size0 = Math.abs(size1 - size2);
+        for (int i = 0; i < size0; i++) {
+            high = high.next;
         }
-        return cur1;
-
-
+        while (low != high && low != null && high != null) {
+            low = low.next;
+            high = high.next;
+        }
+        return low;
     }
 }
