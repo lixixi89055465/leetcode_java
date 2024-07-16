@@ -1,9 +1,30 @@
 package zuo.base.class02;
+/**
+ * 不改进的快速排序
+ * 1）把数组范围中的最后一个数作为划分值，然后把数组通过荷兰国旗问题分成三个部
+ * 分：
+ * 左侧<划分值、中间==划分值、右侧>划分值
+ * 2）对左侧范围和右侧范围，递归执行
+ * 分析
+ * 1）划分值越靠近两侧，复杂度越高；划分值越靠近中间，复杂度越低
+ * 2）可以轻而易举的举出最差的例子，所以不改进的快速排序时间复杂度为O(N^2)
+ *
+ *
+ * 随机快速排序（改进的快速排序）
+ * 1）在数组范围中，等概率随机选一个数作为划分值，然后把数组通过荷兰国旗问题分
+ * 成三个部分：
+ * 左侧<划分值、中间==划分值、右侧>划分值
+ * 2）对左侧范围和右侧范围，递归执行
+ * 3）时间复杂度为O(N*logN)
+ *
+ *
+ */
 
 import jdk.management.resource.internal.ResourceNatives;
 import utils.RandomUtils;
 
 import java.util.Random;
+
 
 public class Code06_QuickSort {
     public static void quickSort(int[] arr) {

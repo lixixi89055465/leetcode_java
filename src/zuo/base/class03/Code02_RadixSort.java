@@ -6,6 +6,13 @@ import java.util.Random;
 
 /**
  * 基数排序
+ * 桶排序思想下的排序
+ * 1）计数排序
+ * 2）基数排序
+ * 分析：
+ * 1)桶排序思想下的排序都是不基于比较的排序
+ * 2)时间复杂度为O(N)，额外空间负载度O(M)
+ * 3)应用范围有限，需要样本的数据状况满足桶的划分
  */
 public class Code02_RadixSort {
     public static void radixSort(int[] arr) {

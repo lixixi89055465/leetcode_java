@@ -1,5 +1,13 @@
 package zuo.base.class02;
 
+/**
+ * 归并排序
+ * 1）整体就是一个简单递归，左边排好序、右边排好序、让其整体有序
+ * 2）让其整体有序的过程里用了排外序方法
+ * 3）利用master公式来求解时间复杂度
+ * 4）归并排序的实质
+ * 时间复杂度O(N*logN)，额外空间复杂度O(N
+ */
 public class Code01_MergeSort {
     public static void mergeSort(int[] arr) {
         if (arr == null || arr.length < 2) {
