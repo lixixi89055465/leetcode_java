@@ -1,25 +1,26 @@
 package zuo.base.class08;
 
 public class Code01_Hanoi {
-    public static void hanoi(int n) {
-        if (n > 0) {
-            func(n, "左", "右", "中");
-        }
-    }
 
-    private static void func(int n, String start, String end, String other) {
-        if (n == 1) {
-            System.out.println("Move 1 from " + start + " to " + end);
-        } else {
-            func(n - 1, start, end, other);
-            System.out.println("Move " + n + " from " + start + " to " + end);
-            func(n - 1, other, end, start);
-        }
-    }
+	public static void hanoi(int n) {
+		if (n > 0) {
+			func(n, n, "left", "mid", "right");
+		}
+	}
 
-    public static void main(String[] args) {
-        int n = 3;
-        hanoi(n);
-    }
+	public static void func(int rest, int down, String from, String help, String to) {
+		if (rest == 1) {
+			System.out.println("move " + down + " from " + from + " to " + to);
+		} else {
+			func(rest - 1, down - 1, from, to, help);
+			func(1, down, from, help, to);
+			func(rest - 1, down - 1, help, from, to);
+		}
+	}
+
+	public static void main(String[] args) {
+		int n = 3;
+		hanoi(n);
+	}
 
 }

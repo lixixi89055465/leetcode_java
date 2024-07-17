@@ -4,36 +4,55 @@ import java.util.Comparator;
 import java.util.PriorityQueue;
 
 public class Code05_IPO {
-    public static int findMaximizedCapital(int k, int w, int[] profits, int[] capital) {
-        PriorityQueue<Integer> s1 = new PriorityQueue<>(new Comparator<Integer>() {
-            @Override
-            public int compare(Integer o1, Integer o2) {
-                return capital[o1] - capital[o2];
-            }
-        });
-        PriorityQueue<Integer> s2 = new PriorityQueue<>(new Comparator<Integer>() {
-            @Override
-            public int compare(Integer o1, Integer o2) {
-                return profits[o2] - profits[o1];
-            }
-        });
-        for (int i = 0; i < capital.length; i++) {
-            if (capital[i] > w) {
-                s2.add(i);
-            } else {
-                s1.add(i);
-            }
-        }
-        while (k-- > 0) {
-            while (!s2.isEmpty() && capital[s2.peek()] <= w) {
-                s1.add(s2.poll());
-            }
-            if (s1.isEmpty()) {
-                return w;
-            }
-            w += profits[s1.poll()];
-        }
-        return w;
+	public static class Node {
+		public int p;
+		public int c;
 
-    }
+		public Node(int p, int c) {
+			this.p = p;
+			this.c = c;
+		}
+	}
+
+	public static class MinCostComparator implements Comparator<Node> {
+
+		@Override
+		public int compare(Node o1, Node o2) {
+			return o1.c - o2.c;
+		}
+
+	}
+
+	public static class MaxProfitComparator implements Comparator<Node> {
+
+		@Override
+		public int compare(Node o1, Node o2) {
+			return o2.p - o1.p;
+		}
+
+	}
+
+	public static int findMaximizedCapital(int k, int W, int[] Profits, int[] Capital) {
+		Node[] nodes = new Node[Profits.length];
+		for (int i = 0; i < Profits.length; i++) {
+			nodes[i] = new Node(Profits[i], Capital[i]);
+		}
+
+		PriorityQueue<Node> minCostQ = new PriorityQueue<>(new MinCostComparator());
+		PriorityQueue<Node> maxProfitQ = new PriorityQueue<>(new MaxProfitComparator());
+		for (int i = 0; i < nodes.length; i++) {
+			minCostQ.add(nodes[i]);
+		}
+		for (int i = 0; i < k; i++) {
+			while (!minCostQ.isEmpty() && minCostQ.peek().c <= W) {
+				maxProfitQ.add(minCostQ.poll());
+			}
+			if (maxProfitQ.isEmpty()) {
+				return W;
+			}
+			W += maxProfitQ.poll().p;
+		}
+		return W;
+	}
+
 }

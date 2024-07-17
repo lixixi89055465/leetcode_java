@@ -1,40 +1,43 @@
 package zuo.base.class07;
 
+import java.util.Arrays;
 import java.util.Comparator;
-import java.util.PriorityQueue;
 
 public class Code04_BestArrange {
-    private static class Program {
-        public int start;
-        public int end;
 
-        public Program(int start, int end) {
-            this.start = start;
-            this.end = end;
-        }
-    }
+	public static class Program {
+		public int start;
+		public int end;
 
-    public int BestArrange(Program[] programe, int timePoint) {
-        PriorityQueue<Program> queue = new PriorityQueue<>(new ProgramComparator01());
-        for (Program program : programe) {
-            queue.add(program);
-        }
-        int lastEnd = 0;
-        int result = 0;
-        while (!queue.isEmpty()) {
-            Program cur = queue.poll();
-            if (cur.start >= lastEnd) {
-                result++;
-                lastEnd = cur.end;
-            }
-        }
-        return result;
-    }
+		public Program(int start, int end) {
+			this.start = start;
+			this.end = end;
+		}
+	}
 
-    private class ProgramComparator01 implements Comparator<Program> {
-        @Override
-        public int compare(Program o1, Program o2) {
-            return o2.end - o1.end;
-        }
-    }
+	public static class ProgramComparator implements Comparator<Program> {
+
+		@Override
+		public int compare(Program o1, Program o2) {
+			return o1.end - o2.end;
+		}
+
+	}
+
+	public static int bestArrange(Program[] programs, int start) {
+		Arrays.sort(programs, new ProgramComparator());
+		int result = 0;
+		for (int i = 0; i < programs.length; i++) {
+			if (start <= programs[i].start) {
+				result++;
+				start = programs[i].end;
+			}
+		}
+		return result;
+	}
+
+	public static void main(String[] args) {
+
+	}
+
 }
