@@ -32,24 +32,48 @@ public class Code04_IsBST {
         return checkBST(head.right);
     }
 
-    public static boolean isBST(Node head) {
-        if (head == null) {
-            return true;
-        }
-        boolean isLeftBst = isBST(head.left);
-        if (!isLeftBst) {
-            return false;
-        }else{
-            preValue=head.value;
-        }
-        return isBST(head.right);
+    public static class ReturnData {
+        public boolean isBST;
+        public int min;
+        public int max;
 
-
+        public ReturnData(boolean is, int mi, int ma) {
+            isBST = is;
+            min = mi;
+            max = ma;
+        }
     }
 
-    public static void process(Node node, LinkedList<Node> inOrderList) {
-        if (node == null)
-            return;
+    public static ReturnData process(Node x) {
+        if (x == null) {
+            return null;
+        }
+        ReturnData leftData = process(x.left);
+        ReturnData rightData = process(x.right);
+        boolean isBst;
+        int min = x.value;
+        int max = x.value;
+        if (leftData != null) {
+            min = Math.min(min, leftData.min);
+            max = Math.max(max, rightData.max);
+        }
+        if (rightData != null) {
+            min = Math.min(min, rightData.min);
+            max = Math.max(max, rightData.max);
+        }
+        boolean isBST = true;
+        if (leftData != null && (!leftData.isBST)) {
+            isBST = false;
+        }
+        if (rightData != null && !rightData.isBST) {
+            isBST = false;
+        }
+        return new ReturnData(isBST, min, max);
+    }
+
+
+    public static boolean isBST(Node head) {
+        return false;
     }
 
 }
