@@ -1,6 +1,14 @@
 package zuo.base.class05;
 
 public class Code02_MaxDistanceInTree {
+    public static class Node {
+        public int value;
+        public Node left;
+        public Node right;
+        public Node(int data) {
+            this.value = data;
+        }
+    }
     private static class Node1 {
         public int value;
         public Node left;
