@@ -4,6 +4,9 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
+/**
+ * 一个数据流中，随时可以取得中位数
+ */
 public class Code06_MadianQuick {
 
 	public static class MedianHolder {
