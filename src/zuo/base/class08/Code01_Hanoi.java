@@ -1,5 +1,9 @@
 package zuo.base.class08;
 
+/**
+ * 汉诺塔问题
+ * 打印n层汉诺塔从最左边移动到最右边的全部过程
+ */
 public class Code01_Hanoi {
 
 	public static void hanoi(int n) {
