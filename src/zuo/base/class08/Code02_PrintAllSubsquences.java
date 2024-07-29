@@ -3,6 +3,9 @@ package zuo.base.class08;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 打印一个字符串的全部子序列，包括空字符串
+ */
 public class Code02_PrintAllSubsquences {
 
 	public static void printAllSubsquence(String str) {
@@ -15,11 +18,11 @@ public class Code02_PrintAllSubsquences {
 			System.out.println(String.valueOf(chs));
 			return;
 		}
-		process(chs, i + 1);
-		char tmp = chs[i];
-		chs[i] = 0;
-		process(chs, i + 1);
-		chs[i] = tmp;
+		process(chs,i+1);
+		char tmp=chs[i];
+		chs[i]=0;
+		process(chs,i+1);
+		chs[i]=tmp;
 	}
 	
 	public static void function(String str) {
