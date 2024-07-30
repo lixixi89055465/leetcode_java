@@ -1,5 +1,6 @@
 package zuo.base.class07;
 
+//  一串数字，只能取两边的数字，两个人都绝顶聪明，先手赢还是后手赢。
 public class Code03_CardsInLine {
     public static int win1(int[] arr) {
         if (arr == null || arr.length == 0) {

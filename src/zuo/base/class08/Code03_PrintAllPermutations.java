@@ -2,6 +2,10 @@ package zuo.base.class08;
 
 import java.util.ArrayList;
 
+/**
+ * 打印一个字符串的全部排列
+ * 打印一个字符串的全部排列，要求不要出现重复的排列
+ */
 public class Code03_PrintAllPermutations {
 
 	public static ArrayList<String> Permutation(String str) {
@@ -30,10 +34,19 @@ public class Code03_PrintAllPermutations {
 		}
 	}
 
-	public static void swap(char[] chs, int i, int j) {
-		char tmp = chs[i];
-		chs[i] = chs[j];
-		chs[j] = tmp;
-	}
+    public static void swap(char[] chs, int i, int j) {
+        char tmp = chs[i];
+        chs[i] = chs[j];
+        chs[j] = tmp;
+    }
+
+    public static void main(String[] args) {
+        String str = "abca";
+        ArrayList<String> result = Permutation(str);
+        result.forEach(e -> {
+            System.out.println(e);
+        });
+
+    }
 
 }
