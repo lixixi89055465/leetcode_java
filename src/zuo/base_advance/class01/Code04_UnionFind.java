@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Stack;
 
+/**
+ * 并查集结构的详解和实现
+ */
 public class Code04_UnionFind {
 
 	public static class Element<V> {
