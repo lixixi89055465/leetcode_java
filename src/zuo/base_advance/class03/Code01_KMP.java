@@ -1,5 +1,8 @@
 package zuo.base_advance.class03;
 
+/**
+ * KMP 算法
+ */
 public class Code01_KMP {
 
 	public static int getIndexOf(String s, String m) {
