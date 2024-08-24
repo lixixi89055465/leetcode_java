@@ -3,6 +3,7 @@ package zuo.intermediate.class02;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * 给一个包含n个整数元素的集合a，一个包含m个整数元素的集合b。
