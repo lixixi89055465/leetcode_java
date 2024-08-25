@@ -1,5 +1,13 @@
 package zuo.intermediate.class03;
 
+
+/**
+ * 用zigzag的方式打印矩阵，比如如下的矩阵
+ * 0 1 2 3
+ * 4 5 6 7
+ * 8 9 10 11
+ * 打印顺序为：0 1 4 8 5 2 3 6 9 10 7 11
+ */
 public class Problem03_RotateMatrix {
     public static void printMatrix(int[][] matrix) {
         for (int i = 0; i != matrix.length; i++) {
