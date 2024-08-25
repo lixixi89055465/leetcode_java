@@ -1,85 +1,91 @@
 package zuo.intermediate.class04;
 
+import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
-import java.util.concurrent.LinkedBlockingQueue;
 
 public class Problem03_StackAndQueueConvert {
 
-    private static class TwoQueueStack {
-        private Queue<Integer> queuePush = new LinkedBlockingQueue<>();
-        private Queue<Integer> queuePop = new LinkedBlockingQueue<>();
+	public static class TwoStacksQueue {
+		private Stack<Integer> stackPush;
+		private Stack<Integer> stackPop;
 
-        public void push(int value) {
-            queuePush.add(value);
-        }
+		public TwoStacksQueue() {
+			stackPush = new Stack<Integer>();
+			stackPop = new Stack<Integer>();
+		}
 
-        public int poll() {
-            if (queuePush.isEmpty() && queuePop.isEmpty()) {
-                throw new RuntimeException("queue is empty!");
-            }
-            if (!queuePush.isEmpty()) {
-                while (queuePush.size() > 1) {
-                    queuePop.add(queuePush.poll());
-                }
-                return queuePush.poll();
-            } else {
-                while (queuePop.size() > 1) {
-                    queuePush.add(queuePop.poll());
-                }
-                return queuePop.poll();
-            }
-        }
+		public void push(int pushInt) {
+			stackPush.push(pushInt);
+		}
 
-        public int peek() {
-            if (queuePush.isEmpty() && queuePop.isEmpty()) {
-                throw new RuntimeException("queue is empty!");
-            }
-            if (!queuePush.isEmpty()) {
-                while (queuePush.size() > 1) {
-                    queuePop.add(queuePush.poll());
-                }
-                return queuePush.peek();
-            } else {
-                while (queuePop.size() > 1) {
-                    queuePush.add(queuePop.poll());
-                }
-                return queuePop.peek();
-            }
-        }
-    }
+		public int poll() {
+			if (stackPop.empty() && stackPush.empty()) {
+				throw new RuntimeException("Queue is empty!");
+			} else if (stackPop.empty()) {
+				while (!stackPush.empty()) {
+					stackPop.push(stackPush.pop());
+				}
+			}
+			return stackPop.pop();
+		}
 
-    private static class TwoStackQueue {
-        private Stack<Integer> stackPush = new Stack<>();
-        private Stack<Integer> stackPop = new Stack<>();
+		public int peek() {
+			if (stackPop.empty() && stackPush.empty()) {
+				throw new RuntimeException("Queue is empty!");
+			} else if (stackPop.empty()) {
+				while (!stackPush.empty()) {
+					stackPop.push(stackPush.pop());
+				}
+			}
+			return stackPop.peek();
+		}
+	}
 
-        public void push(int value) {
-            stackPush.push(value);
-            dao();
-        }
+	public static class TwoQueuesStack {
+		private Queue<Integer> queue;
+		private Queue<Integer> help;
 
-        public int poll() {
-            if (stackPop.isEmpty() && stackPush.isEmpty()) {
-                throw new RuntimeException("Queue is empty!");
-            }
-            dao();
-            return stackPop.pop();
-        }
+		public TwoQueuesStack() {
+			queue = new LinkedList<Integer>();
+			help = new LinkedList<Integer>();
+		}
 
-        public int peek() {
-            if (stackPop.isEmpty() && stackPush.isEmpty()) {
-                throw new RuntimeException("Queue is Empy ");
-            }
-            dao();
-            return stackPush.peek();
-        }
+		public void push(int pushInt) {
+			queue.add(pushInt);
+		}
 
-        public void dao() {
-            if (stackPop.isEmpty()) {
-                while (!stackPush.isEmpty()) {
-                    stackPop.push(stackPush.pop());
-                }
-            }
-        }
-    }
+		public int peek() {
+			if (queue.isEmpty()) {
+				throw new RuntimeException("Stack is empty!");
+			}
+			while (queue.size() != 1) {
+				help.add(queue.poll());
+			}
+			int res = queue.poll();
+			help.add(res);
+			swap();
+			return res;
+		}
+
+		public int pop() {
+			if (queue.isEmpty()) {
+				throw new RuntimeException("Stack is empty!");
+			}
+			while (queue.size() > 1) {
+				help.add(queue.poll());
+			}
+			int res = queue.poll();
+			swap();
+			return res;
+		}
+
+		private void swap() {
+			Queue<Integer> tmp = help;
+			help = queue;
+			queue = tmp;
+		}
+
+	}
+
 }

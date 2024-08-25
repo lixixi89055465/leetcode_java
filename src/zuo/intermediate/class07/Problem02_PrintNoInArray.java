@@ -1,34 +1,33 @@
 package zuo.intermediate.class07;
 
 public class Problem02_PrintNoInArray {
-    public static void printNumberNoInArray(int[] arr) {
-        int n = arr.length;
-        for (int i = 0; i < n; i++) {
-            if (arr[i] == i + 1) {
-                continue;
-            }
-            modify(arr, i);
-        }
-        for (int i = 0; i < n; i++) {
-            if (arr[i] != i + 1) {
-                System.out.println(i+1);
-            }
-        }
-    }
 
-    private static void modify(int[] arr, int index) {
-        int cache = arr[index];
-        int tmp = 0;
-        while (cache != index + 1) {
-            tmp = cache;
-            cache = arr[cache - 1];
-            arr[tmp-1] = tmp;
-            index = tmp - 1;
-        }
-    }
+	// 请保证arr[0..N-1]上的数字都在[1～n]之间
+	public static void printNumberNoInArray(int[] arr) {
+		if (arr == null || arr.length == 0) {
+			return;
+		}
+		for (int i = 0; i < arr.length; i++) {
+			modify(arr[i], arr);
+		}
+		for (int i = 0; i < arr.length; i++) {
+			if (arr[i] != i + 1) {
+				System.out.println(i + 1);
+			}
+		}
+	}
 
-    public static void main(String[] args) {
-        int[] arr = {1, 7, 6, 5, 2, 2, 4, 5};
-        printNumberNoInArray(arr);
-    }
+	public static void modify(int value, int[] arr) {
+		while (arr[value - 1] != value) {
+			int tmp = arr[value - 1];
+			arr[value - 1] = value;
+			value = tmp;
+		}
+	}
+
+	public static void main(String[] args) {
+		int[] test = { 3, 2, 3, 5, 6, 1, 6 };
+		printNumberNoInArray(test);
+	}
+
 }

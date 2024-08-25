@@ -1,40 +1,38 @@
 package zuo.intermediate.class06;
 
 public class Problem06_SubArrayMaxSum {
-    public static int maxSum(int []arr){
-        if(arr==null|| arr.length==0){
-            return 0;
-        }
-        int curMax=arr[0]>0?arr[0]:0;
-        int ans=arr[0];
-        for (int i = 1; i < arr.length; i++) {
-            curMax+=arr[i];
-            if(curMax<0){
-                curMax=0;
-            }
-            ans=Math.max(curMax,ans);
-        }
-        return ans;
 
-    }
-    public static int maxSum1(int []arr){
-        int[]dp=new int[arr.length];
-        dp[0]=arr[0]>0?arr[0]:0;
-        int ans=dp[0];
-        for (int i = 1; i <arr.length ; i++) {
-            if(dp[i-1]<0){
-                dp[i]=arr[i];
-            }else{
-                dp[i]=arr[i]+dp[i-1];
-            }
-            ans=Math.max(dp[i],ans);
-       }
-        return ans;
-    }
+	public static int maxSum(int[] arr) {
+		if (arr == null || arr.length == 0) {
+			return 0;
+		}
+		int max = Integer.MIN_VALUE;
+		int cur = 0;
+		for (int i = 0; i != arr.length; i++) {
+			cur += arr[i];
+			max = Math.max(max, cur);
+			cur = cur < 0 ? 0 : cur;
+		}
+		return max;
+	}
 
-    public static void main(String[] args) {
-        int[] arr={-2,1,-3,4,-1,2,1,-5,4};
-        System.out.println(maxSum(arr));
-        System.out.println(maxSum1(arr));
-    }
+	public static void printArray(int[] arr) {
+		for (int i = 0; i != arr.length; i++) {
+			System.out.print(arr[i] + " ");
+		}
+		System.out.println();
+	}
+
+	public static void main(String[] args) {
+		int[] arr1 = { -2, -3, -5, 40, -10, -10, 100, 1 };
+		System.out.println(maxSum(arr1));
+
+		int[] arr2 = { -2, -3, -5, 0, 1, 2, -1 };
+		System.out.println(maxSum(arr2));
+
+		int[] arr3 = { -2, -3, -5, -1 };
+		System.out.println(maxSum(arr3));
+
+	}
+
 }
