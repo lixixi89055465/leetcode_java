@@ -1,5 +1,7 @@
 package zuo.intermediate.class07;
 
+import java.util.logging.Level;
+
 public class Problem05 {
     private static class Node {
         public int value;
@@ -23,9 +25,9 @@ public class Problem05 {
             return 1;
         }
         if (mostLeftLevel(node.right, level + 1) == h) {
-            return bs(node.right, level + 1, h) + (1 << (h - level));
+            return (1 << (h - level)) + bs(node.right, level + 1, h);
         } else {
-            return bs(node.left, level + 1, h) + (1 << (h - level - 1));
+            return (1 << (h - level - 1)) + bs(node.left, level + 1, h);
         }
     }
 
