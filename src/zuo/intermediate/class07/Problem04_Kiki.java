@@ -9,7 +9,8 @@ public class Problem04_Kiki {
 		return process(0, end, add, times, del, start, end * 2, ((end - start) / 2) * add);
 	}
 
-	public static int process(int pre, int aim, int add, int times, int del, int finish, int limitAim, int limitCoin) {
+	public static int process(int pre, int aim, int add, int times, int del,
+							  int finish, int limitAim, int limitCoin) {
 		if (pre > limitCoin) {
 			return Integer.MAX_VALUE;
 		}

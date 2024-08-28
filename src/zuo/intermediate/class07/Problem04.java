@@ -8,33 +8,35 @@ public class Problem04 {
         return procecss(0, end, add, times, del, start, end * 2, ((end - start) / 2) * add);
     }
 
-    private static int procecss(int preMoney, int aim, int add, int times, int del, int cur,
+    private static int procecss(int pre, int aim, int add, int times, int del, int finish,
                                 int limitAim, int limitCoin) {
-        if (preMoney > limitCoin) {
+        if (pre > limitCoin) {
             return Integer.MAX_VALUE;
         }
-        if (cur < 0) {
+        if (aim < 0) {
             return Integer.MAX_VALUE;
         }
-        if (aim == cur) {
-            return preMoney;
+        if (aim > limitAim) {
+            return Integer.MAX_VALUE;
+        }
+        if (aim == finish) {
+            return pre;
         }
         int min = Integer.MAX_VALUE;
-        //人气+2
-        int p1 = procecss(preMoney + add, aim, add, times, del, cur + add, limitAim, limitCoin);
+        int p1 = procecss(pre + add, aim - 2, add, times, del, finish, limitAim, limitCoin);
         if (p1 != Integer.MAX_VALUE) {
             min = p1;
         }
-        //人气-2的方式
-        int p2 = procecss(preMoney + del, aim, add, times, del, cur - del, limitAim, limitCoin);
+        int p2 = procecss(pre + del, aim + 2, add, times, del, finish, limitAim, limitCoin);
         if (p2 != Integer.MAX_VALUE) {
             min = Math.min(min, p2);
         }
-        int p3 = procecss(preMoney + times, aim, add, times, del, cur * times, limitAim, limitCoin);
-        if (p3 != Integer.MAX_VALUE) {
-            min = Math.min(min, p3);
+        if ((aim & 1) == 0) {
+            int p3 = procecss(pre + times, aim / 2, add, times, del, finish, limitAim, limitCoin);
+            if (p3 != Integer.MAX_VALUE) {
+                min = Math.min(min, p3);
+            }
         }
         return min;
     }
 }
-
