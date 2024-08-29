@@ -80,42 +80,45 @@ public class Problem02 {
         return 0;
     }
 
-    public static int dpLive(String express, boolean desired) {
-        char[] str = express.toCharArray();
-        int n = str.length;
-        int[][] tMap = new int[express.length()][express.length()];
-        int[][] fMap = new int[express.length()][express.length()];
-        for (int i = 0; i < express.length(); i += 2) {
-            for (int j = i; j < express.length(); j += 2) {
+    public static int num2(String express, boolean desired) {
+        char[] chs = express.toCharArray();
+        int[][] fDp = new int[chs.length][chs.length];//false
+        int[][] tDp = new int[chs.length][chs.length];//true
+        for (int i = 0; i < chs.length; i += 2) {
+            for (int j = 0; j < i; j += 2) {
                 if (i == j) {
-                    if (express.charAt(i) == '1') {
-                        tMap[i][j] = 1;
-                    } else {
-                        fMap[i][j] = 1;
-                    }
+                    fDp[i][j] = chs[i] == '0' ? 1 : 0;
+                    tDp[i][j] = chs[i] == '1' ? 1 : 0;
                 } else {
-                    for (int k = i + 1; k < j; k += 2) {
-                        switch (express.charAt(k)) {
-                            case '&':
-                                tMap[i][j] += tMap[i][k - 1] * tMap[k + 1][j];
-                                fMap[i][j] += fMap[i][k - 1] * fMap[k + 1][j];
-                            case '|':
-                                tMap[i][j] += tMap[i][k - 1] * tMap[k + 1][j];
-                                tMap[i][j] += tMap[i][k - 1] * fMap[k + 1][j];
-                                tMap[i][j] += fMap[i][k - 1] * tMap[k + 1][j];
-                                fMap[i][j] += fMap[i][k - 1] * fMap[k + 1][j];
-                            case '^':
-                                tMap[i][j] += tMap[i][k - 1] * tMap[k + 1][j];
-                                tMap[i][j] += fMap[i][k - 1] * fMap[k + 1][j];
-
-                                fMap[i][j] += fMap[i][k - 1] * tMap[k + 1][j];
-                                fMap[i][j] += tMap[i][k - 1] * fMap[k + 1][j];
-                                break;
+                    for (int k = i; k < j; k += 2) {
+                        if (chs[k + 1] == '&') {
+                            fDp[i][j] += fDp[i][k] * tDp[k + 2][j];
+                            fDp[i][j] += tDp[i][k] * fDp[k + 2][j];
+                            fDp[i][j] += fDp[i][k] * fDp[k + 2][j];
+                            tDp[i][j] += tDp[i][k] * tDp[k + 2][j];
+                        } else if (chs[k + 1] == '|') {
+                            tDp[i][j] += fDp[i][k] * tDp[k + 2][j];
+                            tDp[i][j] += tDp[i][k] * fDp[k + 2][j];
+                            tDp[i][j] += tDp[i][k] * tDp[k + 2][j];
+                            fDp[i][j] += fDp[i][k] * fDp[k + 2][j];
+                        } else if (chs[k + 1] == '^') {
+                            tDp[i][j] += fDp[i][k] * tDp[k + 2][j];
+                            tDp[i][j] += tDp[i][k] * fDp[k + 2][j];
+                            fDp[i][j] += fDp[i][k] * tDp[k + 2][j];
+                            fDp[i][j] += tDp[i][k] * fDp[k + 2][j];
                         }
                     }
                 }
             }
+
         }
-        return desired ? tMap[0][express.length() - 1] : fMap[0][express.length() - 1];
+        return desired ? tDp[0][tDp.length - 1] : fDp[0][fDp.length - 1];
+    }
+
+    public static void main(String[] args) {
+        String express = "1^0&0|1&1^0&0^1|0|1&1";
+        boolean desired = true;
+        System.out.println(num1(express, desired));
+        System.out.println(num2(express, desired));
     }
 }
