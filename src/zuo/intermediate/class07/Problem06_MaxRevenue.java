@@ -1,10 +1,7 @@
 package zuo.intermediate.class07;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.TreeMap;
 
 /**
  * 如上图数据所示，给定有限时间为10天。可以获取得最大奖励为：11700，需要的时长为：9天。参加的活动为BDFH
@@ -89,17 +86,17 @@ public class Problem06_MaxRevenue {
 		int allTime = 10;
 		int[] revenue = { 2000, 4000, 2500, 1600, 3800, 2600, 4000, 3500 };
 		int[] times = { 3, 3, 2, 1, 4, 2, 4, 3 };
-		int[][] dependents = { 
-				{ 0, 1, 1, 0, 0, 0, 0, 0 }, 
-				{ 0, 0, 0, 1, 1, 0, 0, 0 }, 
+		int[][] dependents = {
+				{ 0, 1, 1, 0, 0, 0, 0, 0 },
+				{ 0, 0, 0, 1, 1, 0, 0, 0 },
 				{ 0, 0, 0, 1, 0, 0, 0, 0 },
-				{ 0, 0, 0, 0, 1, 1, 1, 0 }, 
-				{ 0, 0, 0, 0, 0, 0, 0, 1 }, 
+				{ 0, 0, 0, 0, 1, 1, 1, 0 },
+				{ 0, 0, 0, 0, 0, 0, 0, 1 },
 				{ 0, 0, 0, 0, 0, 0, 0, 1 },
 				{ 0, 0, 0, 0, 0, 0, 0, 1 },
 				{ 0, 0, 0, 0, 0, 0, 0, 0 } };
 
-		
+
 		int[] res = maxRevenue(allTime, revenue, times, dependents);
 		System.out.println(res[0] + " , " + res[1]);
 	}
