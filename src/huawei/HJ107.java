@@ -13,8 +13,8 @@ public class HJ107 {
 //        }
 
 //        float HJ93 = 2.7f;
-//        float res = process(HJ93);
-//        System.out.printf("%4.1f", res);
+//        float minDistance = process(HJ93);
+//        System.out.printf("%4.1f", minDistance);
 
 
     }

@@ -38,7 +38,7 @@ public class Code06_ConvertToLetterString {
             return 0;
         }
         if (str[i] == '1') {
-//            int res = process(str, i + 1);
+//            int minDistance = process(str, i + 1);
             dp[i + 1] = process(str, i + 1);
             dp[i] = dp[i + 1];
             if (i + 1 < str.length) {
@@ -48,11 +48,11 @@ public class Code06_ConvertToLetterString {
             return dp[i];
         }
         if (str[i] == '2') {
-//            int res = process(str, i + 1);
+//            int minDistance = process(str, i + 1);
             dp[i + 1] = process(str, i + 1);
             dp[i] = dp[i + 1];
             if (i + 1 < str.length && (str[i + 1] >= '0' && str[i + 1] <= '6')) {
-//                res += process(str, i + 2);
+//                minDistance += process(str, i + 2);
                 dp[i + 2] = process(str, i + 2);
                 dp[i] += dp[i + 2];
             }

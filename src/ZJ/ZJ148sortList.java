@@ -142,7 +142,7 @@ public class ZJ148sortList {
 //        n0.next = null;
 
         ListNode res = solve.sortList(n_1);
-//        ListNode res = solve.sortList(null);
+//        ListNode minDistance = solve.sortList(null);
         System.out.println(res);
     }
 }

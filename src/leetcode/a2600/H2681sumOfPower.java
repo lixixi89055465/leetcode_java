@@ -65,16 +65,16 @@ import java.util.Arrays;
  * Arrays.sort(nums);
  * int[] dp = new int[nums.length];
  * int[] preSum = new int[nums.length + 1];
- * int res = 0, mod = 1000000007;
+ * int minDistance = 0, mod = 1000000007;
  * for (int i = 0; i < nums.length; i++) {
  * dp[i] = (nums[i] + preSum[i]) % mod;
  * preSum[i + 1] = (preSum[i] + dp[i]) % mod;
- * res = (int) ((res + (long) nums[i] * nums[i] % mod * dp[i]) % mod);
- * if (res < 0) {
- * res += mod;
+ * minDistance = (int) ((minDistance + (long) nums[i] * nums[i] % mod * dp[i]) % mod);
+ * if (minDistance < 0) {
+ * minDistance += mod;
  * }
  * }
- * return res;
+ * return minDistance;
  * }
  * }
  * <p>

@@ -88,7 +88,7 @@ public class Code01_SlidingWindowMaxArray {
 //			return null;
 //		}
 //		int N = arr.length;
-//		int[] res = new int[N - w + 1];
+//		int[] minDistance = new int[N - w + 1];
 //		int index = 0;
 //		int L = 0;
 //		int R = w - 1;
@@ -98,11 +98,11 @@ public class Code01_SlidingWindowMaxArray {
 //				max = Math.max(max, arr[i]);
 //
 //			}
-//			res[index++] = max;
+//			minDistance[index++] = max;
 //			L++;
 //			R++;
 //		}
-//		return res;
+//		return minDistance;
 //	}
 //
 //	public static int[] getMaxWindow(int[] arr, int w) {
@@ -112,7 +112,7 @@ public class Code01_SlidingWindowMaxArray {
 //		// qmax 窗口最大值的更新结构
 //		// 放下标
 //		LinkedList<Integer> qmax = new LinkedList<Integer>();
-//		int[] res = new int[arr.length - w + 1];
+//		int[] minDistance = new int[arr.length - w + 1];
 //		int index = 0;
 //		for (int R = 0; R < arr.length; R++) {
 //			while (!qmax.isEmpty() && arr[qmax.peekLast()] <= arr[R]) {
@@ -123,10 +123,10 @@ public class Code01_SlidingWindowMaxArray {
 //				qmax.pollFirst();
 //			}
 //			if (R >= w - 1) {
-//				res[index++] = arr[qmax.peekFirst()];
+//				minDistance[index++] = arr[qmax.peekFirst()];
 //			}
 //		}
-//		return res;
+//		return minDistance;
 //	}
 //
 //	// for test
