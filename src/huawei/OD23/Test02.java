@@ -1,4 +1,4 @@
-package huawei;
+package huawei.OD23;
 
 public class Test02 {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package huawei;
+package huawei.OD23;
 
 import com.sun.javafx.image.IntPixelGetter;
 

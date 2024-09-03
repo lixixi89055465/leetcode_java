@@ -1,4 +1,4 @@
-package huawei;
+package huawei.OD23;
 
 import java.util.LinkedList;
 import java.util.Scanner;

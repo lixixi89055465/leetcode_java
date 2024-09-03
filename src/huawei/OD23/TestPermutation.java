@@ -1,4 +1,4 @@
-package huawei;
+package huawei.OD23;
 
 public class TestPermutation {
     public static void main(String[] args) {
