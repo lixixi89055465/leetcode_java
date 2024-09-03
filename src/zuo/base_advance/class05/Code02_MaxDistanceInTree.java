@@ -1,5 +1,11 @@
 package zuo.base_advance.class05;
 
+/**
+ * 叉树节点间的最大距离问题
+ * 从二叉树的节点a出发，可以向上或者向下走，但沿途的节点只能经过一次，到达节点b时路
+ * 径上的节点个数叫作a到b的距离，那么二叉树任何两个节点之间都有距离，求整棵树上的最
+ * 大距离。
+ */
 public class Code02_MaxDistanceInTree {
 
 	public static class Node {

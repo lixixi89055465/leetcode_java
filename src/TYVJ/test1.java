@@ -9,8 +9,8 @@ import java.util.PriorityQueue;
 public class test1 {
     public static void main(String[] args) {
         int N = 10;
-//        int res=Floyd(N);
-//        System.out.println(res);
+//        int minDistance=Floyd(N);
+//        System.out.println(minDistance);
     }
 
     public static int[] Bellman_Ford(int n, int m) {

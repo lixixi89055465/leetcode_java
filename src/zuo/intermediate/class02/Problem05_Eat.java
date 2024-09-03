@@ -7,7 +7,7 @@ public class Problem05_Eat {
     public static String winner1(int n) {
         int base = 1;
         if (n < 5) {
-            return n == 0 || n == 2 ? "后手" : "先手";
+            return n == 2 || n == 0 ? "后手" : "先手";
         }
         while (base <= n) {
             if (winner1(n - base).equals("后手")) {
@@ -19,6 +19,7 @@ public class Problem05_Eat {
             base *= 4;
         }
         return "后手";
+
     }
 
     public static String winner2(int n) {
