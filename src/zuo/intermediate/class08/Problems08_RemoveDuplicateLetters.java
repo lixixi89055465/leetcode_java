@@ -20,11 +20,12 @@ public class Problems08_RemoveDuplicateLetters {
         return String.valueOf(minASCIndex) +
                 remove(
                         str
-                        .substring(minASCIndex + 1)
-                        .replaceAll(String.valueOf(str.charAt(minASCIndex)), ""));
+                                .substring(minASCIndex + 1)
+                                .replaceAll(String.valueOf(str.charAt(minASCIndex)), ""));
     }
 
     public static void main(String[] args) {
-
+        String s = "cbacdcbc";
+        System.out.println(remove(s));
     }
 }
