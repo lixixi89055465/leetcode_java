@@ -44,30 +44,52 @@ package leetcode.a2500;
  */
 public class H2552countQuadruplets {
     private static class Solution {
-        public long countQuadruplets(int[] nums) {
-            int n = nums.length + 1;
-            int[][] dpXiao = new int[n][n];
-            for (int i = 0; i < n - 1; i++) {
-                for (int j = i + 1; j < n; j++) {
-                    dpXiao[i][j] = dpXiao[i + 1][j];
-                    for (int k = 0; k < j - i; k++) {
-                        if (nums[i] > nums[j - k]) {
-                            dpXiao[i][j] += 1;
-                        }
+        public long countQuadruplets1(int[] nums) {
+            long res = 0;
+            int n = nums.length;
+            long[] cnt3 = new long[n];
+            for (int l = 0; l < n; l++) {
+                int cnt2 = 0;
+                for (int j = 0; j < l; j++) {
+                    if (nums[j] < nums[l]) {
+                        res += cnt3[j];
+                        cnt2++;
+                    } else {
+                        cnt3[j] += cnt2;
                     }
                 }
             }
-            int res = 0;
-            for (int i = 0; i < n - 3; i++) {
-                for (int j = i + 3; j < n; j++) {
-                    res += dpXiao[i + 1][j - 1];
+            return res;
+
+        }
+
+        public long countQuadruplets(int[] nums) {
+            int n = nums.length;
+            int[] pre = new int[n + 1];
+            long ans = 0;
+            for (int j = 0; j < n; j++) {
+                int suf = 0;
+                for (int k = n - 1; k > j; k--) {
+                    if (nums[j] > nums[k]) {
+                        ans += (long) pre[nums[k]] * suf;
+                    } else {
+                        ++suf;
+                    }
+                }
+                for (int x = nums[j] + 1; x <= n; x++) {
+                    ++pre[x];
                 }
             }
-            return res;
+            return ans;
         }
     }
 
     public static void main(String[] args) {
-
+        Solution solution = new Solution();
+//        int[] nums = {1, 3, 2, 4, 5};
+//        int []nums = {1,2,3,4};
+        int[] nums = {2, 5, 3, 1, 4};
+        long res = solution.countQuadruplets(nums);
+        System.out.println(res);
     }
 }
