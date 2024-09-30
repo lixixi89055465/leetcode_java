@@ -1,7 +1,9 @@
 package leetcode.a800;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.PriorityQueue;
 
 /**
  * https://leetcode.cn/problems/making-a-large-island/
@@ -52,29 +54,81 @@ public class H827largestIsland {
             Map<Integer, Integer> map = new HashMap<>();
             int m = grid.length;
             int n = grid[0].length;
+            int res = 1;
             for (int i = 0; i < grid.length; i++) {
                 for (int j = 0; j < grid[0].length; j++) {
-                    dfs(i, j, map, grid, m, n);
+                    dfs(i, j, i * n + j + 100, map, grid, m, n);
+                    res = Math.max(res, map.getOrDefault(i * n + j + 100, 0));
                 }
             }
-
-            return 0;
+            PriorityQueue<Integer> maxTwoV = new PriorityQueue<>(4, (e1, e2) -> e2 - e1);
+            HashSet<Integer> set = new HashSet<>();
+            for (int i = 0; i < grid.length; i++) {
+                for (int j = 0; j < grid[0].length; j++) {
+                    if (i == 3 && j == 1) {
+                        System.out.println('1');
+                    }
+                    if (grid[i][j] == 0) {
+                        set.add(getTopTwo(i + 1, j, map, grid, m, n));
+                        set.add(getTopTwo(i - 1, j, map, grid, m, n));
+                        set.add(getTopTwo(i, j + 1, map, grid, m, n));
+                        set.add(getTopTwo(i, j - 1, map, grid, m, n));
+                        for (Integer integer : set) {
+                            if (map.containsKey(integer)) {
+                                maxTwoV.add(map.get(integer));
+                            }
+                        }
+                        int temp = 1;
+                        while (!maxTwoV.isEmpty()) {
+                            temp += maxTwoV.poll();
+                        }
+                        res = Math.max(res, temp);
+                        maxTwoV.clear();
+                        set.clear();
+                    }
+                }
+            }
+            return res;
         }
 
-        private void dfs(int i, int j, Map<Integer, Integer> map, int[][] grid, int m, int n) {
-            if (i >= m || i < 0 || j >= n || j < 0 || grid[i][j] != 1) {
+        private Integer getTopTwo(int i, int j, Map<Integer, Integer> map, int[][] grid, int m, int n) {
+            if (i >= m || i < 0 || j >= n || j < 0 || grid[i][j] == 0) {
+                return -1;
+            }
+            return grid[i][j];
+
+        }
+
+        private void dfs(int i, int j, int parent, Map<Integer, Integer> map, int[][] grid,
+                         int m, int n) {
+            if (i >= m || i < 0 || j >= n || j < 0 || grid[i][j] == 0 || grid[i][j] != 1) {
                 return;
             }
-            grid[i][j] = 2;
-
-
-
+            if (grid[i][j] == 1) {
+                map.putIfAbsent(parent, 0);
+                map.put(parent, map.get(parent) + 1);
+                grid[i][j] = parent;
+                dfs(i + 1, j, parent, map, grid, m, n);
+                dfs(i - 1, j, parent, map, grid, m, n);
+                dfs(i, j + 1, parent, map, grid, m, n);
+                dfs(i, j - 1, parent, map, grid, m, n);
+            }
         }
     }
 
     public static void main(String[] args) {
         Solution s = new Solution();
-        int[][] grid = {{1, 0}, {0, 1}};
+//        int[][] grid = {{1, 0}, {0, 1}};
+//        int[][] grid = {{1, 1}, {1, 1}};
+//        int[][] grid = {{0, 0}, {0, 0}};
+        int[][] grid = {
+                {0, 0, 0, 0, 0, 0, 0},
+                {0, 1, 1, 1, 1, 0, 0},
+                {0, 1, 0, 0, 1, 0, 0},
+                {1, 0, 1, 0, 1, 0, 0},
+                {0, 1, 0, 0, 1, 0, 0},
+                {0, 1, 0, 0, 1, 0, 0},
+                {0, 1, 1, 1, 1, 0, 0}};
         int res = s.largestIsland(grid);
         System.out.println(res);
     }
