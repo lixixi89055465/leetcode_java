@@ -31,27 +31,28 @@ import java.util.Arrays;
  * 1 <= k <= S.length <= 1000
  * s 只由小写字母组成。
  */
-class Solution {
-    public String orderlyQueue(String s, int k) {
-        if (k == 1) {
-            StringBuilder sb = new StringBuilder(s);
-            String smallSb = s;
-            for (int i = 0; i < s.length() - 1; i++) {
-                sb = sb.append(sb.charAt(0));
-                sb.deleteCharAt(0);
-                if (sb.toString().compareTo(smallSb) < 0) {
-                    smallSb=sb.toString();
-                }
-            }
-            return smallSb;
-        }
-        char[] schar = s.toCharArray();
-        Arrays.sort(schar);
-        return new String(schar);
-    }
-}
 
 public class H899orderlyQueue {
+    private static class Solution {
+        public String orderlyQueue(String s, int k) {
+            if (k == 1) {
+                StringBuilder sb = new StringBuilder(s);
+                String smallSb = s;
+                for (int i = 0; i < s.length() - 1; i++) {
+                    sb = sb.append(sb.charAt(0));
+                    sb.deleteCharAt(0);
+                    if (sb.toString().compareTo(smallSb) < 0) {
+                        smallSb=sb.toString();
+                    }
+                }
+                return smallSb;
+            }
+            char[] schar = s.toCharArray();
+            Arrays.sort(schar);
+            return new String(schar);
+        }
+    }
+
     public static void main(String[] args) {
         Solution solve = new Solution();
 //        String s = "cba";
