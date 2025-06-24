@@ -15,26 +15,24 @@ public class H84largestRectangleArea {
             left[0] = -1;
             stack.push(-1);
             for (int i = 0; i < heights.length; i++) {
-                while (stack.size() > 1 && heights[stack.peek()] > heights[i]) {
+                while (stack.size() > 1 && heights[stack.peek()] >= heights[i]) {
                     stack.pop();
                 }
                 left[i] = stack.peek();
                 stack.push(i);
             }
-            RandomUtils.printArray(left);
-
-
+//            RandomUtils.printArray(left);
             int[] right = new int[heights.length];
             stack.clear();
-            stack.push(-1);
+            stack.push(heights.length);
             for (int i = heights.length - 1; i >= 0; i--) {
-                while (stack.size() > 1 && heights[stack.peek()] > heights[i]) {
+                while (stack.size() > 1 && heights[stack.peek()] >= heights[i]) {
                     stack.pop();
                 }
                 right[i] = stack.peek();
                 stack.push(i);
             }
-            RandomUtils.printArray(right);
+//            RandomUtils.printArray(right);
             int res = 0;
             for (int i = 0; i < heights.length; i++) {
                 res = Math.max(res, heights[i] * (right[i] - left[i] - 1));
@@ -45,10 +43,9 @@ public class H84largestRectangleArea {
 
     public static void main(String[] args) {
         Solution s = new Solution();
-        int[] heights = {6, 7, 5, 2, 4, 5, 9, 3};
+//        int[] heights = {6, 7, 5, 2, 4, 5, 9, 3};
+        int[] heights = {2, 4};
         int res = s.largestRectangleArea(heights);
         System.out.println(res);
-
-
     }
 }
