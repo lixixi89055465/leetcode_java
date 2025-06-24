@@ -1,5 +1,6 @@
 package leetcode.a200;
 
+import javax.swing.*;
 import java.util.Deque;
 import java.util.LinkedList;
 
@@ -49,6 +50,43 @@ import java.util.LinkedList;
  */
 public class M227calculate {
     private static class Solution {
+        public int calculate1(String s) {
+            int n = s.length();
+            char[] chs = s.toCharArray();
+            char preChar = '+';
+            int num = 0;
+            Deque<Integer> deque = new LinkedList<>();
+            for (int i = 0; i < chs.length; i++) {
+                if (Character.isDigit(chs[i])) {
+                    num = num * 10 + chs[i] - '0';
+                }
+                if (!Character.isDigit(chs[i]) && chs[i] != ' ' || i == n - 1) {
+                    switch (preChar) {
+                        case '+':
+                            deque.push(num);
+                            break;
+                        case '-':
+                            deque.push(-num);
+                            break;
+                        case '*':
+                            deque.push(deque.pop() * num);
+                            break;
+                        case '/':
+                            deque.push(deque.pop() / num);
+                            break;
+                    }
+                    num = 0;
+                    preChar = chs[i];
+                }
+
+            }
+            int res = 0;
+            while (!deque.isEmpty()) {
+                res += deque.pop();
+            }
+            return res;
+        }
+
         public int calculate(String s) {
             char[] chs = s.toCharArray();
             int n = chs.length;
@@ -89,7 +127,9 @@ public class M227calculate {
 
     public static void main(String[] args) {
         Solution solve = new Solution();
-        String s = " 3+5 / 2 ";
-        System.out.println(solve.calculate(s));
+        String s = "3+2*2";
+//        String s = " 3/2 ";
+//        String s = " 3+5 / 2 ";
+        System.out.println(solve.calculate1(s));
     }
 }

@@ -8,6 +8,22 @@ import java.util.HashSet;
  */
 public class M3lengthOfLongestSubstring {
     private static class Solution {
+        public int lengthOfLongestSubstring1(String s) {
+            int[] cache = new int[128];
+            for (int i = 0; i < 128; i++) {
+                cache[i] = 0;
+            }
+            int n = s.length();
+            char[] chs = s.toCharArray();
+            int start = 0, res = 0;
+            for (int i = 0; i < chs.length; i++) {
+                start = Math.max(start, cache[chs[i]]+1);
+                cache[chs[i]] = i;
+                res = Math.max(res, i - start + 1);
+            }
+            return res;
+        }
+
         public int lengthOfLongestSubstring(String s) {
             int[] map = new int[128];
             for (int i = 0; i < 128; i++) {
@@ -21,7 +37,7 @@ public class M3lengthOfLongestSubstring {
                 int index = chs[i];
                 start = Math.max(start, map[index] + 1);
                 res = Math.max(res, i - start + 1);
-                map[index]=i;
+                map[index] = i;
             }
             return res;
         }
