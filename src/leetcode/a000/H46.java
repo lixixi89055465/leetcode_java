@@ -2,6 +2,9 @@ package leetcode.a000;
 
 import leetcode.a100.M120;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -46,13 +49,74 @@ import java.util.List;
  * 1 <= nums.length <= 6
  * -10 <= nums[i] <= 10
  * nums 中的所有整数 互不相同
+ * class Solution {
+ * public List<List<Integer>> permute(int[] nums) {
+ * List<List<Integer>> res = new ArrayList<>();
+ * Integer[] inums = new Integer[nums.length];
+ * for (int i = 0; i < nums.length; i++) {
+ * inums[i] = nums[i];
+ * }
+ * dfs(res, inums, 0);
+ * return res;
+ * }
+ * <p>
+ * private void dfs(List<List<Integer>> res, Integer[] nums, int index) {
+ * if (index == nums.length - 1) {
+ * ArrayList<Integer> integers = new ArrayList<>(nums.length);
+ * Collections.addAll(integers, nums);
+ * res.add(integers);
+ * return;
+ * }
+ * <p>
+ * for (int i = index; i < nums.length; i++) {
+ * swap(nums, index, i);
+ * dfs(res, nums, index + 1);
+ * swap(nums, index, i);
+ * }
+ * <p>
+ * }
+ * <p>
+ * private void swap(Integer[] nums, int index1, int index2) {
+ * int tmp = nums[index1];
+ * nums[index1] = nums[index2];
+ * nums[index2] = tmp;
+ * }
+ * }
  */
 
 public class H46 {
 
     private static class Solution {
         public List<List<Integer>> permute(int[] nums) {
-            return null;
+            List<List<Integer>> res = new ArrayList<>();
+            Integer[] inums = new Integer[nums.length];
+            for (int i = 0; i < nums.length; i++) {
+                inums[i] = nums[i];
+            }
+            dfs(res, inums, 0);
+            return res;
+        }
+
+        public void dfs(List<List<Integer>> res, Integer[] nums, int index) {
+            if (index == nums.length - 1) {
+                List<Integer> list = new ArrayList<>();
+                Collections.addAll(list, nums);
+                res.add(list);
+                return;
+            }
+            for (int i = index; i < nums.length; i++) {
+                swap(nums, index, i);
+                dfs(res, nums, index + 1);
+                swap(nums, index, i);
+            }
+
+
+        }
+
+        private void swap(Integer[] nums, int i, int j) {
+            int tmp=nums[i];
+            nums[i]=nums[j];
+            nums[j]=tmp;
         }
     }
 
