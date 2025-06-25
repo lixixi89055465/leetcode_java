@@ -13,4 +13,8 @@ package leetcode.a900;
  */
 
 public class M912 {
+
+    public static void main(String[] args) {
+
+    }
 }
