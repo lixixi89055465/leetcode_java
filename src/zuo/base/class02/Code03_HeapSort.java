@@ -1,6 +1,7 @@
 package zuo.base.class02;
 
 
+import com.sun.scenario.effect.impl.sw.java.JSWColorAdjustPeer;
 import jdk.management.resource.internal.ResourceNatives;
 import utils.RandomUtils;
 
@@ -34,13 +35,13 @@ public class Code03_HeapSort {
     private static void heapify(int[] arr, int index, int heapSize) {
         int left = index * 2 + 1;
         while (left < heapSize) {
-            int largest = left + 1 < heapSize && arr[left + 1] > arr[left] ? left + 1 : left;
-            largest = arr[largest] > arr[index] ? largest : index;
-            if (largest == index)
+            int largest = left + 1 < heapSize && arr[left] < arr[left + 1] ? arr[left + 1] : arr[left];
+            int swapIndex = arr[largest] > arr[index] ? largest : index;
+            if (swapIndex == index) {
                 break;
-            RandomUtils.swap(arr, largest, index);
-            index = largest;
-            left = index * 2 + 1;
+            }
+            RandomUtils.swap(arr,swapIndex,index);
+            left= index * 2 + 1;
         }
     }
 
@@ -49,8 +50,7 @@ public class Code03_HeapSort {
         int[] arr = RandomUtils.generateRandomArray(100, 100);
         int[] copyArr = RandomUtils.copyArray(arr);
         heapSort(arr);
-        RandomUtils.sort(copyArr );
-
+        RandomUtils.sort(copyArr);
 
 
         boolean equal = RandomUtils.isEqual(arr, copyArr);

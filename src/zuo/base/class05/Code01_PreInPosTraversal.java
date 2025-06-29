@@ -1,5 +1,7 @@
 package zuo.base.class05;
 
+import zuo.base.class04.Code05_SortArrayDistanceK;
+
 import java.util.Stack;
 
 public class Code01_PreInPosTraversal {
@@ -42,84 +44,64 @@ public class Code01_PreInPosTraversal {
     }
 
     public static void preOrderUnRecur(Node head) {
-        System.out.print("pre-order: ");
+        System.out.println("pre-order");
         if (head != null) {
-            Stack<Node> stack = new Stack<Node>();
+            Stack<Node> stack = new Stack<>();
             stack.add(head);
-            while (!stack.isEmpty()) {
+            while (head != null) {
                 head = stack.pop();
-                System.out.print(head.value + " ");
-                if (head.right != null) {
-                    stack.push(head.right);
-                }
+                System.out.println(head.value);
                 if (head.left != null) {
-                    stack.push(head.left);
+                    stack.add(head.left);
+                }
+                if (head.right != null) {
+                    stack.add(head.right);
                 }
             }
         }
-        System.out.println();
+        System.out.println("post-order");
     }
 
     public static void inOrderUnRecur(Node head) {
-        System.out.print("in-order: ");
         if (head != null) {
             Stack<Node> stack = new Stack<>();
-            while (!stack.isEmpty() || head != null) {
+            while (head != null && !stack.isEmpty()) {
                 if (head != null) {
-                    stack.add(head);
+                    stack.push(head);
                     head = head.left;
                 } else {
-                    Node pop = stack.pop();
-                    System.out.println(pop.value);
+                    head = stack.pop();
+                    System.out.println(head);
                     head = head.right;
                 }
             }
         }
-        System.out.println();
     }
 
     public static void posOrderUnRecur1(Node head) {
+
+    }
+
+    public static void posOrderUnRecur2(Node head) {
         System.out.print("pos-order: ");
         if (head != null) {
             Stack<Node> s1 = new Stack<>();
             Stack<Node> s2 = new Stack<>();
             s1.add(head);
-            while (!s1.isEmpty()) {
+            while (s1.isEmpty()) {
                 head = s1.pop();
                 s2.push(head);
                 if (head.left != null) {
                     s1.push(head.left);
                 }
                 if (head.right != null) {
-                    s1.push(head.right);
+                    s2.push(head.right);
                 }
             }
             while (!s2.isEmpty()) {
                 System.out.println(s2.pop().value);
             }
         }
-        System.out.println();
-    }
-
-    public static void posOrderUnRecur2(Node h) {
-        System.out.print("pos-order: ");
-        if (h != null) {
-            Stack<Node> s = new Stack<>();
-            s.push(h);
-            Node c;
-            while (!s.isEmpty()) {
-                c = s.peek();
-                if (c.left != null && h != c.left && h != c.right) {
-                    s.push(c.left);
-                } else if (c.right != null && h != c.right) {
-                    s.push(c.right);
-                } else {
-                    System.out.println(s.pop().value + "\t");
-                    h = c;
-                }
-            }
-        }
-        System.out.println();
     }
 
     public static void main(String[] args) {
