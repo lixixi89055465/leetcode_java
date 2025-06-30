@@ -36,28 +36,39 @@ public class Code06_QuickSort {
 
     private static void quickSort(int[] arr, int L, int R) {
         if (L < R) {
-            RandomUtils.swap(arr, R, L+(int) ((R - L + 1) * Math.random()));
-            int p[] = partition(arr, L, R);
-            quickSort(arr, L, p[0] - 1);
-            quickSort(arr, p[1] + 1, R);
+            int mid=L+(R-L)/2;
+            RandomUtils.swap(arr,mid,arr[R]);
+            int[]p=partition(arr,L,R);
         }
 
     }//41, 79, 70,31
 
     private static int[] partition(int[] arr, int L, int R) {
-        int less = L - 1;
-        int more = R;
-        while (L < more) {
-            if (arr[L] < arr[R]) {
-                RandomUtils.swap(arr, ++less, L++);
-            } else if (arr[L] > arr[R]) {
-                RandomUtils.swap(arr, --more, L);
-            } else {
+        int less=L-1;
+        int more=R;
+        while (L<more){
+            if(arr[L]<arr[R]){
+                RandomUtils.swap(arr,++less,L++);
+            }else if(arr[L]>arr[R]){
+                RandomUtils.swap(arr,--more,L);
+            }else{
                 L++;
             }
         }
-        RandomUtils.swap(arr, more, R);
-        return new int[]{less + 1, more};
+        RandomUtils.swap(arr,more,R);
+        return new int[]{less+1,more};
+//        int less = L - 1;
+//        int more = R;
+//        while (L < more) {
+//            if (arr[L] < arr[R]) {
+//                RandomUtils.swap(arr, ++less, L++);
+//            } else if (arr[L] > arr[R]) {
+//                RandomUtils.swap(arr, --more, L);
+//            } else {
+//                L++;
+//            }
+//        }
+//        RandomUtils.swap(arr, more, R);
     }
 
 

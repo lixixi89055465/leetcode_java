@@ -17,38 +17,33 @@ public class Code01_MergeSort {
     }
 
     private static void process01(int[] arr, int L, int R) {
-        if (L == R) {
-            return;
-        }
-        int mid = L + ((R - L) >> 2);
+        int mid = L + (R - L) / 2;
         process01(arr, L, mid);
         process01(arr, mid + 1, R);
         mergeArr(arr, L, mid, R);
     }
 
-    private static void mergeArr(int[] arr, int L, int mid, int R) {
+    private static int[] mergeArr(int[] arr, int L, int mid, int R) {
         int[] cache = new int[R - L + 1];
-        int index = 0;
-        int i, j;
-        for (i = L, j = mid + 1; i <= mid && j <= R; ) {
+        int i = L;
+        int j = mid + 1;
+        int k = 0;
+        while (i <= L && j <= R) {
             if (arr[i] < arr[j]) {
-                cache[index++] = arr[i];
+                cache[k++] = arr[i];
                 i++;
             } else {
-                cache[index++] = arr[j];
+                cache[k++] = arr[j];
                 j++;
             }
         }
         for (; i <= mid; i++) {
-            cache[index++] = arr[i];
+            cache[k++] = arr[i];
         }
-        for (j = mid + 1; j <= R; i++) {
-            cache[index++] = arr[j];
+        for (; j <= R; j++) {
+            cache[k++] = arr[j];
         }
-        index=0;
-        for (int k = L; k <= R; k++) {
-            arr[k] = cache[index++];
-        }
+        return cache;
     }
 
     public static void main(String[] args) {
