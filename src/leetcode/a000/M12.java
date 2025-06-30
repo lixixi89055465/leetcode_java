@@ -37,30 +37,32 @@ public class M12 {
         int i = 0;
         for (; i < time.length; i++) {
             timeMax = Math.max(timeMax, time[i]);
-            if (sum+time[i]-timeMax>top){
-                sum = 0;
-                timeMax = 0;
+            sum += time[i];
+            if (sum - timeMax > top) {
+                sum = time[i];
+                timeMax = time[i];
                 m--;
             }
-            sum+=time[i];
         }
-        if (sum <= top) {
-            m--;
-        }
-        if (i < time.length) {
+        if (m > 1) {
+            return true;
+        } else if (m == 1) {
+            return sum - timeMax <= top;
+        } else if (m < 0) {
             return false;
+        } else {
+            return sum == 0;
         }
-        return m >= 0;
     }
 
     public static void main(String[] args) {
         M12 s = new M12();
 //        int[] time = {1, 2, 3, 3};
 //        int m = 2;
-        int[] time = {1, 2, 3, 3, 3};
-        int m = 2;
-//        int[] time = {50, 47, 68, 33, 35, 84, 25, 49, 91, 75};
-//        int m = 1;
+//        int[] time = {1, 2, 3, 3, 3};
+//        int m = 2;
+        int[] time = {50, 47, 68, 33, 35, 84, 25, 49, 91, 75};
+        int m = 1;
         int res = s.minTime(time, m);
         System.out.println(res);
     }
