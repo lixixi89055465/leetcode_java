@@ -15,14 +15,17 @@ public class Code01_MorrisTraversal {
         Node mostRight = null;
         while (cur != null) {
             mostRight = cur.left;
-            while (mostRight.right != null && mostRight.right != cur) {
-                mostRight = mostRight.right;
-            }
-            if (mostRight.right == null) {
-                mostRight.right = cur;
-                cur = cur.left;
-            } else {
-                mostRight.right = null;
+            if (mostRight != null) {
+                while (mostRight.right != null && mostRight != cur) {
+                    mostRight = mostRight.right;
+                }
+                if (mostRight.right == null) {
+                    mostRight.right = cur;
+                    cur = cur.left;
+                    continue;
+                } else {
+                    mostRight.right = null;
+                }
             }
             cur = cur.right;
         }
@@ -38,17 +41,17 @@ public class Code01_MorrisTraversal {
             mostRight = cur.left;
             if (mostRight != null) {
                 while (mostRight.right != null && mostRight.right != cur) {
-                    mostRight = mostRight.right;
+                    mostRight.right = mostRight;
                 }
                 if (mostRight.right == null) {
                     System.out.println(cur.value);
                     mostRight.right = cur;
                     cur = cur.left;
+                    continue;
                 } else {
                     mostRight.right = null;
+
                 }
-            } else {
-                System.out.println(cur.value);
             }
             cur = cur.right;
         }
