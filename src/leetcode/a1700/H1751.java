@@ -1,5 +1,7 @@
 package leetcode.a1700;
 
+import java.util.Arrays;
+
 /**
  * 1751. 最多可以参加的会议数目 II
  * 困难
@@ -48,18 +50,42 @@ package leetcode.a1700;
  */
 public class H1751 {
     public int maxValue(int[][] events, int k) {
-        int res = dp(events, 0, 0, 0, k);
-        return res;
-    }
+        int length = events.length;
+        Arrays.sort(events, (o1, o2) -> {
+                return o1[1] - o2[1];
+//            if (o1[0] == o2[0]) {
+//                return o1[1] - o2[1];
+//            }
+//            return o1[0] - o2[0];
+        });
 
-    private int dp(int[][] events, int index, int ki, int pre, int k) {
-
-        return 0;
+        int[][] dp = new int[length + 1][k + 1];
+        for (int i = 1; i < length + 1; i++) {
+            for (int j = 1; j < k + 1; j++) {
+                int[] event = events[i - 1];
+                dp[i][j] = event[2];
+                for (int l = i; l > 0; l--) {
+                    if (events[l - 1][1] >= event[0]) {
+                        dp[i][j] = Math.max(dp[i][j], dp[l][j - 1] + event[2]);
+                        break;
+                    }
+                }
+                dp[i][j] = Math.max(dp[i][j], Math.max(dp[i - 1][j], dp[i][j - 1]));
+            }
+        }
+        return dp[length][k];
     }
 
     public static void main(String[] args) {
-        int[][] events = {{1, 2, 4}, {3, 4, 3}, {2, 3, 10}};
-        int k = 2;
+//        int[][] events = {{1, 2, 4}, {3, 4, 3}, {2, 3, 10}};
+//        int k = 2;
+//        int[][] events = {{1, 2, 4}, {3, 4, 3}, {2, 3, 1}};
+//        int k = 2;
+//        int[][]events = {{1,1,1},{2,2,2},{3,3,3},{4,4,4}};
+//        int k = 3;
+        int[][] events = {{21, 77, 43}, {2, 74, 47}, {6, 59, 22}, {47, 47, 38}, {13, 74, 57}, {27, 55, 27}, {8, 15, 8}};
+        int k = 3;
+
         H1751 s = new H1751();
         int res = s.maxValue(events, k);
         System.out.println(res);
