@@ -46,24 +46,32 @@ package leetcode.a2000;
  * 1 <= nums[i] <= 105
  */
 public class M2044 {
+    int[] nums;
+    int maxOr, cnt;
+
     public int countMaxOrSubsets(int[] nums) {
-        int maxOr = 0, maxVal = Integer.MIN_VALUE;
-        for (int i = 0; i < 1 << nums.length; i++) {
-            int objval = 0;
-            for (int j = 0; j < nums.length; j++) {
-                if (((i >> j) & 1) == 1) {
-                    objval |= nums[j];
-                }
-            }
-            if (objval > maxOr) {
-                maxOr = objval;
-                maxVal = 1;
-            } else if (objval == maxOr) {
-                maxVal++;
-            }
-        }
-        return maxVal;
+        this.nums = nums;
+        this.maxOr = 0;
+        this.cnt = 0;
+        dfs(0, 0);
+        return cnt;
     }
+
+    private void dfs(int pos, int orVal) {
+        if (pos == this.nums.length) {
+            if (orVal > maxOr) {
+                maxOr = orVal;
+                this.cnt = 1;
+            } else if (orVal == maxOr) {
+                this.cnt++;
+            }
+            return;
+        }
+
+        dfs(pos + 1, orVal | nums[pos]);
+        dfs(pos + 1, orVal);
+    }
+
 
     public static void main(String[] args) {
 //        M2044 solve = new M2044();
