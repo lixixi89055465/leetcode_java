@@ -24,15 +24,16 @@ public class Code03_MaxHappy {
     }
 
     private static Info process(Employee x) {
-        if (x.nexts.size() == 0) {
+        if (x.nexts.isEmpty()) {
             return new Info(x.happy, 0);
         }
-        Info info = new Info(x.happy, 0);
+        int lai = x.happy;
+        int bulai = 0;
         for (Employee next : x.nexts) {
             Info nextInfo = process(next);
-            info.laiMaxHappy += nextInfo.buMaxHappy;
-            info.buMaxHappy += Math.max(nextInfo.laiMaxHappy, nextInfo.buMaxHappy);
+            lai += nextInfo.buMaxHappy;
+            bulai += Math.max(nextInfo.laiMaxHappy, nextInfo.buMaxHappy);
         }
-        return info;
+        return new Info(lai, bulai);
     }
 }
