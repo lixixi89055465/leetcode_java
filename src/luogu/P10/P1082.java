@@ -1,6 +1,5 @@
 package luogu.P10;
 
-import sun.security.util.math.intpoly.IntegerPolynomial;
 
 import java.util.Scanner;
 

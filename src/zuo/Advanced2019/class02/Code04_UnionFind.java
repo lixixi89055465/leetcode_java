@@ -23,19 +23,17 @@ Code04_UnionFind {
     }
 
     public static class UnionFindSet<V> {
-        public HashMap<V, Element<V>> elementMap;
-        //key 某个元素 value 该元素的父
+        public HashMap<V, Element> elementMap;
         public HashMap<Element<V>, Element<V>> fatherMap;
-        //key 某
         public HashMap<Element<V>, Integer> sizeMap;
 
         public UnionFindSet(List<V> list) {
             elementMap = new HashMap<>();
             fatherMap = new HashMap<>();
             sizeMap = new HashMap<>();
-            for (V v : list) {
-                Element<V> element = new Element<>(v);
-                elementMap.put(v, element);
+            for (V value : list) {
+                Element<V> element = new Element<>(value);
+                elementMap.put(value, element);
                 fatherMap.put(element, element);
                 sizeMap.put(element, 1);
             }
@@ -43,7 +41,7 @@ Code04_UnionFind {
 
         private Element<V> findHead(Element<V> element) {
             Stack<Element<V>> path = new Stack<>();
-            while (element != fatherMap.get(element)) {
+            while (element != elementMap.get(element)) {
                 path.push(element);
                 element = fatherMap.get(element);
             }
@@ -61,17 +59,17 @@ Code04_UnionFind {
         }
 
         public void union(V a, V b) {
-            Element<V> ea = findHead(elementMap.get(a));
-            Element<V> eb = findHead(elementMap.get(b));
-            if (ea != eb) {
-                Element<V> big = sizeMap.get(ea) > sizeMap.get(eb) ? ea : eb;
-                Element<V> small = big == ea ? eb : ea;
-                fatherMap.put(small,big);
-                sizeMap.put(big,sizeMap.get(ea)+sizeMap.get(eb));
-                sizeMap.remove(small);
+            if (elementMap.containsKey(a) && elementMap.containsKey(b)) {
+                Element<V> aF = findHead(elementMap.get(a));
+                Element<V> bF = findHead(elementMap.get(b));
+                if (aF != bF) {
+                    Element<V> big = sizeMap.get(aF) >= sizeMap.get(bF) ? aF : bF;
+                    Element<V> small = big == aF ? bF : aF;
+                    fatherMap.put(small, big);
+                    sizeMap.put(big, sizeMap.get(aF) + sizeMap.get(bF));
+                    sizeMap.remove(small);
+                }
             }
-
-
         }
 
     }

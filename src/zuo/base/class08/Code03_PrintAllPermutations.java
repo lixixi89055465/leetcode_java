@@ -3,6 +3,8 @@ package zuo.base.class08;
 import utils.RandomUtils;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 /**
  * 打印一个字符串的全部排列
@@ -11,27 +13,30 @@ import java.util.ArrayList;
 public class Code03_PrintAllPermutations {
     public static ArrayList<String> Permutation2(String str) {
         ArrayList<String> res = new ArrayList<>();
-        if (str == null || str.length() == 0) {
+        if (str == null) {
             return res;
         }
         char[] chs = str.toCharArray();
-        process01(chs, 0, res);
+        process(chs, 0, res);
         res.sort(null);
         return res;
+
     }
 
     private static void process01(char[] chs, int i, ArrayList<String> res) {
         if (i == chs.length) {
             res.add(String.valueOf(chs));
+            return;
         }
-        //使用
-        process01(chs, i + 1, res);
-        //不使用
-        char tmp = chs[i];
-        chs[i] = 0;
-        process01(chs, i + 1, res);
-        chs[i] = tmp;
-
+        boolean[] visit = new boolean[26];
+        for (int j = i; j < chs.length; j++) {
+            if (!visit[chs[j] - 'a']) {
+                RandomUtils.swap(chs, i, j);
+                process01(chs, i + 1, res);
+                RandomUtils.swap(chs, i, j);
+                visit[chs[j]-'a']=true;
+            }
+        }
 
     }
 
