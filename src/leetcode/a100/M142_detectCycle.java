@@ -1,6 +1,5 @@
 package leetcode.a100;
 
-import sun.awt.windows.WPrinterJob;
 
 public class M142_detectCycle {
     private static class ListNode {
