@@ -21,9 +21,9 @@ public class Problem03_StackAndQueueConvert {
 
 		public int poll() {
 			if (stackPop.empty() && stackPush.empty()) {
-				throw new RuntimeException("Queue is empty!");
-			} else if (stackPop.empty()) {
-				while (!stackPush.empty()) {
+				throw new RuntimeException("error");
+			}else if(stackPop.isEmpty()){
+				while (!stackPush.isEmpty()) {
 					stackPop.push(stackPush.pop());
 				}
 			}
@@ -38,7 +38,15 @@ public class Problem03_StackAndQueueConvert {
 					stackPop.push(stackPush.pop());
 				}
 			}
-			return stackPop.peek();
+//			return stackPop.peek();
+			if (stackPush.empty() && stackPush.empty()) {
+				throw new RuntimeException("Queue is empty'");
+			} else if (stackPop.empty()) {
+				while (!stackPush.isEmpty()) {
+					stackPop.push(stackPush.pop());
+				}
+			}
+			return stackPop.pop();
 		}
 	}
 
