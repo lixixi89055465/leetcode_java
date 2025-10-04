@@ -2,16 +2,19 @@ package zuo.senior.class02;
 
 public class Problem03_LongestLessSumSubArrayLength {
     public static int maxLengthAweSome(int[] arr, int k) {
-        int[] minSum = new int[arr.length];
+        if (arr == null || arr.length == 0) {
+            return 0;
+        }
+        int[] minSums = new int[arr.length];
         int[] minSumEnds = new int[arr.length];
-        minSum[arr.length - 1] = arr[arr.length - 1];
-        minSum[arr.length - 1] = arr.length - 1;
-        for (int i = arr.length - 2; i >= 0; i++) {
-            if (minSum[i + 1] < 0) {
-                minSum[i] = minSum[i + 1] + arr[i];
+        minSums[arr.length - 1] = arr[arr.length - 1];
+        minSumEnds[arr.length - 1] = arr.length - 1;
+        for (int i = arr.length - 2; i >= 0; i--) {
+            if (minSums[i + 1] < 0) {
+                minSums[i] = arr[i] + minSums[i + 1];
                 minSumEnds[i] = minSumEnds[i + 1];
             } else {
-                minSum[i] = arr[i];
+                minSums[i] = arr[i];
                 minSumEnds[i] = i;
             }
         }
@@ -19,8 +22,8 @@ public class Problem03_LongestLessSumSubArrayLength {
         int sum = 0;
         int res = 0;
         for (int i = 0; i < arr.length; i++) {
-            while (end < arr.length && sum + minSum[end] <= k) {
-                sum += minSum[end];
+            while (end < arr.length && sum + minSums[end] <= k) {
+                sum += minSums[end];
                 end = minSumEnds[end] + 1;
             }
             res = Math.max(res, end - i);
@@ -31,5 +34,9 @@ public class Problem03_LongestLessSumSubArrayLength {
             }
         }
         return res;
+    }
+
+    public static void main(String[] args) {
+
     }
 }
